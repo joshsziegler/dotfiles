@@ -69,6 +69,8 @@ def nullOrInt(x):
 def date_format(d):
     """Takes numerical date without formatting (20141225) and formats it (2014.12.25)
     """
+    if not d:
+        return ""
     t = str(d)
     return "{}.{}.{}".format(t[0:4], t[4:6], t[6:8])
 
@@ -93,10 +95,8 @@ class Run(object):
 def parse_runs(dir):
     """Parse runs.csv in the given directory (dir)
 
-    Returns HTML formatted summary of that file and may add two columns to runs
-    without a previously calculated total_time_in_seconds and pace column. This
-    is a minor speedup meant to prevent us from calculating them everytime this
-    script runs.
+    Returns HTML formatted summary of that file, including current records and
+    recent runs.
     """
     path = os.path.join(dir, "runs.csv")
     total_miles = 0.0
@@ -132,6 +132,23 @@ def parse_runs(dir):
     return html
 
 
+def parse_max_weight_ex(dir):
+    """Parse max_weight_ex.csv in the given directory (dir)
+
+    Returns HTML formatted summary of that file, including current records.
+    """
+    path = os.path.join(dir, "max_weight_ex.csv")
+    csvfile = open(path, newline='')
+    ex = csv.reader(csvfile, delimiter=",", quoting=csv.QUOTE_NONE)
+    ex = list(ex)
+    html = "<b>Max Weight Records:</b><hr>"
+    html += "<table><tr><td><b>Exercise</b></td><td><b>1 RM</b></td><td><b>Date</b></td><td><b>2 RM</b></td><td><b>Date</b></td><td><b>3 RM</b></td><td><b>Date</b></td></tr>"
+    for e in ex:
+        html += "<tr><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td></tr>".format(e[0], e[1], date_format(e[2]), e[3], date_format(e[4]), e[5], date_format(e[6]))
+    html += "</table><br>"
+    return html
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('user',        type=str)
@@ -144,8 +161,8 @@ if __name__ == "__main__":
 
     html = "<html><head></head><body>"
     html += "{}<br />".format(parse_runs(args.health_dir))
+    html += "{}<br />".format(parse_max_weight_ex(args.health_dir))
     html += "</body></html>"
 
-    open("test.html", 'w').write(html)
 
-    #send_email(args.user, args.password, args.to, "Health Summary for {}".format(today.isoformat()), "HTML Failed to Load", html)
+    send_email(args.user, args.password, args.to, "Health Summary for {}".format(today.isoformat()), "HTML Failed to Load", html)
