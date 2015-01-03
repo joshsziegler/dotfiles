@@ -148,6 +148,21 @@ def parse_max_weight_ex(dir):
     html += "</table><br>"
     return html
 
+def parse_max_reps_ex(dir):
+    """Parse max_reps_ex.csv in the given directory (dir)
+
+    Returns HTML formatted summary of that file, including current records.
+    """
+    path = os.path.join(dir, "max_reps_ex.csv")
+    csvfile = open(path, newline='')
+    ex = csv.reader(csvfile, delimiter=",", quoting=csv.QUOTE_NONE)
+    ex = list(ex)
+    html = "<b>Max Rep Records:</b><hr>"
+    html += "<table><tr><td><b>Exercise</b></td><td><b>Reps</b></td><td><b>Date</b></td></tr>"
+    for e in ex:
+        html += "<tr><td>{}</td><td>{}</td><td>{}</td></tr>".format(e[0], e[1], date_format(e[2]))
+    html += "</table><br>"
+    return html
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -162,7 +177,7 @@ if __name__ == "__main__":
     html = "<html><head></head><body>"
     html += "{}<br />".format(parse_runs(args.health_dir))
     html += "{}<br />".format(parse_max_weight_ex(args.health_dir))
+    html += "{}<br />".format(parse_max_reps_ex(args.health_dir))
     html += "</body></html>"
-
 
     send_email(args.user, args.password, args.to, "Health Summary for {}".format(today.isoformat()), "HTML Failed to Load", html)
