@@ -158,9 +158,9 @@ def parse_max_reps_ex(dir):
     ex = csv.reader(csvfile, delimiter=",", quoting=csv.QUOTE_NONE)
     ex = list(ex)
     html = "<b>Max Rep Records:</b><hr>"
-    html += "<table><tr><td><b>Exercise</b></td><td><b>Reps</b></td><td><b>Date</b></td></tr>"
+    html += "<table><tr><td><b>Exercise</b></td><td><b>Reps</b></td></tr>"
     for e in ex:
-        html += "<tr><td>{}</td><td>{}</td><td>{}</td></tr>".format(e[0], e[1], date_format(e[2]))
+        html += "<tr><td>{}</td><td>{}</td></tr>".format(e[0], e[1])
     html += "</table><br>"
     return html
 
