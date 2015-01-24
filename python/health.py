@@ -1,4 +1,4 @@
-"""Parses CSV files containing personal health data and send it a summary via email.
+"""Parses CSV files containing personal health data and save a summary as a file.
 
 
 Data includes latest runs, PRs on runs and lifts, weight, and so on.
@@ -33,25 +33,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-import csv, os.path, datetime, smtplib, argparse, email.message
-from collections import OrderedDict
-
-def send_email(gmail_user, gmail_pwd, to, subject, text, html):
-    """Taken as-is from StackOverflow answer: http://stackoverflow.com/a/12424439
-    """
-    msg = email.message.EmailMessage()
-    msg['Subject'] = subject
-    msg['From'] = gmail_user
-    msg['To'] = to
-    msg.set_content(text) # Plain text version
-    msg.add_alternative(html, subtype="html") # HTML version
-
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.ehlo()
-    server.starttls()
-    server.login(gmail_user, gmail_pwd)
-    server.send_message(msg)
-    server.close()
+import csv, os.path, datetime, argparse
 
 def n2es(x):
     """None/Null to Empty String
@@ -166,18 +148,17 @@ def parse_max_reps_ex(dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('user',        type=str)
-    parser.add_argument('password',    type=str)
-    parser.add_argument('to',          type=str)
     parser.add_argument('--health_dir',  type=str, default="C:/home/health/")
     args = parser.parse_args()
 
     today = datetime.date.today()
 
     html = "<html><head></head><body>"
+    html += "<h2>Health Summary for {}</h2>".format(today.isoformat())
     html += "{}<br />".format(parse_runs(args.health_dir))
     html += "{}<br />".format(parse_max_weight_ex(args.health_dir))
     html += "{}<br />".format(parse_max_reps_ex(args.health_dir))
     html += "</body></html>"
 
-    send_email(args.user, args.password, args.to, "Health Summary for {}".format(today.isoformat()), "HTML Failed to Load", html)
+    summary = os.path.join(args.health_dir, "summary.html")
+    open(summary, 'w').write(html)
