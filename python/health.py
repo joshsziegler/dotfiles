@@ -86,7 +86,8 @@ def parse_runs(dir):
     last_three_runs = []
     csvfile = open(path, newline='')
     runs = csv.reader(csvfile, delimiter=",", quoting=csv.QUOTE_NONE)
-    runs = [Run(r) for r in runs]
+    runs = list(runs) # FIXME: inefficient
+    runs = [Run(r) for r in runs[1:]]
     for run in runs:
         total_miles += run.miles
         if run.total_in_sec and run.miles in records:
@@ -97,7 +98,7 @@ def parse_runs(dir):
     runs.sort(key=lambda x: x.date, reverse=True)
     last_three_runs = runs[0:7]
 
-    html = "<b>Running:</b><hr>"
+    html = "<h3>Running:</h3>"
     html +=  "<b>All Time Mileage:</b> {}<br><br>".format(total_miles)
     html += "<table><tr><td><b>Recent Runs</b></td><td><b>Miles</b></td><td><b>H</b></td><td><b>M</b></td><td><b>S</b></td><td><b>Pace</b></td></tr>"
     for run in last_three_runs:
@@ -113,38 +114,26 @@ def parse_runs(dir):
 
     return html
 
+def csv_to_table_as_is(dir, filename):
+    """Parse CSV formatted file specified as dir/filename.csv to HTML formatted table as is.
 
-def parse_max_weight_ex(dir):
-    """Parse max_weight_ex.csv in the given directory (dir)
-
-    Returns HTML formatted summary of that file, including current records.
+    Expects the first row to be headers, which are capitalized using .title()
     """
-    path = os.path.join(dir, "max_weight_ex.csv")
+    path = os.path.join(dir, filename)
     csvfile = open(path, newline='')
     ex = csv.reader(csvfile, delimiter=",", quoting=csv.QUOTE_NONE)
-    ex = list(ex)
-    html = "<b>Max Weight Records:</b><hr>"
-    html += "<table><tr><td><b>Exercise</b></td><td><b>1 RM</b></td><td><b>Date</b></td><td><b>2 RM</b></td><td><b>Date</b></td><td><b>3 RM</b></td><td><b>Date</b></td></tr>"
-    for e in ex:
-        html += "<tr><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td><td>{}</td></tr>".format(e[0], e[1], date_format(e[2]), e[3], date_format(e[4]), e[5], date_format(e[6]))
-    html += "</table><br>"
-    return html
+    rows = list(ex) # FIXME: inefficient
+    html_ = "<h3>{}:</h3><table>".format(filename[:-4].replace("_", " ").title())
+    html_ += "<tr>{}</tr>".format("".join(["<td><b>{}</b></td>".format(x.title()) for x in rows[0]]))
+    for row in rows[1:]:
+        html_ += "<tr>"
+        for cell in row:
+            html_ += "<td>{}</td>".format(cell)
+        html_ += "</tr>"
+    html_ += "</table><br>"
+    return html_
 
-def parse_max_reps_ex(dir):
-    """Parse max_reps_ex.csv in the given directory (dir)
 
-    Returns HTML formatted summary of that file, including current records.
-    """
-    path = os.path.join(dir, "max_reps_ex.csv")
-    csvfile = open(path, newline='')
-    ex = csv.reader(csvfile, delimiter=",", quoting=csv.QUOTE_NONE)
-    ex = list(ex)
-    html = "<b>Max Rep Records:</b><hr>"
-    html += "<table><tr><td><b>Exercise</b></td><td><b>Reps</b></td></tr>"
-    for e in ex:
-        html += "<tr><td>{}</td><td>{}</td></tr>".format(e[0], e[1])
-    html += "</table><br>"
-    return html
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -156,8 +145,10 @@ if __name__ == "__main__":
     html = "<html><head></head><body>"
     html += "<h2>Health Summary for {}</h2>".format(today.isoformat())
     html += "{}<br />".format(parse_runs(args.health_dir))
-    html += "{}<br />".format(parse_max_weight_ex(args.health_dir))
-    html += "{}<br />".format(parse_max_reps_ex(args.health_dir))
+    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "max_weight_ex.csv"))
+    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "max_reps_ex.csv"))
+    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "last_of.csv"))
+    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "body_fat.csv"))
     html += "</body></html>"
 
     summary = os.path.join(args.health_dir, "summary.html")
