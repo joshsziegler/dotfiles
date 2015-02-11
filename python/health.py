@@ -114,6 +114,7 @@ def parse_runs(dir):
 
     return html
 
+
 def csv_to_table_as_is(dir, filename):
     """Parse CSV formatted file specified as dir/filename.csv to HTML formatted table as is.
 
@@ -134,7 +135,6 @@ def csv_to_table_as_is(dir, filename):
     return html_
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--health_dir',  type=str, default="C:/home/health/")
@@ -145,10 +145,8 @@ if __name__ == "__main__":
     html = "<html><head></head><body>"
     html += "<h2>Health Summary for {}</h2>".format(today.isoformat())
     html += "{}<br />".format(parse_runs(args.health_dir))
-    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "max_weight_ex.csv"))
-    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "max_reps_ex.csv"))
-    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "last_of.csv"))
-    html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, "body_fat.csv"))
+    for f in ["max_weight_ex.csv", "max_reps_ex.csv", "last_of.csv","body_fat.csv"]:
+        html += "{}<hr /><br />".format(csv_to_table_as_is(args.health_dir, f))
     html += "</body></html>"
 
     summary = os.path.join(args.health_dir, "summary.html")
