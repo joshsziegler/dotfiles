@@ -74,12 +74,13 @@ if __name__ == "__main__":
     parser.add_argument('user',        type=str)
     parser.add_argument('password',    type=str) 
     parser.add_argument('to',          type=str) 
-    parser.add_argument('--past_links',  type=str, default="past_links.txt")
+    parser.add_argument('--past_links',type=str, default="past_links.txt")
+    parser.add_argument('--days',      type=int, default=1)
     args = parser.parse_args()
 
     today = datetime.date.today()
-    yesterday = today - datetime.timedelta(days=1)
-    yesterday = yesterday.timetuple() # feedparser uses timetuples
+    x_days_ago = today - datetime.timedelta(days=args.days)
+    x_days_ago = x_days_ago.timetuple() # feedparser uses timetuples
 
     past_links = []
     try:
@@ -103,13 +104,13 @@ if __name__ == "__main__":
                     continue # skip this old link
 
                 try: 
-                    if post['published_parsed'] < yesterday:
+                    if post['published_parsed'] < x_days_ago:
                         continue # skip this old link
                 except:
                     pass 
 
                 try: # some feeds don't seem to have published as a key
-                    if post['updated_parsed'] < yesterday:
+                    if post['updated_parsed'] < x_days_ago:
                         continue # skip this old link
                 except:
                     pass 
