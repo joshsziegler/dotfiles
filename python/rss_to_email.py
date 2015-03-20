@@ -34,22 +34,18 @@ feeds = [ # These will be printed in-order, so put important stuff first
     ("http://feeds.feedburner.com/thedoghousediaries/feed", "Doghouse Diaries "),
     ("http://www.smbc-comics.com/rss.php", "SMBC"),
     ("http://penny-arcade.com/feed", "Penny Arcade"),
-    ("http://penny-arcade.com/feed/podcasts", "Penny Arcade Podcasts"),
     # News, blogs, etc.
     ("http://www.vox.com/authors/matthew-yglesias/rss", "Matt Yglesias"),
-    ("http://feeds.feedburner.com/codinghorror", "Coding Horror"),
     ("http://www.python.org/channews.rdf", "Python"),
     ("http://feeds.arstechnica.com/arstechnica/features", "Ars Technica Features"),
-    ("http://hwww.damninteresting.com/?feed=rss2", "Damn Interesting"),
-    ("http://www.joelonsoftware.com/rss.xml", "Joel On Software"),
-    ("http://matt.might.net/articles/feed.rss", "Matt Might"),
     ("http://www.wired.com/threatlevel/feed/", "Wired: Threat Level"),
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
     ("http://www.gatesnotes.com/home/rss", "Gates Notes"), # Broken date-time parsing?
     ("http://feeds.propublica.org/propublica/main", "ProPublica"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
-    ("http://feeds.feedburner.com/newsyc50", "HN-50"),
+    #("http://feeds.feedburner.com/newsyc50", "HN-50"), # FIXME - No longer works?
 ]
+
 
 def send_email(gmail_user, gmail_pwd, to, subject, text, html):
     """Taken as-is from StackOverflow answer: http://stackoverflow.com/a/12424439
