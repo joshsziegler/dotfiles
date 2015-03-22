@@ -29,18 +29,17 @@ import feedparser
 
 feeds = [ # These will be printed in-order, so put important stuff first
     # Comics
-    ("http://theoatmeal.com/feed/rss", "The Oatmeal"),
-    ("http://xkcd.com/rss.xml", "XKCD"),
+    ("http://penny-arcade.com/feed", "Penny Arcade"),
     ("http://feeds.feedburner.com/thedoghousediaries/feed", "Doghouse Diaries "),
     ("http://www.smbc-comics.com/rss.php", "SMBC"),
-    ("http://penny-arcade.com/feed", "Penny Arcade"),
+    ("http://theoatmeal.com/feed/rss", "The Oatmeal"),
+    ("http://xkcd.com/rss.xml", "XKCD"),
     # News, blogs, etc.
-    ("http://www.vox.com/authors/matthew-yglesias/rss", "Matt Yglesias"),
+    ("http://www.vox.com/authors/matthew-yglesias/rss", "Vox: Matt Yglesias"),
     ("http://www.python.org/channews.rdf", "Python"),
-    ("http://feeds.arstechnica.com/arstechnica/features", "Ars Technica Features"),
+    ("http://feeds.arstechnica.com/arstechnica/features", "Ars Technica"),
     ("http://www.wired.com/threatlevel/feed/", "Wired: Threat Level"),
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
-    ("http://www.gatesnotes.com/home/rss", "Gates Notes"), # Broken date-time parsing?
     ("http://feeds.propublica.org/propublica/main", "ProPublica"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
     #("http://feeds.feedburner.com/newsyc50", "HN-50"), # FIXME - No longer works?
