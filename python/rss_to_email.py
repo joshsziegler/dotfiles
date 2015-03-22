@@ -36,13 +36,12 @@ feeds = [ # These will be printed in-order, so put important stuff first
     ("http://xkcd.com/rss.xml", "XKCD"),
     # News, blogs, etc.
     ("http://www.vox.com/authors/matthew-yglesias/rss", "Vox: Matt Yglesias"),
-    ("http://www.python.org/channews.rdf", "Python"),
     ("http://feeds.arstechnica.com/arstechnica/features", "Ars Technica"),
     ("http://www.wired.com/threatlevel/feed/", "Wired: Threat Level"),
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
     ("http://feeds.propublica.org/propublica/main", "ProPublica"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
-    #("http://feeds.feedburner.com/newsyc50", "HN-50"), # FIXME - No longer works?
+    ("http://feeds.feedburner.com/hn100points", "Hacker News > 100pt"), # FIXME - No longer works?
 ]
 
 
@@ -89,7 +88,7 @@ if __name__ == "__main__":
         try:
             posts = feedparser.parse(feed)
             plain += "{}:\n".format(feed_title)
-            html  += "<b>{}</b>:<br>".format(feed_title)
+            html  += "<b><a href=\"{}\" style=\"text-decoration: none;color: black;\">{}</a></b>:<br>".format(feed, feed_title)
             for post in posts['entries']:
                 title = post['title']
                 link  = post['link']
