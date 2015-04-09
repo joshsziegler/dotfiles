@@ -5,6 +5,7 @@
 // @author       Josh S Ziegler
 // @exclude		 *stackoverflow.com/*
 // @exclude      *stackexchange.com/*
+// @exclude      *github.com/*
 // ==/UserScript==
 
 function removeElement(el){
