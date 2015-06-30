@@ -137,7 +137,7 @@ def csv_to_table_as_is(dir, filename):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--health_dir',  type=str, default="C:/home/health/")
+    parser.add_argument('--health_dir',  type=str, default="C:/home/health_data/")
     args = parser.parse_args()
 
     today = datetime.date.today()

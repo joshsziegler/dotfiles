@@ -39,7 +39,6 @@ feeds = [ # These will be printed in-order, so put important stuff first
     ("http://feeds.arstechnica.com/arstechnica/features", "Ars Technica"),
     ("http://www.wired.com/threatlevel/feed/", "Wired: Threat Level"),
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
-    ("http://feeds.propublica.org/propublica/main", "ProPublica"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
     ("http://feeds.feedburner.com/hn100points", "Hacker News > 100pt"), # FIXME - No longer works?
 ]
