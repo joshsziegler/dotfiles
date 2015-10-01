@@ -40,7 +40,7 @@ feeds = [ # These will be printed in-order, so put important stuff first
     ("http://www.wired.com/threatlevel/feed/", "Wired: Threat Level"),
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
-    ("https://news.ycombinator.com/rss", "Hacker News"),
+    #("https://news.ycombinator.com/rss", "Hacker News"),
     ("http://feeds.feedburner.com/oreilly/newbooks", "O'Reilly - New Books")
 ]
 
