@@ -1,0 +1,17 @@
+{
+	"file_exclude_patterns":[
+		"*.meta"
+	],
+	"ignored_packages":[
+		"Vintage"
+	],
+	"rulers":[
+		100
+	],
+	"dictionary": "Packages/Language - English/en_US.dic",
+	"spell_check": true,
+	"added_words":[
+		"Deserialize",
+		"refactored"
+	],
+}
