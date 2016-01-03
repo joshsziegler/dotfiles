@@ -40,8 +40,11 @@ feeds = [ # These will be printed in-order, so put important stuff first
     ("http://www.wired.com/threatlevel/feed/", "Wired: Threat Level"),
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
-    #("https://news.ycombinator.com/rss", "Hacker News"),
-    ("http://feeds.feedburner.com/oreilly/newbooks", "O'Reilly - New Books")
+    ("https://news.ycombinator.com/rss", "Hacker News")
+]
+
+plain_links = [ # Simply put as-is in the email 
+    #("http://hckrnews.com/", "Hckr News")
 ]
 
 
@@ -87,6 +90,9 @@ if __name__ == "__main__":
     for feed, feed_title in feeds:
         try:
             posts = feedparser.parse(feed)
+            if len(posts['entries']) < 1: # skip feeds without any stories
+                continue
+
             plain += "{}:\n".format(feed_title)
             html  += "<b><a href=\"{}\" style=\"text-decoration: none;color: black;\">{}</a></b>:<br>".format(feed, feed_title)
             for post in posts['entries']:
@@ -118,6 +124,13 @@ if __name__ == "__main__":
             err = "Choked on {}\n{}\n\n".format(feed, traceback.format_exc())
             plain += err
             html  += err
+
+    plain += "\n"
+    html += "<br>"
+
+    for link, pretty_name in plain_links:
+        plain += "{} {}\n".format(title, link)
+        html  += "<a href=\"{}\" style=\"text-decoration: none;color: #444;\">{}</a><br>".format(link, pretty_name)
 
     html += "</body></html>"
     send_email(args.user, args.password, args.to, "RSS Feeds for {}".format(today.isoformat()), plain, html)
