@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 """Parses RSS/Atom feeds and sends them in an email.
 
 
