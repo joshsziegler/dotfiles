@@ -2,7 +2,13 @@
 and is intended to find similar images.
 """
 
-def dhash(image, hash_size = 8):
+from PIL import Image # Use Pillow for Python 3.x
+
+def dhash(img_path):
+    x = Image.open(img_path)
+    return _dhash(x)
+
+def _dhash(image, hash_size = 8):
     """Computer dHash of an image.
 
     # example of use
@@ -27,11 +33,11 @@ def dhash(image, hash_size = 8):
 
     # Compare adjacent pixels.
     difference = []
-    for row in xrange(hash_size):
-        for col in xrange(hash_size):
+    for row in range(hash_size):
+        for col in range(hash_size):
             pixel_left = image.getpixel((col, row))
             pixel_right = image.getpixel((col + 1, row))
-            difference.append(pixel_left &gt; pixel_right)
+            difference.append(pixel_left > pixel_right)
 
     # Convert the binary array to a hexadecimal string.
     decimal_value = 0

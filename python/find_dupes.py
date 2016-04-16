@@ -1,7 +1,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014 Joshua S. Ziegler 
+Copyright (c) 2014-2016 Joshua S. Ziegler 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,10 @@ import os
 import re
 from hashlib import md5
 import json
+from dhash import dhash
 
 class FindDupes(object):
-    def __init__(self, home, dir_list=None, delete_dupes=False):
+    def __init__(self, home, dir_list=None, delete_dupes=False, use_dhash=False):
         self.home = home
         if delete_dupes:
             print("This will delete duplicates!")
@@ -37,6 +38,7 @@ class FindDupes(object):
             if temp != "YES":
                 raise Exception("User did enter YES to confirm dupe deletion.")
         self.delete_dupes = delete_dupes
+        self.use_dhash = use_dhash
         self.file_blacklist = [] # list of regex objects
         self.dir_blacklist  = [] # list of regex objects
         if dir_list:
@@ -94,7 +96,11 @@ class FindDupes(object):
                     print("Failed to open", path)
                     print(e) 
 
-                file_hash = md5(binary_str).hexdigest() 
+                if self.use_dhash:
+                    file_hash = dhash(path)
+                else:
+                    file_hash = md5(binary_str).hexdigest() 
+                    
                 if file_hash not in self.hash_to_path:
                     self.hash_to_path[file_hash] = [path] 
                 else: 
@@ -135,9 +141,10 @@ class FindDupes(object):
 if __name__ == "__main__":
     #search_dirs = ["documents", "Google Drive", "Pictures"] 
     #zb = FindDupes("/", search_dirs)
-    zb = FindDupes("/home/gdrive/", delete_dupes=False)
+    zb = FindDupes("C:\\home\\games\\mapping_objects\\", delete_dupes=False)
     zb.blacklist_dir("\.\w*?$") # all hidden directories
     zb.blacklist_file("^\.") # all hidden files (starting with a dot) 
     zb.blacklist_file("^.*?\.swp") # all files ending with '.swp' 
+    zb.blacklist_file("^.*?.txt")
     zb.search_for_dupes()
     zb.save()
