@@ -1,7 +1,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014 Joshua S. Ziegler 
+Copyright (c) 2014-2016 Joshua S. Ziegler 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
