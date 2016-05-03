@@ -61,9 +61,9 @@ def get_feeds(days, past_links_path):
     except:
         pass # no file found
 
-    title = "RSS Feeds for {}".format(today.isoformat())
-    plain = "{}\n".format(title)
-    html =  "<h1>{}</h1>".format(title)
+    news_title = "RSS Feeds for {}".format(today.isoformat())
+    plain = "{}\n".format(news_title)
+    html =  "<h1>{}</h1>".format(news_title)
     for feed, feed_title in feeds:
         try:
             posts = feedparser.parse(feed)
@@ -95,7 +95,7 @@ def get_feeds(days, past_links_path):
                 # include it by default if not in past_link file or published date
                 past_links.append(link)
                 plain += "    {} {}\n".format(title, link)
-                html  += "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"{}\">{}</a><br>".format(link, title)
+                html  += "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"http://www.readability.com/read?url={}\">{}</a><br>".format(link, title)
 
         except:
             err = "Choked on {}\n{}\n\n".format(feed, traceback.format_exc())
@@ -106,25 +106,32 @@ def get_feeds(days, past_links_path):
     html += "<br>"
 
     for link, pretty_name in plain_links:
-        plain += "{} {}\n".format(title, link)
+        plain += "{} {}\n".format(pretty_name, link)
         html  += "<a href=\"{}\">{}</a><br>".format(link, pretty_name)
-
-    html += "</body></html>"
 
     open(past_links_path, "w+").write('\n'.join(past_links))
 
-    return (title, plain, html)
+    return (news_title, plain, html)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--html', action='store_true')
     parser.add_argument('--past_links', type=str, default="past_links.txt")
     parser.add_argument('--days',       type=int, default=1)
+    parser.add_argument('-t', '--templates_path', type=str, default="/home/josh/zglr_org/templates.py")
     args = parser.parse_args()
+
 
     title, plain, html = get_feeds(args.days, args.past_links)
     html = "<html><body>{}</body></html>".format(html)
     if args.html:
-        print(html.encode('ascii', 'ignore'))
+        # Import the templates module for 'base'
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("templates", args.templates_path)
+        templates = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(templates)
+        html = templates.base(title, html)
+        html = html.encode('ascii', 'ignore')
+        print(html)
     else:
         print(plain.encode('ascii', 'ignore'))
