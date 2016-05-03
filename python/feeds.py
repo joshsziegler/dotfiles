@@ -138,8 +138,8 @@ if __name__ == "__main__":
             print("Failed to import templates for 'base'")
             sys.exit()
 
-        html = templates.base(title, html)
         html = html.encode('ascii', 'ignore')
+        html = templates.base(title, html)
         print(html)
     else:
         print(plain.encode('ascii', 'ignore'))
