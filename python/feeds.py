@@ -26,7 +26,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-import datetime, traceback, argparse
+import sys, datetime, traceback, argparse
 import feedparser
 
 feeds = [ # These will be printed in-order, so put important stuff first
@@ -126,10 +126,18 @@ if __name__ == "__main__":
     html = "<html><body>{}</body></html>".format(html)
     if args.html:
         # Import the templates module for 'base'
-        import importlib.util
-        spec = importlib.util.spec_from_file_location("templates", args.templates_path)
-        templates = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(templates)
+        if sys.version_info >= (3, 5):
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("templates", args.templates_path)
+            templates = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(templates)
+        elif sys.version_info >= (3, 3):
+            from importlib.machinery import SourceFileLoader
+            templates = SourceFileLoader("templates", args.templates_path).load_module()
+        else:
+            print("Failed to import templates for 'base'")
+            sys.exit()
+
         html = templates.base(title, html)
         html = html.encode('ascii', 'ignore')
         print(html)
