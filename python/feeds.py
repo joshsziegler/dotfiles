@@ -95,7 +95,7 @@ def get_feeds(days, past_links_path):
                 # include it by default if not in past_link file or published date
                 past_links.append(link)
                 plain += "    {} {}\n".format(title, link)
-                html  += "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"{}\">{}</a><br>)".format(link, title)
+                html  += "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"{}\">{}</a><br>".format(link, title)
 
         except:
             err = "Choked on {}\n{}\n\n".format(feed, traceback.format_exc())
