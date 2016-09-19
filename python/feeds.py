@@ -42,6 +42,7 @@ feeds = [ # These will be printed in-order, so put important stuff first
     ("http://www.wired.com/threatlevel/feed/", "Wired: Threat Level"),
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
+    ("http://queue.acm.org/rss/feeds/articles.xml", "ACM Queue"),
     ("https://news.ycombinator.com/rss", "Hacker News")
 ]
 

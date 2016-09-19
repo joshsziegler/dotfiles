@@ -1,29 +1,31 @@
 #!/bin/bash
 
 echo "Update repos..."
-sudo apt-get update
+sudo apt update
 
-#echo "Remove crap I don\'t want..."
-#sudo apt-get -y remove thunderbird \
-    
-
-# xubuntu-restricted-extrax ~ MP3, DVD playback`
-# baobab ~ disk usage graphing
-echo "Installing base packages..."
-sudo apt-get -y install -y git gitk vim chromium-browser guake nmap \
-     python-pip python-dev build-essential \
-     deja-dup baobab gparted unetbootin \
-     xubuntu-restricted-extras 
-
-# Other packages that are maybes:
-#  - ddclient		Dyanmic DNS Client (e.g. for Google Domains Dynanmic DNS)
-#  - mumble-server	i.e. Murmur 
-#  	- Config via sudo dpkg-reconfigure mumble-server
-
+# Packages:
+#  - git
+#  - gitk
+#  - vim
+#  - nmap
+#  - tmux
+#  - python3
+#  - python3-pip
+#  - python-pip  
+#  - python-dev
+#  - build-essential
+#  - deja-dup                     backup tool
+#  - gparted                      disk partitioning
+#  - unetbootin                   create bootable USB sticks
+#  - guake                        Quake-style terminal
+#  - chromium-browser             OSS Chrome
+#  - xubuntu-restricted-extrax    MP3, DVD playback
+#  - baobab                       disk usage graphing 
+#  - ddclient                     Dyanmic DNS Client (e.g. for Google Domains Dynanmic DNS)
+#  - mumble-server                i.e. Murmur (Config via sudo dpkg-reconfigure mumble-server)  
+# 
 # Crontab -e
 #   57 9 * * * python3 /home/josh/dotfiles/python/feeds.py --html > /var/www/zglr.org/news.html
-
-
 
 echo "Clean up packages..."
 sudo apt-get -y autoremove
@@ -60,6 +62,10 @@ sudo chown -R jz:jz /home/josh/*
 
 echo "Change home dir to 700..."
 sudo chmod 700 /home/josh
+
+echo "Add Bash Aliases..."
+echo 'alias backup="rsync -rcvPh --delete /cygdrive/c/home/ josh@192.168.1.2:~/backups/josh-lt/"' >> ~/.bash_profile
+echo 'alias update="sudo apt update && yes | sudo apt upgrade"' >> ~/.bash_profile
 
 echo "Upgrade all packages installed..."
 sudo apt-get upgrade
