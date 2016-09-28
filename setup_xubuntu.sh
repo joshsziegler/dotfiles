@@ -26,7 +26,7 @@ sudo apt update
 #  - xrdp                         allows Windows users to connect via Remote Desktop without any installs
 # 
 # Crontab -e
-#   57 9 * * * python3 /home/josh/dotfiles/python/feeds.py --html > /var/www/zglr.org/news.html
+#   57 9 * * * cd /home/josh/code/dotfiles/python/ && echo "Starting news run `date`" >> news_feed_errors.txt && source venv/bin/activate && python feeds.py --html > /var/www/home.zglr.org/news.html 2>> news_feed_errors.txt 
 
 echo "Clean up packages..."
 sudo apt-get -y autoremove
