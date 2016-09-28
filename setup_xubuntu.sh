@@ -23,6 +23,7 @@ sudo apt update
 #  - baobab                       disk usage graphing 
 #  - ddclient                     Dyanmic DNS Client (e.g. for Google Domains Dynanmic DNS)
 #  - mumble-server                i.e. Murmur (Config via sudo dpkg-reconfigure mumble-server)  
+#  - xrdp                         allows Windows users to connect via Remote Desktop without any installs
 # 
 # Crontab -e
 #   57 9 * * * python3 /home/josh/dotfiles/python/feeds.py --html > /var/www/zglr.org/news.html
