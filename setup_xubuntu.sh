@@ -23,7 +23,9 @@ sudo apt update
 #  - baobab                       disk usage graphing 
 #  - ddclient                     Dyanmic DNS Client (e.g. for Google Domains Dynanmic DNS)
 #  - mumble-server                i.e. Murmur (Config via sudo dpkg-reconfigure mumble-server)  
-#  - xrdp                         allows Windows users to connect via Remote Desktop without any installs
+#  - goacess                      Web server log viewer
+#  - minidlna                     DLNA server
+#  - xrdp                         allows Windows users to connect via Remote Desktop
 # 
 # Crontab -e
 #   57 9 * * * cd /home/josh/code/dotfiles/python/ && echo "Starting news run `date`" >> news_feed_errors.txt && source venv/bin/activate && python feeds.py --html > /var/www/home.zglr.org/news.html 2>> news_feed_errors.txt 
@@ -66,7 +68,7 @@ sudo chmod 700 /home/josh
 
 echo "Add Bash Aliases..."
 echo 'alias backup="rsync -rcvPh --delete /cygdrive/c/home/ josh@192.168.1.2:~/backups/josh-lt/"' >> ~/.bash_profile
-echo 'alias update="sudo apt update && yes | sudo apt upgrade"' >> ~/.bash_profile
+echo 'alias update="sudo apt update && sudo apt upgrade - y && sudo apt autoremove && sudo reboot"' >> ~/.bash_profile
 
 echo "Upgrade all packages installed..."
 sudo apt-get upgrade
