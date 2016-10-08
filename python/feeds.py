@@ -119,7 +119,7 @@ if __name__ == "__main__":
     parser.add_argument('--html', action='store_true')
     parser.add_argument('--past_links', type=str, default="past_links.txt")
     parser.add_argument('--days',       type=int, default=1)
-    parser.add_argument('-t', '--templates_path', type=str, default="/home/josh/zglr_org/templates.py")
+    parser.add_argument('-t', '--templates_path', type=str, default="/home/josh/code/zglr_org/templates.py")
     args = parser.parse_args()
 
 

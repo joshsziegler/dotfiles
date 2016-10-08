@@ -28,7 +28,7 @@ sudo apt update
 #  - xrdp                         allows Windows users to connect via Remote Desktop
 # 
 # Crontab -e
-#   57 9 * * * python3 /home/josh/dotfiles/python/feeds.py --html > /var/www/zglr.org/news.html
+#   57 9 * * * cd /home/josh/code/dotfiles/python/ && echo "Starting news run `date`" >> news_feed_errors.txt && source venv/bin/activate && python feeds.py --html > /var/www/home.zglr.org/news.html 2>> news_feed_errors.txt 
 
 echo "Clean up packages..."
 sudo apt-get -y autoremove
@@ -72,4 +72,4 @@ echo 'alias backup="rsync -rcvPh --delete /cygdrive/c/home/ josh@192.168.1.2:~/b
 echo 'alias update="sudo apt update && sudo apt upgrade - y && sudo apt autoremove && sudo reboot"' >> ~/.bash_profile
 
 echo "Upgrade all packages installed..."
-sudo apt-get upgrade
+sudo apt update && sudo apt -y  upgrade && sudo reboot
