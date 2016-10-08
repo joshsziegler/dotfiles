@@ -31,7 +31,7 @@ def move_and_rename(src_dir, dest_dir):
     for r,d,f in os.walk(src_dir):
         for files in f:
             src = os.path.join(r, files)
-            dest = r.replace(".\\","").replace(".","").replace("\\", " - ").replace(",", " - ") 
+            dest = r.replace(".\\","").replace(".","").replace(os.path.sep, " - ").replace(",", " - ") 
             if dest: 
                 dest += " - " + files.replace(",", " - ")
             else:
