@@ -62,7 +62,7 @@ git clean -xfd
 git clean -f
 
 echo "Changing everything to be owned by josh..."
-sudo chown -R jz:jz /home/josh/*
+sudo chown -R josh:josh /home/josh/*
 
 echo "Change home dir to 700..."
 sudo chmod 700 /home/josh
