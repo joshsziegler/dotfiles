@@ -39,6 +39,7 @@ cp -r .gitconfig ~
 
 echo "Add some default aliases to bash_profile?"
 echo "alias backup='rsync -rcvPh --delete /cygdrive/c/home josh@192.168.1.2:~/backups/josh-lt/'"
+echo "alias zssh='ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 
 echo "Remember to update SSHD config:"
 echo "PermitRootLogin no"
