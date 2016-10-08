@@ -71,4 +71,4 @@ echo 'alias backup="rsync -rcvPh --delete /cygdrive/c/home/ josh@192.168.1.2:~/b
 echo 'alias update="sudo apt update && sudo apt upgrade - y && sudo apt autoremove && sudo reboot"' >> ~/.bash_profile
 
 echo "Upgrade all packages installed..."
-sudo apt-get upgrade
+sudo apt update && sudo apt -y  upgrade && sudo reboot
