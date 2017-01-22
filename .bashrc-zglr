@@ -12,6 +12,7 @@ alias zssh="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 alias zssh2="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 
 # Python-related 
-alias pya="source venv/bin/activate"
-alias pyd="deactivate"
+alias pya="source venv/bin/activate"      # Active the current dir's virtualenv
+alias pyd="deactivate"                    # Deactivate the current virtualenv
+alias pys="python -m SimpleHTTPServer"    # Serve the current directory 
 
