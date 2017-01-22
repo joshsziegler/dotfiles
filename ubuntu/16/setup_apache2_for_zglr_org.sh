@@ -21,3 +21,20 @@ sudo vim /etc/apache2/sites-available/zglr.org.conf
 sudo vim /etc/apache2/sites-available/zglr.org-le-ssl.conf 
 sudo crontab -e
 sudo letsencrypt renew
+
+# Setup Secure Dir Using Basic Auth and File Backend
+sudo apt install apache2-utils
+# Setup your new password file (leave off the -c to add a user to an existing
+# file)
+sudo htpasswd -c /etc/apache2/.htpasswd josh
+# The following needs to go into the apache config for your secure dir
+#<Directory "/var/www/zglr.org/s/">
+#AuthType Basic
+#AuthName "Restricted Content"
+#AuthUserFile /etc/apache2/.htpasswd
+#Require valid-user # alternatively, specify exact users
+#</Directory>
+sudo vim /etc/apache2/sites-available/zglr.org-le-ssl.conf
+sudo apache2ctl configtest
+sudo systemctl restart apache2
+

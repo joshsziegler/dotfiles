@@ -43,6 +43,8 @@ suod apt install \
     python3 \
     python3-pip \
     python-dev \
+    apache2 \
+    apache2-utils \ 
     build-essential 
 #   deja-dup                     backup tool
 #   gparted                      disk partitioning
