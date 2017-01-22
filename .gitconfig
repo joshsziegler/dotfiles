@@ -1,5 +1,7 @@
 [user]
-	name = Josh Ziegler
-	email = josh.s.ziegler@gmail.com
+    name = Josh Ziegler
+    email = josh.s.ziegler@gmail.com
 [core]
     hooksPath = hooks/
+[push]
+    default = simple
