@@ -15,4 +15,5 @@ alias zssh2="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 alias pya="source venv/bin/activate"      # Active the current dir's virtualenv
 alias pyd="deactivate"                    # Deactivate the current virtualenv
 alias pys="python -m SimpleHTTPServer"    # Serve the current directory 
+alias pyt="python -m unittest discover"   # Run all unit tests found 
 

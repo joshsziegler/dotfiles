@@ -13,7 +13,6 @@ mkdir ~/virtual_machines
 echo "Move settings over..."
 cp -r vim/.vim* ~/
 cp -r .gitconfig ~/
-cp .bashrc-zglr ~/
 
 
 echo "Changing everything to be owned by josh..."
@@ -25,8 +24,7 @@ sudo chmod 700 /home/josh
 
 
 echo "Setup .bashrc"
-cp .bashrc-zglr ~/
-echo "source .bashrc-zglr" >> ~/.bashrc 
+echo "source ~/code/dotfiles/.bashrc-zglr" >> ~/.bashrc 
 
 
 echo "Update repos..."
