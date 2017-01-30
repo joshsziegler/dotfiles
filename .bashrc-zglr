@@ -21,3 +21,5 @@ alias pyr="grc && pyv3 && pya && pydev"   # Rebuild from scratch
 
 # Git-related
 alias grc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
+alias gbd="git branch -d " 
+alias gbd-remote="git push origin :"
