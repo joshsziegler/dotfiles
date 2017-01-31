@@ -18,7 +18,7 @@ alias pys="python -m SimpleHTTPServer"                  # Serve the current dire
 alias pyt="python -m unittest discover"                 # Run all unit tests found 
 alias pydev="python setup.py develop"                   # Run setup.py in developer mode
 alias pyr="grc && pyv3 && pya && pydev"                 # Rebuild from scratch
-aliss pyautopep="autopep8 -riav --max-line-length 120"  # Auto fix most PEP8 violations
+alias pyautopep="autopep8 -riav --max-line-length 120"  # Auto fix most PEP8 violations
 
 # Git-related
 alias grc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
