@@ -3,35 +3,27 @@
 echo "Delete standard home directory layout"
 rm -rf ~/Documents ~/Downloads ~/Music ~/Pictures ~/Public ~/Templates ~/Videos
 
-
 echo  "Create my standard home directory layout"
 mkdir ~/code
 mkdir ~/downloads
-mkdir ~/virtual_machines
-
+mkdir ~/vm
 
 echo "Move settings over..."
 cp -r vim/.vim* ~/
 cp -r .gitconfig ~/
-cp .bashrc-zglr ~/
-
-
-echo "Changing everything to be owned by josh..."
-sudo chown -R josh:josh /home/josh/*
-
-
-echo "Change home dir to 700..."
-sudo chmod 700 /home/josh
-
 
 echo "Setup .bashrc"
 cp .bashrc-zglr ~/
 echo "source .bashrc-zglr" >> ~/.bashrc 
 
+echo "Changing everything to be owned by josh..."
+sudo chown -R josh:josh /home/josh/*
+
+echo "Change home dir to 700..."
+sudo chmod 700 /home/josh
 
 echo "Update repos..."
 sudo apt update
-
 
 echo "Install packages..."
 suod apt install \
@@ -45,7 +37,8 @@ suod apt install \
     python-dev \
     apache2 \
     apache2-utils \ 
-    build-essential 
+    build-essential \
+    fail2ban
 #   deja-dup                     backup tool
 #   gparted                      disk partitioning
 #   unetbootin                   create bootable USB sticks
@@ -59,21 +52,20 @@ suod apt install \
 #   minidlna                     DLNA server
 #   xrdp                         allows Windows users to connect via Remote Desktop
 
-
 # Setup RSS-to-Email script  
 # Crontab -e
 #   57 9 * * * cd /home/josh/code/dotfiles/python/ && echo "Starting news run `date`" >> news_feed_errors.txt && source venv/bin/activate && python feeds.py --html > /var/www/home.zglr.org/news.html 2>> news_feed_errors.txt 
 
+echo "Upgrade all packages installed..."
+sudo apt -y  full-upgrade
 
 echo "Clean up packages..."
 sudo apt-get -y autoremove
 
-
-echo "Upgrade all packages installed..."
-sudo apt update && sudo apt -y  upgrade 
-
-
 echo "1) Remember to update SSHD config: (/etc/ssh/sshd_config)"
 echo "    PermitRootLogin no"
 echo "    PasswordAuthentication no"
-echo "2) Reboot to finish upgrade process.
+echo "2) Setup crontab: (sudo crontab -e)"
+echo "  30 2 * * 1 /usr/bin/letsencrypt renew >> /var/log/le-renew.log"
+echo "  0  3 * * * apt update && apt full-upgrade -y && apt autoremove && reboot"
+echo "3) Reboot to finish upgrade process.
