@@ -22,6 +22,9 @@ sudo chown -R josh:josh /home/josh/*
 echo "Change home dir to 700..."
 sudo chmod 700 /home/josh
 
+echo "Setup .bashrc"
+echo "source ~/code/dotfiles/.bashrc-zglr" >> ~/.bashrc 
+
 echo "Update repos..."
 sudo apt update
 

@@ -5,3 +5,7 @@
     hooksPath = hooks/
 [push]
     default = simple
+[credential]
+    helper = cache
+[credential "https://git.mindmodeling.org"]
+    username = joshz
