@@ -27,3 +27,4 @@ alias gitbd="git branch -d "
 #alias gbd-remote="git push origin :"
 alias gitf='git fetch --all --prune'
 alias gitc='git checkout'
+alias gits='git status'
