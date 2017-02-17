@@ -5,6 +5,8 @@
     hooksPath = hooks/
 [push]
     default = simple
+[pull]
+    rebase = true
 [credential]
     helper = cache
 [credential "https://git.mindmodeling.org"]
