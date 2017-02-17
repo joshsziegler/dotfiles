@@ -28,3 +28,6 @@ alias gitbd="git branch -d "
 alias gitf='git fetch --all --prune'
 alias gitc='git checkout'
 alias gits='git status'
+
+# Apt-related
+alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
