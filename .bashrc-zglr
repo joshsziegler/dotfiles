@@ -6,24 +6,24 @@ export EDITOR=vim
 
 # Personal PC/LAN related
 alias zbackup2="rsync -rcvPh --delete /cygdrive/c/home josh@192.168.1.2:~/backups/josh-lt/"
-alias zbackup="rsync -rcvPh --chmod=ugo=rwX --delete /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
+alias zbackup="rsync -rcvPh --chmod=ugo=rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
 alias zupdate="sudo apt update && sudo apt upgrade - y && sudo apt autoremove && sudo reboot"
 alias zssh="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 alias zssh2="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 
-# Python-related 
+# Python-related
 alias pyv3="virtualenv --no-site-packages --python=python3 --clear venv"  # Create Python 3 virtualenv
 alias pya="source venv/bin/activate"                    # Active the current dir's virtualenv
 alias pyd="deactivate"                                  # Deactivate the current virtualenv
-alias pys="python -m SimpleHTTPServer"                  # Serve the current directory 
-alias pyt="python -m unittest discover"                 # Run all unit tests found 
+alias pys="python -m SimpleHTTPServer"                  # Serve the current directory
+alias pyt="python -m unittest discover"                 # Run all unit tests found
 alias pydev="python setup.py develop"                   # Run setup.py in developer mode
 alias pyr="gitrc && pyv3 && pya && pydev"               # Rebuild from scratch
 alias pyautopep="autopep8 -riav --max-line-length 120"  # Auto fix most PEP8 violations
 
 # Git-related
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
-alias gitbd="git branch -d " 
+alias gitbd="git branch -d "
 #alias gbd-remote="git push origin :"
 alias gitf='git fetch --all --prune'
 alias gitc='git checkout'
