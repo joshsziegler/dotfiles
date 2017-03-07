@@ -23,7 +23,8 @@ alias pyautopep="autopep8 -riav --max-line-length 120"  # Auto fix most PEP8 vio
 
 # Git-related
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
-alias gitbd="git branch -d "
+alias gitbd="git branch -d " # Delete the local branch
+alias gitbdr="git origin --delete " # Delete the remote branch
 #alias gbd-remote="git push origin :"
 alias gitf='git fetch --all --prune'
 alias gitc='git checkout'
