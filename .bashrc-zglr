@@ -30,6 +30,7 @@ alias gitbdr="git origin --delete " # Delete the remote branch
 alias gitf='git fetch --all --prune'
 alias gitc='git checkout'
 alias gits='git status'
+alias gitsq='git reset --soft HEAD~'  # Soft-squash the last N commits (you must provide a number)
 
 # Apt-related
 alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
