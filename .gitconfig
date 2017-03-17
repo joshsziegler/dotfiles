@@ -4,7 +4,7 @@
 [core]
     hooksPath = hooks/
 [push]
-    default = simple
+#    default = simple  # Not sure this is a good policy
 [pull]
     rebase = true
 [credential]
