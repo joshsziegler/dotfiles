@@ -4,9 +4,9 @@
 [core]
     hooksPath = hooks/
 [push]
-#    default = simple  # Not sure this is a good policy
+    default = simple
 [pull]
-    rebase = true
+#    rebase = true  # Not sure this is a good policy
 [credential]
     helper = cache
 [credential "https://git.mindmodeling.org"]
