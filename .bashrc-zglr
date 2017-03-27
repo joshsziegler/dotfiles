@@ -24,7 +24,7 @@ alias pys="python -m http.server"                       # Server the current dir
 alias pyt="python -m unittest discover"                 # Run all unit tests found
 alias pydev="python setup.py develop"                   # Run setup.py in developer mode
 alias pyr="gitrc && pyv3 && pya && pydev"               # Rebuild from scratch
-alias pyautopep="autopep8 -riav --max-line-length 120"  # Auto fix most PEP8 violations
+alias pyf="autopep8 -riav --max-line-length 120"        # Auto fix most PEP8 violations
 
 # Git-related
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
