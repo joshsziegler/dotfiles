@@ -45,9 +45,11 @@ alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
 
 # Work
 alias mm-pull="rsync -r -e 'ssh -i ~/.ssh/dren_desktop' joshz@dev.mindmodeling.org:~/ joshz.dev.mindmodeling.org/"
+alias ssh-pk="/usr/local/ossh/bin/ssh"
 
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
 
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ssh/bin
+
