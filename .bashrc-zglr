@@ -7,7 +7,7 @@ export EDITOR=vim
 # Personal PC/LAN related
 alias backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
 alias backup3="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home josh@192.168.1.2:~/backups/josh_lt/"
-alias zupdate="sudo apt update && sudo apt upgrade - y && sudo apt autoremove && sudo reboot"
+alias zupdate="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo reboot"
 alias zssh="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 alias zssh2="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 
