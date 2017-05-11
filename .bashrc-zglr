@@ -48,3 +48,6 @@ alias mm-pull="rsync -r -e 'ssh -i ~/.ssh/dren_desktop' joshz@dev.mindmodeling.o
 
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
+
+# Work-related Paths
+PATH=$PATH:/usr/local/krb5/bin:/usr/local/ssh/bin
