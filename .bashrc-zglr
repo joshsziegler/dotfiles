@@ -53,3 +53,7 @@ alias ls-last-updated="ls -Alrt | tail -n10"
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
+# GO-related Paths
+export GOPATH=~/go/
+export PATH=$PATH:$GOPATH/bin
+
