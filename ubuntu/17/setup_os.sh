@@ -7,6 +7,8 @@ echo  "Create my standard home directory layout"
 mkdir ~/code
 mkdir ~/downloads
 mkdir ~/vm
+mkdir -p ~/code/gocode/src  # My Go source directory
+mkdir ~/go  # Go install location (so I don't have to install it system-wide)
 
 echo "Move settings over..."
 cp -r vim/.vim* ~/
