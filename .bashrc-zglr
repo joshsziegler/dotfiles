@@ -51,5 +51,10 @@ alias ssh-pk="/usr/local/ossh/bin/ssh"
 alias ls-last-updated="ls -Alrt | tail -n10"
 
 # Work-related Paths
-PATH=$PATH:/usr/local/krb5/bin:/usr/local/ssh/bin
+PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
+
+# GO-related Paths
+export GOPATH=~/code/gocode
+export GOROOT=~/go
+export PATH=$PATH:$GOROOT/bin
 
