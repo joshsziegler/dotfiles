@@ -28,8 +28,8 @@ alias tmux="tmux attach -t joshz || tmux new -s joshz"
 
 
 # FUSE
-alias mount-zglr="sshfs josh@zglr.org:/home/josh/ /home/joshz/zglr.org"
-alias umount-zglr="fusermount -u /home/joshz/zglr.org"
+alias fuse-mount-zglr="sshfs josh@zglr.org:/home/josh/ /home/joshz/zglr.org"
+alias fuse-umount-zglr="fusermount -u /home/joshz/zglr.org"
 
 
 # Rsync
