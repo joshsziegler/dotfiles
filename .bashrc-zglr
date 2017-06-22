@@ -5,7 +5,7 @@ export VISUAL=vim
 export EDITOR=vim
 
 # Update my Machine Config Using dotfiles
-alias dotfiles-update="cd ~/code/dotfiles/ && git pull && source ~/.bashrc && cp .gitconfig ~/ && mkdir -p ~/.ssh/ && cp .ssh/config ~/.ssh/config && cd ~"
+alias dotfiles-update="git -C ~/code/dotfiles/ pull && source ~/.bashrc && cp ~/code/dotfiles/.gitconfig ~/ && mkdir -p ~/.ssh/ && cp ~/code/dotfiles/.ssh/config ~/.ssh/config"
 
 # Personal PC/LAN related
 alias backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
@@ -13,6 +13,9 @@ alias backup3="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --ex
 alias zupdate="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo reboot"
 alias zssh="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 alias zssh2="ssh josh@zglr.org -t 'tmux attach || tmux new'"
+
+# Tmux-related
+alias tmux="tmux attach -t joshz || tmux new -s joshz"
 
 # FUSE
 alias mount-zglr="sshfs josh@zglr.org:/home/josh/ /home/joshz/zglr.org"
@@ -46,10 +49,11 @@ alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 # Apt-related
 alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
 
-
 # Work
 alias mm-pull="rsync -r -e 'ssh -i ~/.ssh/dren_desktop' joshz@dev.mindmodeling.org:~/ joshz.dev.mindmodeling.org/"
 alias ssh-pk="/usr/local/ossh/bin/ssh"
+alias ssh-mm-dev="ssh joshz@dev.mindmodeling.org -t 'tmux attach -t joshz || tmux new -s joshz'" 
+alias ssh-mm-prod="ssh -tt joshz@dev.mindmodeling.org ssh -tt root@wsu-mm"
 
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
