@@ -11,3 +11,5 @@
     helper = cache
 [credential "https://git.mindmodeling.org"]
     username = joshz
+[credential "https://github.com"]
+    username = joshsziegler
