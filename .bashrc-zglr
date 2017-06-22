@@ -5,7 +5,7 @@ export VISUAL=vim
 export EDITOR=vim
 
 # Update my Machine Config Using dotfiles
-alias dotfiles-update="cd ~/code/dotfiles/ && git pull && source ~/.bashrc && cp .gitconfig ~/ && cd ~"
+alias dotfiles-update="cd ~/code/dotfiles/ && git pull && source ~/.bashrc && cp .gitconfig ~/ && mkdir -p ~/.ssh/ && cp .ssh/config ~/.ssh/config && cd ~"
 
 # Personal PC/LAN related
 alias backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
