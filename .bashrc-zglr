@@ -4,24 +4,42 @@ export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\
 export VISUAL=vim
 export EDITOR=vim
 
-# Update my Machine Config Using dotfiles
+
+# Update my dotfiles
 alias dotfiles-update="git -C ~/code/dotfiles/ pull && source ~/.bashrc && cp ~/code/dotfiles/.gitconfig ~/ && mkdir -p ~/.ssh/ && cp ~/code/dotfiles/.ssh/config ~/.ssh/config"
 
-# Personal PC/LAN related
-alias backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
-alias backup3="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home josh@192.168.1.2:~/backups/josh_lt/"
-alias zupdate="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo reboot"
-alias zssh="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
-alias zssh2="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 
-# Tmux-related
+# Ubuntu and Apt
+alias apt-update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo reboot"
+alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
+
+
+# SSH 
+alias ssh-zglr="ssh josh@zglr.org -t 'tmux attach || tmux new'"
+alias ssh-zglr2="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
+## SSH - Work
+alias ssh-pk="/usr/local/ossh/bin/ssh"
+alias ssh-mm-dev="ssh joshz@dev.mindmodeling.org -t 'tmux attach -t joshz || tmux new -s joshz'" 
+alias ssh-mm-prod="ssh -tt joshz@dev.mindmodeling.org ssh -tt root@wsu-mm"
+
+
+# Tmux
 alias tmux="tmux attach -t joshz || tmux new -s joshz"
+
 
 # FUSE
 alias mount-zglr="sshfs josh@zglr.org:/home/josh/ /home/joshz/zglr.org"
 alias umount-zglr="fusermount -u /home/joshz/zglr.org"
 
-# Python-related
+
+# Rsync
+alias rsync-zlt-backup="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home josh@192.168.1.2:~/backups/josh_lt/"
+alias rsync-zlt-backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
+# Rsync - Work
+alias rsync-mm-pull="rsync -r -e 'ssh -i ~/.ssh/dren_desktop' joshz@dev.mindmodeling.org:~/ joshz.dev.mindmodeling.org/"
+
+
+# Python
 alias pyv3="virtualenv --no-site-packages --python=python3 --clear venv"  # Create Python 3 virtualenv
 alias pya="source venv/bin/activate"                    # Active the current dir's virtualenv
 alias pyd="deactivate"                                  # Deactivate the current virtualenv
@@ -32,7 +50,7 @@ alias pydev="python setup.py develop"                   # Run setup.py in develo
 alias pyr="gitrc && pyv3 && pya && pydev"               # Rebuild from scratch
 alias pyf="autopep8 -riav --max-line-length 120"        # Auto fix most PEP8 violations
 
-# Git-related
+# Git
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
 alias gitbd="git branch -d " # Delete the local branch
 alias gitbdr="git origin --delete " # Delete the remote branch
@@ -46,20 +64,14 @@ alias gitkap='gitk --simplify-by-decoration --all'
 alias gitl='git log --graph --decorate'
 alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 
-# Apt-related
-alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
-
-# Work
-alias mm-pull="rsync -r -e 'ssh -i ~/.ssh/dren_desktop' joshz@dev.mindmodeling.org:~/ joshz.dev.mindmodeling.org/"
-alias ssh-pk="/usr/local/ossh/bin/ssh"
-alias ssh-mm-dev="ssh joshz@dev.mindmodeling.org -t 'tmux attach -t joshz || tmux new -s joshz'" 
-alias ssh-mm-prod="ssh -tt joshz@dev.mindmodeling.org ssh -tt root@wsu-mm"
 
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
 
+
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
+
 
 # GO-related Paths
 export GOPATH=~/code/gocode
