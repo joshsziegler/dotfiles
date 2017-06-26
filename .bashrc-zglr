@@ -21,6 +21,10 @@ alias ssh-zglr2="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 alias ssh-pk="/usr/local/ossh/bin/ssh"
 alias ssh-mm-dev="ssh joshz@dev.mindmodeling.org -t 'tmux attach -t joshz || tmux new -s joshz'" 
 alias ssh-mm-prod="ssh -tt joshz@dev.mindmodeling.org ssh -tt root@wsu-mm"
+alias ssh-mm-thunder="ssh-pk joshz@thunder.afrl.hpc.mil"
+alias ssh-mm-lightning="ssh-pk joshz@lightning.afrl.hpc.mil"
+alias ssh-mm-talon="ssh-pk joshz@talon.afrl.hpc.mil"
+alias ssh-mm-topaz="ssh-pk joshz@topaz.erdc.hpc.mil"
 
 
 # Tmux
