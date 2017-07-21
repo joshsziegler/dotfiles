@@ -7,7 +7,7 @@ set tabstop=8
 set softtabstop=4
 set shiftwidth=4
 set autoindent
-set textwidth=79
+"set textwidth=79  " I think of short lines as less and less of an issue
 
 "Python code folding
 set foldmethod=indent 
