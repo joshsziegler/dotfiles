@@ -33,6 +33,7 @@ map <leader>p :!python % <CR>
 " color settings (if terminal/gui supports it)
 if &t_Co > 2 || has("gui_running")
   syntax on          " enable colors
+  colorscheme monokai
   set hlsearch       " highlight search (very useful!)
   set incsearch      " search incremently (search while typing)
 endif
