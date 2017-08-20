@@ -40,6 +40,7 @@ suod apt install \
     apache2-utils \ 
     build-essential \
     fail2ban
+#   vnstat                      # Network Stats
 #   deja-dup                     backup tool
 #   gparted                      disk partitioning
 #   unetbootin                   create bootable USB sticks

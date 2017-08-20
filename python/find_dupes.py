@@ -1,7 +1,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014-2016 Joshua S. Ziegler 
+Copyright (c) 2014-2016 Joshua S. Ziegler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,11 @@ THE SOFTWARE.
 """
 
 
-import os 
+import os
 import re
 from hashlib import md5
 import json
-from dhash import dhash
+# from dhash import dhash
 
 class FindDupes(object):
     def __init__(self, home, dir_list=None, delete_dupes=False, use_dhash=False):
@@ -42,7 +42,7 @@ class FindDupes(object):
         self.file_blacklist = [] # list of regex objects
         self.dir_blacklist  = [] # list of regex objects
         if dir_list:
-            self.dir_list = dir_list 
+            self.dir_list = dir_list
         else:
             # Search all directorys in the home directory
             self.dir_list = [ name for name in os.listdir(home) if os.path.isdir(os.path.join(home, name)) ]
@@ -77,42 +77,42 @@ class FindDupes(object):
             path = os.path.join(directory, filename)
             path = os.path.abspath(path) # Normalize the path
 
-            if os.path.islink(path): 
-                contine # skip links
-            elif os.path.isdir(path): 
+            if os.path.islink(path):
+                continue # skip links
+            elif os.path.isdir(path):
                 if self.blacklisted_dir(path):
                     #print "Skipping dir:", root
-                    continue # skip this directory 
+                    continue # skip this directory
 
                 self.search_dir(path)
             else:
                 if self.blacklisted_file(path):
-                    #print "Skipping file:", file_path 
+                    #print "Skipping file:", file_path
                     continue # skip this file
 
                 try:
                     binary_str = open(path, 'rb').read()
                 except IOError as e:
                     print("Failed to open", path)
-                    print(e) 
+                    print(e)
 
                 if self.use_dhash:
                     file_hash = dhash(path)
                 else:
-                    file_hash = md5(binary_str).hexdigest() 
-                    
+                    file_hash = md5(binary_str).hexdigest()
+
                 if file_hash not in self.hash_to_path:
-                    self.hash_to_path[file_hash] = [path] 
-                else: 
+                    self.hash_to_path[file_hash] = [path]
+                else:
                     if path not in self.hash_to_path[file_hash]:
                         # This is a duplicate
-                        self.hash_to_path[file_hash].append(path) 
+                        self.hash_to_path[file_hash].append(path)
                         if self.delete_dupes:
                             print("Deleting duplicate: {}".format(path))
                             os.remove(path)
 
         self.filter_duplicates()
-                
+
 
     def search_for_dupes(self):
         for directory in self.dir_list:
@@ -134,17 +134,18 @@ class FindDupes(object):
         for f_hash in to_remove:
             del self.hash_to_path[f_hash]
 
-    def add_dir(self, directory):  
+    def add_dir(self, directory):
         if directory not in self.dir_list:
             self.dir_list.append(directory)
 
 if __name__ == "__main__":
-    #search_dirs = ["documents", "Google Drive", "Pictures"] 
+    #search_dirs = ["documents", "Google Drive", "Pictures"]
     #zb = FindDupes("/", search_dirs)
-    zb = FindDupes("C:\\home\\games\\mapping_objects\\", delete_dupes=False)
+    zb = FindDupes("/cygdrive/c/home/", delete_dupes=False)
     zb.blacklist_dir("\.\w*?$") # all hidden directories
-    zb.blacklist_file("^\.") # all hidden files (starting with a dot) 
-    zb.blacklist_file("^.*?\.swp") # all files ending with '.swp' 
+    zb.blacklist_file("^\.") # all hidden files (starting with a dot)
+    zb.blacklist_file("^.*?\.swp") # all files ending with '.swp'
     zb.blacklist_file("^.*?.txt")
+    zb.blacklist_file("^venv") # all Python Virtual environments
     zb.search_for_dupes()
     zb.save()
