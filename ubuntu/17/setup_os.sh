@@ -40,6 +40,7 @@ suod apt install \
     apache2-utils \ 
     build-essential \
     fail2ban
+    linkchecker                   
 #   vnstat                      # Network Stats
 #   deja-dup                     backup tool
 #   gparted                      disk partitioning
