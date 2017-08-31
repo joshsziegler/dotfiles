@@ -3,6 +3,7 @@
     email = josh.s.ziegler@gmail.com
 [core]
     hooksPath = hooks/
+    editor = vim
 [push]
     default = simple
 [pull]
