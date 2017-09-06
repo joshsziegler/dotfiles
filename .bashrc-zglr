@@ -71,6 +71,7 @@ alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
+alias exit-code="echo $?"  # I can never remember this...
 
 
 # Work-related Paths
