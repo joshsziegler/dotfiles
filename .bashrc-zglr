@@ -6,7 +6,16 @@ export EDITOR=vim
 
 
 # Update my dotfiles
-alias dotfiles-update="git -C ~/code/dotfiles/ pull && source ~/.bashrc && ln -sf ~/code/dotfiles/.gitconfig ~/ && mkdir -p ~/.ssh/ && ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/ && ln -sf ~/code/dotfiles/.vimrc ~/ && ln -sf ~/code/dotfiles/.vim/ ~/ && ln -sf ~/code/dotfiles/.pypirc ~/"
+dotfiles(){
+    git -C ~/code/dotfiles/ pull 
+    source ~/.bashrc 
+    ln -sf ~/code/dotfiles/.gitconfig ~/ 
+    mkdir -p ~/.ssh/ 
+    ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/ 
+    ln -sf ~/code/dotfiles/.vimrc ~/ 
+    ln -sf ~/code/dotfiles/.vim/ ~/ 
+    ln -sf ~/code/dotfiles/.pypirc ~/
+}
 
 
 # Ubuntu and Apt
