@@ -69,6 +69,16 @@ alias gitl='git log --graph --decorate'
 alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 
 
+# Golang
+zgobuild(){
+    [ -z "$1" ] && echo "zgobuild pkg_name out_name" && return
+    [ -z "$2" ] && echo "zgobuild pkg_name out_name" && return
+    GOOS=linux   GOARCH=386   go build -o "$2-linux-386"     $1 
+    GOOS=linux   GOARCH=amd64 go build -o "$2-linux-amd64"   $1 
+    GOOS=windows GOARCH=386   go build -o "$2-windows-386"   $1 
+    GOOS=windows GOARCH=amd64 go build -o "$2-windows-amd64" $1 
+}
+
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
 alias exit-code="echo $?"  # I can never remember this...
