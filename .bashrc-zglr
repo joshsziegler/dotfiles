@@ -100,5 +100,5 @@ PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 # GO-related Paths
 export GOPATH=~/code/gocode
 #export GOROOT=~/go
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOPATH/bin
 
