@@ -11,6 +11,7 @@ set autoindent
 
 "Python code folding
 set foldmethod=indent 
+set foldlevelstart=20  " Open files with folds opened (mostly)
 nnoremap <space> za
 vnoremap <space> zf
 
