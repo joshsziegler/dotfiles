@@ -39,9 +39,13 @@ suod apt install \
     apache2 \
     apache2-utils \ 
     build-essential \
-    fail2ban
-    linkchecker                   
-#   vnstat                      # Network Stats
+    fail2ban \ 
+    linkchecker \
+    lnav \                      # Fantastic CLI log viewer
+    vnstat                      # Network Stats
+#   acct                        # System resource usage by user 
+#   darkstat                    # Network monitor with HTTP served graphs/stats
+#   logwatch                    # Summarizes log files and can send summary via email
 #   deja-dup                     backup tool
 #   gparted                      disk partitioning
 #   unetbootin                   create bootable USB sticks
