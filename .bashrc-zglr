@@ -77,6 +77,7 @@ alias gitkap='gitk --simplify-by-decoration --all'
 alias gitl='git log --graph --decorate'
 alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 alias gittime='git log --author="`git config --get user.name`" --since="1 week ago" --date=short --no-merges --pretty="%ad (%ar) -- %s"'
+alias gittime2='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
 
 
 # Golang
