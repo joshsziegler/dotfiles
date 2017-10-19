@@ -4,6 +4,10 @@ execute pathogen#infect()
 filetype on            " enables filetype detection
 filetype plugin on     " enables filetype specific plugins
 
+" Lightline (status line)
+set noshowmode    " Hide vim's default status line
+set laststatus=2  " Make sure lightline's status line is shown
+
 "PEP 8
 set expandtab
 set tabstop=8
