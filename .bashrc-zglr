@@ -80,13 +80,31 @@ alias gittime='git log --author="`git config --get user.name`" --since="1 week a
 
 
 # Golang
+foo(){
+    [ -z "$1" ] && echo "zgobuild pkg_name out_name" && return
+    [ -z "$2" ] && echo "zgobuild pkg_name out_name" && return
+    go build -o "$2-linux-386" -ldflags "-X main.BuildDate=`date -u --rfc-3339=seconds | sed -e 's/ /T/'` \
+        -X main.GitCommit=`git rev-parse --short HEAD` \
+        -X main.GitBranch=`git symbolic-ref -q --short HEAD` \
+        -X main.State=`if [ -n "$(git status --porcelain)" ]; then echo 'dirty'; fi` \
+        -X main.Version=`git describe --abbrev=0`" $1 
+}
 zgobuild(){
     [ -z "$1" ] && echo "zgobuild pkg_name out_name" && return
     [ -z "$2" ] && echo "zgobuild pkg_name out_name" && return
-    GOOS=linux   GOARCH=386   go build -o "$2-linux-386"     $1 
-    GOOS=linux   GOARCH=amd64 go build -o "$2-linux-amd64"   $1 
-    GOOS=windows GOARCH=386   go build -o "$2-windows-386"   $1 
-    GOOS=windows GOARCH=amd64 go build -o "$2-windows-amd64" $1 
+    GITVERSION=$(git describe --abbrev=0)
+    GITCOMMIT=$(git rev-parse --short HEAD)
+    BUILDDATE=$(date -u --rfc-3339=seconds)
+    GITBRANCH=$(git symbolic-ref -q --short HEAD)
+
+    GOOS=linux   GOARCH=386   go build -o "$2-linux-386" \
+        -ldflags "-X main.GitCommit=$GITCOMMIT \
+        main.Version=$GITVERSION \
+        main.BuildDate=$BUILDDATE \
+        main.GitBranch=$GITBRANCH" $1 
+    #GOOS=linux   GOARCH=amd64 go build -o "$2-linux-amd64"   $1 
+    #GOOS=windows GOARCH=386   go build -o "$2-windows-386"   $1 
+    #GOOS=windows GOARCH=amd64 go build -o "$2-windows-amd64" $1 
 }
 
 # Misc

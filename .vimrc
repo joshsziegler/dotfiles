@@ -1,3 +1,6 @@
+" enable Pathogen package manager
+execute pathogen#infect()  
+
 filetype on            " enables filetype detection
 filetype plugin on     " enables filetype specific plugins
 
