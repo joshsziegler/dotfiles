@@ -81,7 +81,8 @@ alias gittime2='git log --since="1 week ago" --date=short --no-merges --pretty="
 
 
 # Golang
-alias goinstall='rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
+alias goinstall-linux-amd64='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
+alias goinstall-linux-x86='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz && tar -C ~/ -xzf go1.9.2.linux-386.tar.gz && mv go go1.9'
 foo(){
     [ -z "$1" ] && echo "zgobuild pkg_name out_name" && return
     [ -z "$2" ] && echo "zgobuild pkg_name out_name" && return
