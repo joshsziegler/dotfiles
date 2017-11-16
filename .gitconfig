@@ -4,6 +4,7 @@
 [core]
     hooksPath = hooks/
     editor = vim
+	quotepath = false
 [push]
     default = simple
 [pull]

@@ -81,6 +81,7 @@ alias gittime2='git log --since="1 week ago" --date=short --no-merges --pretty="
 
 
 # Golang
+alias goinstall='rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
 foo(){
     [ -z "$1" ] && echo "zgobuild pkg_name out_name" && return
     [ -z "$2" ] && echo "zgobuild pkg_name out_name" && return
@@ -119,6 +120,7 @@ PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
 # GO-related Paths
 export GOPATH=~/code/gocode
-#export GOROOT=~/go
+export GOROOT=~/go1.9
+export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
