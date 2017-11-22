@@ -34,6 +34,7 @@ alias ssh-mm-thunder="ssh-pk joshz@thunder.afrl.hpc.mil"
 alias ssh-mm-lightning="ssh-pk joshz@lightning07.afrl.hpc.mil"
 alias ssh-mm-talon="ssh-pk joshz@talon.afrl.hpc.mil -t 'screen -R'"
 alias ssh-mm-topaz="ssh-pk joshz@topaz07.erdc.hpc.mil -t 'screen -R'"
+alias ssh-mm-armstrong="ssh-pk joshz@armstrong05.navydsrc.hpc.mil -t 'screen -R'"
 
 
 # Tmux
