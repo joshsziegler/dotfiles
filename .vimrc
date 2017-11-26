@@ -54,3 +54,4 @@ set ruler
 set nowrap
 set smarttab         " smart tab handling for indenting
 set smartindent      " smart auto indenting
+set cursorline       " highlight the line the cursor is on
