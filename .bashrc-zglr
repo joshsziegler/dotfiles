@@ -36,12 +36,9 @@ export PS1='\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[1;36m\] \w\[\033[
 export VISUAL=vim
 export EDITOR=vim
 
-
-
 # Ubuntu and Apt
 alias apt-update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo reboot"
 alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
-
 
 # SSH 
 alias ssh-zglr="ssh josh@zglr.org -t 'tmux attach || tmux new'"
@@ -56,22 +53,18 @@ alias ssh-mm-talon="ssh-pk joshz@talon.afrl.hpc.mil -t 'screen -R'"
 alias ssh-mm-topaz="ssh-pk joshz@topaz07.erdc.hpc.mil -t 'screen -R'"
 alias ssh-mm-armstrong="ssh-pk joshz@armstrong05.navydsrc.hpc.mil -t 'screen -R'"
 
-
 # Tmux
 alias tmux="tmux attach -t joshz || tmux new -s joshz"
-
 
 # FUSE
 alias fuse-mount-zglr="sshfs josh@zglr.org:/home/josh/ /home/joshz/zglr.org"
 alias fuse-umount-zglr="fusermount -u /home/joshz/zglr.org"
-
 
 # Rsync
 alias rsync-zlt-backup="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home josh@192.168.1.2:~/backups/josh_lt/"
 alias rsync-zlt-backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
 # Rsync - Work
 alias rsync-mm-pull="rsync -r -e 'ssh -i ~/.ssh/dren_desktop' joshz@dev.mindmodeling.org:~/ joshz.dev.mindmodeling.org/"
-
 
 # Python
 alias pyv3="virtualenv --no-site-packages --python=python3 --clear venv"  # Create Python 3 virtualenv
@@ -99,7 +92,6 @@ alias gitl='git log --graph --decorate'
 alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 alias gittime='git log --author="`git config --get user.name`" --since="1 week ago" --date=short --no-merges --pretty="%ad (%ar) -- %s"'
 alias gittime2='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
-
 
 # Golang
 alias goinstall-linux-amd64='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
