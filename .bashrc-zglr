@@ -45,7 +45,7 @@ alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
 alias ssh-zglr="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 alias ssh-zglr2="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 ## SSH - Work
-eval `ssh-agent -s`  # Start the ssh-agent upon login so we don't have to keep entering our SSH passphrase(s)
+#eval `ssh-agent -s`  # Start the ssh-agent upon login so we don't have to keep entering our SSH passphrase(s)
 alias ssh-key-mm-root="ssh-add ~/.ssh/mm-root-2017-12-28-rsa"
 alias ssh-pk="/usr/local/ossh/bin/ssh"
 alias ssh-mm-dev="ssh joshz@dev.mindmodeling.org -t 'tmux attach -t joshz || tmux new -s joshz'" 
