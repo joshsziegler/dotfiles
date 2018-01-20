@@ -28,7 +28,6 @@ dotfiles(){
     ln -sf ~/code/dotfiles/.vimrc ~/ 
     ln -sf ~/code/dotfiles/.vim/ ~/ 
     ln -sf ~/code/dotfiles/.pypirc ~/
-    ln -sf ~/code/dotfiles/.bash_profile ~/
 }
 
 # Show Current Git Branch and Status in Prompt
@@ -46,16 +45,7 @@ alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
 alias ssh-zglr="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 alias ssh-zglr2="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 ## SSH - Work
-eval `ssh-agent -s`  # Start the ssh-agent upon login so we don't have to keep entering our SSH passphrase(s)
-alias ssh-key-mm-root="ssh-add ~/.ssh/mm-root-2017-12-28-rsa"
 alias ssh-pk="/usr/local/ossh/bin/ssh"
-alias ssh-mm-dev="ssh joshz@dev.mindmodeling.org -t 'tmux attach -t joshz || tmux new -s joshz'" 
-alias ssh-mm-prod="ssh -tt joshz@dev.mindmodeling.org ssh -tt root@wsu-mm"
-alias ssh-mm-thunder="ssh-pk joshz@thunder.afrl.hpc.mil"
-alias ssh-mm-lightning="ssh-pk joshz@lightning07.afrl.hpc.mil"
-alias ssh-mm-talon="ssh-pk joshz@talon.afrl.hpc.mil -t 'screen -R'"
-alias ssh-mm-topaz="ssh-pk joshz@topaz07.erdc.hpc.mil -t 'screen -R'"
-alias ssh-mm-armstrong="ssh-pk joshz@armstrong05.navydsrc.hpc.mil -t 'screen -R'"
 
 # Tmux
 alias tmux="tmux attach -t joshz || tmux new -s joshz"
@@ -67,8 +57,6 @@ alias fuse-umount-zglr="fusermount -u /home/joshz/zglr.org"
 # Rsync
 alias rsync-zlt-backup="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home josh@192.168.1.2:~/backups/josh_lt/"
 alias rsync-zlt-backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
-# Rsync - Work
-alias rsync-mm-pull="rsync -r -e 'ssh -i ~/.ssh/dren_desktop' joshz@dev.mindmodeling.org:~/ joshz.dev.mindmodeling.org/"
 
 # Python
 alias pyv3="virtualenv --no-site-packages --python=python3 --clear venv"  # Create Python 3 virtualenv
@@ -97,45 +85,16 @@ alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 alias gittime='git log --author="`git config --get user.name`" --since="1 week ago" --date=short --no-merges --pretty="%ad (%ar) -- %s"'
 alias gittime2='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
 
-# Golang
-alias goinstall-linux-amd64='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
-alias goinstall-linux-x86='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz && tar -C ~/ -xzf go1.9.2.linux-386.tar.gz && mv go go1.9'
-foo(){
-    [ -z "$1" ] && echo "zgobuild pkg_name out_name" && return
-    [ -z "$2" ] && echo "zgobuild pkg_name out_name" && return
-    go build -o "$2-linux-386" -ldflags "-X main.BuildDate=`date -u --rfc-3339=seconds | sed -e 's/ /T/'` \
-        -X main.GitCommit=`git rev-parse --short HEAD` \
-        -X main.GitBranch=`git symbolic-ref -q --short HEAD` \
-        -X main.State=`if [ -n "$(git status --porcelain)" ]; then echo 'dirty'; fi` \
-        -X main.Version=`git describe --abbrev=0`" $1 
-}
-zgobuild(){
-    [ -z "$1" ] && echo "zgobuild pkg_name out_name" && return
-    [ -z "$2" ] && echo "zgobuild pkg_name out_name" && return
-    GITVERSION=$(git describe --abbrev=0)
-    GITCOMMIT=$(git rev-parse --short HEAD)
-    BUILDDATE=$(date -u --rfc-3339=seconds)
-    GITBRANCH=$(git symbolic-ref -q --short HEAD)
-
-    GOOS=linux   GOARCH=386   go build -o "$2-linux-386" \
-        -ldflags "-X main.GitCommit=$GITCOMMIT \
-        main.Version=$GITVERSION \
-        main.BuildDate=$BUILDDATE \
-        main.GitBranch=$GITBRANCH" $1 
-    #GOOS=linux   GOARCH=amd64 go build -o "$2-linux-amd64"   $1 
-    #GOOS=windows GOARCH=386   go build -o "$2-windows-386"   $1 
-    #GOOS=windows GOARCH=amd64 go build -o "$2-windows-amd64" $1 
-}
-
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
 alias exit-code="echo $?"  # I can never remember this...
 
-
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
-
+# Golang
+alias goinstall-linux-amd64='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
+alias goinstall-linux-x86='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz && tar -C ~/ -xzf go1.9.2.linux-386.tar.gz && mv go go1.9'
 # GO-related Paths
 export GOPATH=~/code/gocode
 export GOROOT=~/go1.9
