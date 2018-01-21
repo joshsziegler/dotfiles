@@ -88,6 +88,9 @@ alias gittime2='git log --since="1 week ago" --date=short --no-merges --pretty="
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
 alias exit-code="echo $?"  # I can never remember this...
+alias find-largest="du -Sh | sort -rh | head -5"
+alias find-largest-dirs="du -ah | sort -rh | head -n 5"
+alias find-largest-files="find -type f -exec du -Sh {} + | sort -rh | head -n 5"
 
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
