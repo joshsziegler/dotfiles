@@ -101,13 +101,12 @@ install-go-1-9(){
     rm -rf ~/go1.9 || true       # Remove the old Go 1.9 install if it exists
     if  uname -m | grep -q x86_64; then
         echo "Installing Go 1.9 64-bit for Linux"
-        curl -L -o go1.9.2.tgz https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz 
+        wget -O ~/go1.9.2.tgz https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz 
     else
         echo "Installing Go 1.9 32-bit for Linux"
-        curl -L -o go1.9.2.tgz https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz 
+        wget -O ~/go1.9.2.tgz https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz 
     fi
-    tar -C ~/ -xzf go1.9.2.tgz 
-    mv go go1.9
+    tar -C ~/ -xzf ~/go1.9.2.tgz --transform 's/go/go1.9/'  # Extract into to a dir named go1.9 NOT the standard go
 }
 # GO-related Paths
 export GOPATH=~/go
