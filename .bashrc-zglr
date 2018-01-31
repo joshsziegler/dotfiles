@@ -96,10 +96,10 @@ alias find-largest-files="find -type f -exec du -Sh {} + | sort -rh | head -n 5"
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
 # Golang
-alias goinstall-linux-amd64='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
-alias goinstall-linux-x86='mkdir -p ~/go1.9 && rm -r ~/go1.9 && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz && tar -C ~/ -xzf go1.9.2.linux-386.tar.gz && mv go go1.9'
+alias goinstall-linux-amd64='rm -r ~/go1.9 || true && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz && tar -C ~/ -xzf go1.9.2.linux-amd64.tar.gz && mv go go1.9'
+alias goinstall-linux-x86='rm -r ~/go1.9 || true && wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz && tar -C ~/ -xzf go1.9.2.linux-386.tar.gz && mv go go1.9'
 # GO-related Paths
-export GOPATH=~/code/gocode
+export GOPATH=~/go
 export GOROOT=~/go1.9
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
