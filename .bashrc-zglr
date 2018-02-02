@@ -28,6 +28,7 @@ dotfiles(){
     ln -sf ~/code/dotfiles/.vimrc ~/ 
     ln -sf ~/code/dotfiles/.vim/ ~/ 
     ln -sf ~/code/dotfiles/.pypirc ~/
+    ln -sf ~/code/dotfiles/.tmux.conf ~/
 }
 
 # Show Current Git Branch and Status in Prompt
@@ -47,8 +48,8 @@ alias ssh-zglr2="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
 ## SSH - Work
 alias ssh-pk="/usr/local/ossh/bin/ssh"
 
-# Tmux
-alias tmux="tmux attach -t joshz || tmux new -s joshz"
+# Tmux - Support better colors by using -2 option along with set -g default-terminal "screen-256color" 
+alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # FUSE
 alias fuse-mount-zglr="sshfs josh@zglr.org:/home/josh/ /home/joshz/zglr.org"
