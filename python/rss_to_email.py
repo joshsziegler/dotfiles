@@ -27,6 +27,7 @@ THE SOFTWARE.
 """
 
 import smtplib, argparse, email.message
+import feeds
 
 
 def send_email(gmail_user, gmail_pwd, to, subject, text, html):
@@ -55,8 +56,9 @@ if __name__ == "__main__":
     parser.add_argument('--past_links',type=str, default="past_links.txt")
     parser.add_argument('--days',      type=int, default=1)
     args = parser.parse_args()
+    print("Username: {}\nPassword:{}\nTo:{}".format(args.user, args.password, args.to))
 
-    title, plain, html = get_feeds(args.days, args.past_links)
+    title, plain, html = feeds.get_feeds(args.days, args.past_links)
     html = "<html><body>{}</body></html>".format(html)
 
-    send_email(args.user, args.password, args.to, title plain, html)
+    send_email(args.user, args.password, args.to, title, plain, html)

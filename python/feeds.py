@@ -43,7 +43,8 @@ feeds = [ # These will be printed in-order, so put important stuff first
     ("http://feeds.wired.com/WiredDangerRoom", "Wired: Danger Room"),
     ("http://www.vox.com/rss/index.xml", "Vox"),
     ("http://queue.acm.org/rss/feeds/articles.xml", "ACM Queue"),
-    ("https://news.ycombinator.com/rss", "Hacker News")
+    #("https://news.ycombinator.com/rss", "Hacker News")
+    ("https://hnrss.org/frontpage?points=75", "Hacker News (>= 75p)")
 ]
 
 plain_links = [ # Simply put as-is in the email 
