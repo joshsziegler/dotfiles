@@ -17,8 +17,8 @@ set autoindent
 "set textwidth=79  " I think of short lines as less and less of an issue
 
 "Python code folding
-set foldmethod=indent 
-set foldlevelstart=20  " Open files with folds opened (mostly)
+set foldmethod=syntax
+set foldlevelstart=0  " Open files with everything folded 
 nnoremap <space> za
 vnoremap <space> zf
 
