@@ -43,6 +43,9 @@ let g:ctrlp_working_path_mode = 'ra' " Invoke Ctrl-P with its working directory 
 "Go to next buffer
 map <leader>m :bn <CR>
 
+"Stop Vim-Go from complaining about Vim's version
+let g:go_version_warning = 0
+
 " color settings (if terminal/gui supports it)
 if &t_Co > 2 || has("gui_running")
   syntax on          " enable colors
