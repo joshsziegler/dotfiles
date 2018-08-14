@@ -16,7 +16,7 @@ set shiftwidth=4
 set autoindent
 "set textwidth=79  " I think of short lines as less and less of an issue
 
-"Python code folding
+"Code folding
 set foldmethod=syntax
 set foldlevelstart=0  " Open files with everything folded 
 nnoremap <space> za
@@ -37,6 +37,11 @@ map <leader>o :set textwidth=0 <CR>
 map <leader>w :set textwidth=79 <CR> 
 "Run python
 map <leader>p :!python % <CR>
+"Sublime-like Ctrl-P searching (https://github.com/ctrlpvim/ctrlp.vim)
+map <leader>k :CtrlP <CR>
+let g:ctrlp_working_path_mode = 'ra' " Invoke Ctrl-P with its working directory set to the nearest parent dir with a .git file
+"Go to next buffer
+map <leader>m :bn <CR>
 
 " color settings (if terminal/gui supports it)
 if &t_Co > 2 || has("gui_running")
