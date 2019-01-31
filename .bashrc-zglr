@@ -93,6 +93,20 @@ alias find-largest="du -Sh | sort -rh | head -5"
 alias find-largest-dirs="du -ah | sort -rh | head -n 5"
 alias find-largest-files="find -type f -exec du -Sh {} + | sort -rh | head -n 5"
 
+# Download a offline and windows-safe version of a website
+zarchive(){
+    wget \
+     --recursive \
+     --no-clobber \
+     --page-requisites \
+     --html-extension \
+     --convert-links \
+     --restrict-file-names=windows \
+     --domains `echo "$1" | awk -F/ '{print $3}'` \
+     --no-parent \
+         $1 
+}
+
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
