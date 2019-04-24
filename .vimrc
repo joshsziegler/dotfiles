@@ -42,6 +42,8 @@ map <leader>k :CtrlP <CR>
 let g:ctrlp_working_path_mode = 'ra' " Invoke Ctrl-P with its working directory set to the nearest parent dir with a .git file
 "Go to next buffer
 map <leader>m :bn <CR>
+"Build Metis
+map <leader>g :!go run build.go<CR>
 
 "Stop Vim-Go from complaining about Vim's version
 let g:go_version_warning = 0
