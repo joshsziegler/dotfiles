@@ -18,7 +18,7 @@ set autoindent
 
 "Code folding
 set foldmethod=syntax
-set foldlevelstart=0  " Open files with everything folded 
+set foldlevelstart=9  " Open files with everything folded 
 nnoremap <space> za
 vnoremap <space> zf
 
@@ -52,8 +52,9 @@ let g:go_version_warning = 0
 if &t_Co > 2 || has("gui_running")
   syntax on          " enable colors
   colorscheme monokai
-  set hlsearch       " highlight search (very useful!)
-  set incsearch      " search incremently (search while typing)
+  set hlsearch        " highlight search (very useful!)
+  set incsearch       " search incremently (search while typing)
+  set colorcolumn=100 " Show a visual ruler at the 100 character mark
 endif
 
 "Misc
