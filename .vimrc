@@ -10,7 +10,7 @@ set laststatus=2  " Make sure lightline's status line is shown
 
 "PEP 8
 set expandtab
-set tabstop=8
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
@@ -18,7 +18,7 @@ set autoindent
 
 "Code folding
 set foldmethod=syntax
-set foldlevelstart=9  " Open files with everything folded 
+set foldlevelstart=9  " Open files with everything unfolded
 nnoremap <space> za
 vnoremap <space> zf
 

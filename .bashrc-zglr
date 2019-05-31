@@ -125,7 +125,7 @@ install-go-1-9(){
 }
 # GO-related Paths
 export GOPATH=~/go
-export GOROOT=~/go1.10
+export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
