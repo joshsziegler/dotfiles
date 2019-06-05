@@ -17,7 +17,6 @@ color(){
     (set -o pipefail;"$@" 2>&1>&3|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1 
 }
 
-
 # Update my dotfiles
 dotfiles(){
     git -C ~/code/dotfiles/ pull 
@@ -51,10 +50,6 @@ alias ssh-pk="/usr/local/ossh/bin/ssh"
 # Tmux - Support better colors by using -2 option along with set -g default-terminal "screen-256color" 
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
-# FUSE
-alias fuse-mount-zglr="sshfs josh@zglr.org:/home/josh/ /home/joshz/zglr.org"
-alias fuse-umount-zglr="fusermount -u /home/joshz/zglr.org"
-
 # Rsync
 alias rsync-zlt-backup="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home josh@192.168.1.2:~/backups/josh_lt/"
 alias rsync-zlt-backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
@@ -71,20 +66,11 @@ alias pyr="gitrc && pyv3 && pya && pydev"               # Rebuild from scratch
 alias pyf="autopep8 -riav --max-line-length 120"        # Auto fix most PEP8 violations
 
 # Git
-alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
-alias gitbd="git branch -d " # Delete the local branch
-alias gitbdr="git origin --delete " # Delete the remote branch
-#alias gbd-remote="git push origin :"
 alias gitf='git fetch --all --prune'
-alias gitc='git checkout'
 alias gits='git status'
-alias gitsq='git reset --soft HEAD~'  # Soft-squash the last N commits (you must provide a number)
-alias gitka='gitk --all'
-alias gitkap='gitk --simplify-by-decoration --all' 
-alias gitl='git log --graph --decorate'
-alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
-alias gittime='git log --author="`git config --get user.name`" --since="1 week ago" --date=short --no-merges --pretty="%ad (%ar) -- %s"'
-alias gittime2='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
+alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
+alias gitl='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
+alias gitt='git log --since="4 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
 
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
@@ -111,21 +97,17 @@ zarchive(){
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
 # Golang
-install-go-1-9(){
+install-go(){
     mkdir -p ~/go                # Create the GOPATH dir if it doesn't exist
     rm -rf ~/go1.9 || true       # Remove the old Go 1.9 install if it exists
-    if  uname -m | grep -q x86_64; then
-        echo "Installing Go 1.9 64-bit for Linux"
-        wget -O ~/go1.9.2.tgz https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz 
-    else
-        echo "Installing Go 1.9 32-bit for Linux"
-        wget -O ~/go1.9.2.tgz https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-386.tar.gz 
-    fi
-    tar -C ~/ -xzf ~/go1.9.2.tgz --transform 's/go/go1.9/'  # Extract into to a dir named go1.9 NOT the standard go
+    rm -rf ~/go1.10 || true      # Remove the old Go 1.10 install if it exists
+    echo "Installing Go 1.9 64-bit for Linux"
+    wget https://redirector.gvt1.com/edgedl/go/go1.12.5.linux-amd64.tar.gz 
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf go1.12.5.linux-amd64.tar.gz  
 }
-# GO-related Paths
+# Go-related Paths
 export GOPATH=~/go
 export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
