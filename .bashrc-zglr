@@ -51,8 +51,7 @@ alias ssh-pk="/usr/local/ossh/bin/ssh"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # Rsync
-alias rsync-zlt-backup="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home josh@192.168.1.2:~/backups/josh_lt/"
-alias rsync-zlt-backup2="rsync -rcvPh --chmod=ug=rwX,o-rwX --delete --delete-excluded --exclude='venv/' /cygdrive/c/home /cygdrive/d/backups/josh-lt/"
+alias backup-zlt="rsync -avh --delete {code,home,.ssh} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
 
 # Python
 alias pyv3="virtualenv --no-site-packages --python=python3 --clear venv"  # Create Python 3 virtualenv
