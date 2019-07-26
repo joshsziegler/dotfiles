@@ -1,68 +1,89 @@
-" enable Pathogen package manager
-execute pathogen#infect()  
+" Josh Ziegler's VIM config
+" -------------------------------------------------------------------------------------------------
 
-filetype on            " enables filetype detection
-filetype plugin on     " enables filetype specific plugins
 
-" Lightline (status line)
+" vim-plug - Package manager 
+" -------------------------------------------------------------------------------------------------
+" Enable package manager (use :PlugUpdate to install or update plugins)
+call plug#begin()           
+" Sublime-flavored Monokai color scheme
+Plug 'ErichDonGubler/vim-sublime-monokai'
+" Improved status and tab line
+Plug 'itchyny/lightline.vim'
+" Add buffer info to lightline 
+Plug 'mengelbrecht/lightline-bufferline' 
+" Wrapper around the fuzzy finder (fzf)
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Show git diff in the gutter and stages/undoes hunks
+Plug 'airblade/vim-gitgutter'
+" File tree explorer for vim
+Plug 'scrooloose/nerdtree'
+" Golang development 
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Better JSON highlighting
+Plug 'elzr/vim-json'
+call plug#end()
+
+
+" Basic Settings 
+" -------------------------------------------------------------------------------------------------
+set nu                        " Show line numbers
+set tabstop=4                 " Show existing tabs as 4 spaces
+set expandtab                 " When pressing tab, insert 4 spaces
+set softtabstop=4             " Make this the same as tabstop
+set shiftwidth=4              " When indenting, use 4 spaces
+set scrolloff=5               " Number of context lines shown above and below the cursor 
+set autoindent                " Copy the indentation from the previous line when starting a new line
+set showmode                  " Show the current mode
+set ignorecase                " Use case-insensitive search
+set ruler                     " Show rules on status line (line, column, and virtual column numbers)
+set nowrap                    " Disable automatic line-wrapping
+set cursorline                " Highlight the line the cursor is on
+set incsearch                 " Search incremently (search while typing)
+set hlsearch                  " Highlight search
+syntax on                     " Enable syntax highlighting  
+colorscheme sublimemonokai    " 
+filetype on                   " Enables filetype detection
+filetype plugin on            " Enables filetype specific plugins
+let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
+let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100 
+:let mapleader = ","          " Set the leader to the comma key
+" Go to next/previous buffer
+map <C-Up> :bn <CR> 
+map <C-Down> :bp <CR>
+" Close the current buffer
+map <C-w> :bd <CR>
+
+
+" Lightline - Improved status and tab line
+" -------------------------------------------------------------------------------------------------
 set noshowmode    " Hide vim's default insert line
 set laststatus=2  " Make sure lightline's status line is shown
 
-"PEP 8
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set autoindent
-"set textwidth=79  " I think of short lines as less and less of an issue
 
-"Code folding
-set foldmethod=syntax
-set foldlevelstart=9  " Open files with everything unfolded
-nnoremap <space> za
-vnoremap <space> zf
+" NERDTree - File tree explorer
+" -------------------------------------------------------------------------------------------------
+map <C-k><C-b> :NERDTreeToggle<CR>
 
-"Set our leader to comma
-:let mapleader = ","
 
-"NERD Tree Shortcut
-map <leader>n :NERDTreeToggle<CR>
-" Toggle tag list plugin
-map <leader>l :TlistToggle<CR>
-"Run aspell on the current file
-map <leader>s :!aspell -c % <CR>
-"Turn autowrap off
-map <leader>o :set textwidth=0 <CR> 
-"Turn autowrap on
-map <leader>w :set textwidth=79 <CR> 
-"Run python
-map <leader>p :!python % <CR>
-"Sublime-like Ctrl-P searching (https://github.com/ctrlpvim/ctrlp.vim)
-map <leader>k :CtrlP <CR>
-let g:ctrlp_working_path_mode = 'ra' " Invoke Ctrl-P with its working directory set to the nearest parent dir with a .git file
-"Go to next buffer
-map <leader>m :bn <CR>
-"Build Metis
-map <leader>g :!go run build.go<CR>
+" FZF (fuzzy finder)
+" -------------------------------------------------------------------------------------------------
+" Use Ctrl-f to search file CONTENTS
+map <C-f> :Rg <CR>   
+" Use Ctrl-p to search file NAMES
+nnoremap <C-p> :Files<CR> 
+" Use RipGrep (rg) command to search file CONTENTS only (not file names)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \   <bang>0)
 
-"Stop Vim-Go from complaining about Vim's version
-let g:go_version_warning = 0
 
-" color settings (if terminal/gui supports it)
-if &t_Co > 2 || has("gui_running")
-  syntax on          " enable colors
-  colorscheme monokai
-  set hlsearch        " highlight search (very useful!)
-  set incsearch       " search incremently (search while typing)
-  set colorcolumn=100 " Show a visual ruler at the 100 character mark
-endif
+" vim-go (Golang development)
+" -------------------------------------------------------------------------------------------------
+" Use goimports on save instead of gofmt (may be slow for larger code bases)
+let g:go_fmt_command = "goimports"
 
-"Misc
-"set mouse=a "use mouse in all modes visual mode (not normal,insert,command,help mode
-set showmode 
-set ignorecase
-set ruler 
-set nowrap
-set smarttab         " smart tab handling for indenting
-set smartindent      " smart auto indenting
-set cursorline       " highlight the line the cursor is on
