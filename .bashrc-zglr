@@ -54,7 +54,7 @@ alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 alias backup-zlt="rsync -avh --delete {code,home,.ssh} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
 
 # Python
-alias pyv3="virtualenv --no-site-packages --python=python3 --clear venv"  # Create Python 3 virtualenv
+alias pyv3="python3 -m venv venv"                       # Create Python 3 virtualenv
 alias pya="source venv/bin/activate"                    # Active the current dir's virtualenv
 alias pyd="deactivate"                                  # Deactivate the current virtualenv
 alias pys2="python -m SimpleHTTPServer"                 # Serve the current directory with Python 2
