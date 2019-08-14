@@ -61,6 +61,19 @@ map <C-w> :bd <CR>
 " -------------------------------------------------------------------------------------------------
 set noshowmode    " Hide vim's default insert line
 set laststatus=2  " Make sure lightline's status line is shown
+let g:lightline={}
+
+
+" Bufferline-Lightline - Add buffer into to Lightline
+" -------------------------------------------------------------------------------------------------
+set showtabline=2  " Always show the tab line
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 
 " NERDTree - File tree explorer
