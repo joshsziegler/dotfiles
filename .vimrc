@@ -78,7 +78,8 @@ autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " NERDTree - File tree explorer
 " -------------------------------------------------------------------------------------------------
-map <C-k><C-b> :NERDTreeToggle<CR>
+map <C-k><C-b> :NERDTreeToggle<CR>  " Open/Close NERDTree with Ctrl-k-b
+let NERDTreeQuitOnOpen=1            " Auto-close NERDTree after opening a file
 
 
 " FZF (fuzzy finder)
