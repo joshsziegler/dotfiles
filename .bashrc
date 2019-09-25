@@ -19,15 +19,15 @@ color(){
 
 # Update my dotfiles
 dotfiles(){
-    git -C ~/code/dotfiles/ pull 
+    git -C ~/Documents/Code/dotfiles/ pull 
     source ~/.bashrc 
-    ln -sf ~/code/dotfiles/.gitconfig ~/ 
+    ln -sf ~/Documents/Code/dotfiles/.gitconfig ~/ 
     mkdir -p ~/.ssh/ 
-    ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/ 
-    ln -sf ~/code/dotfiles/.vimrc ~/ 
-    ln -sf ~/code/dotfiles/.vim/ ~/ 
-    ln -sf ~/code/dotfiles/.pypirc ~/
-    ln -sf ~/code/dotfiles/.tmux.conf ~/
+    ln -sf ~/Documents/Code/dotfiles/.ssh/config ~/.ssh/ 
+    ln -sf ~/Documents/Code/dotfiles/.vimrc ~/ 
+    ln -sf ~/Documents/Code/dotfiles/.vim/ ~/ 
+    ln -sf ~/Documents/Code/dotfiles/.pypirc ~/
+    ln -sf ~/Documents/Code/dotfiles/.tmux.conf ~/
 }
 
 # Show Current Git Branch and Status in Prompt
@@ -96,7 +96,7 @@ zarchive(){
 }
 
 # Linux binaries
-PATH=$PATH:~/code/dotfiles/bin
+PATH=$PATH:~/Documents/Code/dotfiles/bin
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
