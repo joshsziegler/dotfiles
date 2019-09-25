@@ -1,7 +1,6 @@
 " Josh Ziegler's VIM config
 " -------------------------------------------------------------------------------------------------
 
-
 " vim-plug - Package manager 
 " -------------------------------------------------------------------------------------------------
 " Enable package manager (use :PlugUpdate to install or update plugins)
@@ -42,6 +41,7 @@ set nowrap                    " Disable automatic line-wrapping
 set cursorline                " Highlight the line the cursor is on
 set incsearch                 " Search incremently (search while typing)
 set hlsearch                  " Highlight search
+set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
 syntax on                     " Enable syntax highlighting  
 colorscheme sublimemonokai    " 
 filetype on                   " Enables filetype detection
