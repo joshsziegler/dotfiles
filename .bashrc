@@ -19,15 +19,15 @@ color(){
 
 # Update my dotfiles
 dotfiles(){
-    git -C ~/Documents/Code/dotfiles/ pull 
+    git -C ~/Code/dotfiles/ pull 
     source ~/.bashrc 
-    ln -sf ~/Documents/Code/dotfiles/.gitconfig ~/ 
+    ln -sf ~/Code/dotfiles/.gitconfig ~/ 
     mkdir -p ~/.ssh/ 
-    ln -sf ~/Documents/Code/dotfiles/.ssh/config ~/.ssh/ 
-    ln -sf ~/Documents/Code/dotfiles/.vimrc ~/ 
-    ln -sf ~/Documents/Code/dotfiles/.vim/ ~/ 
-    ln -sf ~/Documents/Code/dotfiles/.pypirc ~/
-    ln -sf ~/Documents/Code/dotfiles/.tmux.conf ~/
+    ln -sf ~/Code/dotfiles/.ssh/config ~/.ssh/ 
+    ln -sf ~/Code/dotfiles/.vimrc ~/ 
+    ln -sf ~/Code/dotfiles/.vim/ ~/ 
+    ln -sf ~/Code/dotfiles/.pypirc ~/
+    ln -sf ~/Code/dotfiles/.tmux.conf ~/
 }
 
 # Show Current Git Branch and Status in Prompt
@@ -51,7 +51,7 @@ alias ssh-pk="/usr/local/ossh/bin/ssh"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # Rsync
-alias backup-zlt="rsync -avh --delete {code,home,.ssh} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
+alias backup-zlt="rsync -avh --delete ~/{Code,Documents,Downloads,Music,home,.ssh} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
 
 # Python
 alias pyv3="python3 -m venv venv"                       # Create Python 3 virtualenv

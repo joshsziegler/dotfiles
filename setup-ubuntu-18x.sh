@@ -7,8 +7,6 @@ set -x
 chown -R $USER:$USER ~/*
 # Change home dir to 700
 chmod 700 ~ 
-# Delete standard folders I don't use
-rm -rf ~/{Music,Pictures,Public,Templates,Video} 
 # Create Backup and Code directories
 mkdir -p ~/Documents/{Backup,Code}
 # Setup .bashrc
