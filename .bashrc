@@ -96,7 +96,7 @@ zarchive(){
 }
 
 # Linux binaries
-PATH=$PATH:~/Documents/Code/dotfiles/bin
+PATH=$PATH:~/Code/dotfiles/bin
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
