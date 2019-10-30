@@ -24,8 +24,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'elzr/vim-json'
 " File-type file commenting and uncommenting
 Plug 'tomtom/tcomment_vim'
+" Markdown editing enhancements (folding, links, etc)
+Plug 'plasticboy/vim-markdown'
 call plug#end()
-
 
 " Basic Settings 
 " -------------------------------------------------------------------------------------------------
@@ -59,6 +60,12 @@ map <leader>n :bn <CR>             " Go to the next buffer
 map <leader>m :bp <CR>             " Go to the previous buffer
 map <leader>b :bd <CR>             " Close the current buffer
 map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree 
+
+" Markdown editing 
+" -------------------------------------------------------------------------------------------------
+au! BufRead,BufNewFile *.md set filetype=markdown
+let g:vim_markdown_folding_level=3 " Open Markdown with headers folded to H3
+au FileType markdown set wrap 
 
 " Lightline - Improved status and tab line
 " -------------------------------------------------------------------------------------------------
