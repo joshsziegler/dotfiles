@@ -77,6 +77,9 @@ let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
+" vim-gitgutter - Show git diff in the gutter (added/modified/removed)
+" -------------------------------------------------------------------------------------------------
+set signcolumn=yes  " Always show the git gutter (to avoid moving text)
 
 " NERDTree - File tree explorer
 " -------------------------------------------------------------------------------------------------
