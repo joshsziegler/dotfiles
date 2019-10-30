@@ -94,11 +94,10 @@ nnoremap <C-p> :Files<CR>
 " Use RipGrep (rg) command to search file CONTENTS only (not file names)
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings --ignore-case'.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
-
 
 " vim-go (Golang development)
 " -------------------------------------------------------------------------------------------------
