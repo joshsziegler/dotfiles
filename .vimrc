@@ -22,6 +22,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Better JSON highlighting
 Plug 'elzr/vim-json'
+" Browse tags within code using ctags-exuberant
+Plug 'majutsushi/tagbar'
 " File-type file commenting and uncommenting
 Plug 'tomtom/tcomment_vim'
 " Markdown editing enhancements (folding, links, etc)
@@ -60,6 +62,7 @@ map <leader>n :bn <CR>             " Go to the next buffer
 map <leader>m :bp <CR>             " Go to the previous buffer
 map <leader>b :bd <CR>             " Close the current buffer
 map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree 
+map <leader>t :TagbarToggle<CR>    " Open/Close tag viewer
 
 " Markdown editing 
 " -------------------------------------------------------------------------------------------------
