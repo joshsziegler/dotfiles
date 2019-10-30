@@ -50,21 +50,21 @@ filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
 let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100 
-:let mapleader = ","          " Set the leader to the comma key
 autocmd BufWritePre * :%s/\s+$//e " Remove all trailing whitespace on file save
-" Go to next/previous buffer
-map <C-Up> :bn <CR> 
-map <C-Down> :bp <CR>
-" Close the current buffer
-map <C-w> :bd <CR>
 
+" Setup shortcuts
+" -------------------------------------------------------------------------------------------------
+:let mapleader = ","               " Set the leader to the comma key
+map <leader>n :bn <CR>             " Go to the next buffer
+map <leader>m :bp <CR>             " Go to the previous buffer
+map <leader>b :bd <CR>             " Close the current buffer
+map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree 
 
 " Lightline - Improved status and tab line
 " -------------------------------------------------------------------------------------------------
 set noshowmode    " Hide vim's default insert line
 set laststatus=2  " Make sure lightline's status line is shown
 let g:lightline={}
-
 
 " Bufferline-Lightline - Add buffer into to Lightline
 " -------------------------------------------------------------------------------------------------
@@ -80,9 +80,7 @@ autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " NERDTree - File tree explorer
 " -------------------------------------------------------------------------------------------------
-map <C-k><C-b> :NERDTreeToggle<CR>  " Open/Close NERDTree with Ctrl-k-b
 let NERDTreeQuitOnOpen=1            " Auto-close NERDTree after opening a file
-
 
 " FZF (fuzzy finder)
 " -------------------------------------------------------------------------------------------------
