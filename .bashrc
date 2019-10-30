@@ -105,10 +105,10 @@ install-go(){
     mkdir -p ~/go                # Create the GOPATH dir if it doesn't exist
     rm -rf ~/go1.9 || true       # Remove the old Go 1.9 install if it exists
     rm -rf ~/go1.10 || true      # Remove the old Go 1.10 install if it exists
-    echo "Installing Go 1.9 64-bit for Linux"
-    wget https://redirector.gvt1.com/edgedl/go/go1.12.5.linux-amd64.tar.gz 
+    echo "Installing Go 1.13 64-bit for Linux"
+    wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz 
     sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf go1.12.5.linux-amd64.tar.gz  
+    sudo tar -C /usr/local -xzf go1.13.3.linux-amd64.tar.gz  
 }
 # Go-related Paths
 export GOPATH=~/go
