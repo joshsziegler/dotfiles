@@ -22,6 +22,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Better JSON highlighting
 Plug 'elzr/vim-json'
+" File-type file commenting and uncommenting
+Plug 'tomtom/tcomment_vim'
 call plug#end()
 
 
