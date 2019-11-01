@@ -40,7 +40,7 @@ for UserHost in ubuntu@srv-1\
     fi                                                                                                                                                                                                             
                                                                                                                                                                                                                    
     # Timestamp this backup by creating an empty plain-text file                                                                                                                                                   
-    rm "$DDIR/BackupCreatedOn*.txt"                                                                                                                                                                                
+    rm "$DDIR/BackupCreatedOn"*.txt
     touch "$DDIR/BackupCreatedOn$DATE.txt"                                                                                                                                                                         
                                                                                                                                                                                                                    
     # Run weekly backup on Fridays (sync currently daily to the weekly directory)                                                                                                                                  
