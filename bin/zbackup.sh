@@ -50,7 +50,7 @@ for UserHost in ubuntu@srv-1\
     fi
 
     # Run monthly backup on the first day of the month (sync currently weekly to the monthly directory)
-    if [ "$DOM" == "1" ]; then
+    if [ "$DOM" == "01" ]; then
         echo "*** Creating monthly backup..."
         $RSYNC $WDIR/ $MDIR
     fi
