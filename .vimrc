@@ -53,7 +53,7 @@ filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
 let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100 
-autocmd BufWritePre * :%s/\s+$//e " Remove all trailing whitespace on file save
+autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
 
 " Setup shortcuts
 " -------------------------------------------------------------------------------------------------
