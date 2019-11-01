@@ -1,4 +1,12 @@
 #!/bin/bash                                                                                                                                                                                                        
+
+# A simple rsync over SSH backup script for multiple hosts.
+#
+# - Stores a single full daily, weekly, and monthly backup in /srv/backups/
+#   - Example: If host is foo then daily would be in /srv/backups/foo/daily/
+# - Handles multiple hosts with per-host usernames over SSH
+# - Stores a "backed up on" text file in the directory to make identification easier
+#
                                                                                                                                                                                                                    
 BACKUP_DIR="/srv/backups"                                                                                                                                                                                          
 DIRS="{app,etc,home,opt,root,srv,usr/local,var/log,var/spool,var/www}"                                                                                                                                             
