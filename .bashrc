@@ -79,6 +79,8 @@ alias find-largest-dirs="du -ah | sort -rh | head -n 5"
 alias find-largest-files="find -type f -exec du -Sh {} + | sort -rh | head -n 5"
 # Update date and time using Google's server (only useful is NTP is botched)
 alias update-time="sudo date -s \"$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z\" && sudo hwclock --systohc"
+# Download a webpage (provide one after this alias) and convert to Markdown
+alias html2md="pandoc -s -f html -t markdown_github-raw_html "
 
 
 # Download a offline and windows-safe version of a website
