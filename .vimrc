@@ -1,16 +1,16 @@
 " Josh Ziegler's VIM config
 " -------------------------------------------------------------------------------------------------
 
-" vim-plug - Package manager 
+" vim-plug - Package manager
 " -------------------------------------------------------------------------------------------------
 " Enable package manager (use :PlugUpdate to install or update plugins)
-call plug#begin()           
+call plug#begin()
 " Sublime-flavored Monokai color scheme
 Plug 'ErichDonGubler/vim-sublime-monokai'
 " Improved status and tab line
 Plug 'itchyny/lightline.vim'
-" Add buffer info to lightline 
-Plug 'mengelbrecht/lightline-bufferline' 
+" Add buffer info to lightline
+Plug 'mengelbrecht/lightline-bufferline'
 " Wrapper around the fuzzy finder (fzf)
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -18,7 +18,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 " File tree explorer for vim
 Plug 'scrooloose/nerdtree'
-" Golang development 
+" Golang development
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Better JSON highlighting
 Plug 'elzr/vim-json'
@@ -30,14 +30,14 @@ Plug 'tomtom/tcomment_vim'
 Plug 'plasticboy/vim-markdown'
 call plug#end()
 
-" Basic Settings 
+" Basic Settings
 " -------------------------------------------------------------------------------------------------
 set nu                        " Show line numbers
 set tabstop=4                 " Show existing tabs as 4 spaces
 set expandtab                 " When pressing tab, insert 4 spaces
 set softtabstop=4             " Make this the same as tabstop
 set shiftwidth=4              " When indenting, use 4 spaces
-set scrolloff=5               " Number of context lines shown above and below the cursor 
+set scrolloff=5               " Number of context lines shown above and below the cursor
 set autoindent                " Copy the indentation from the previous line when starting a new line
 set showmode                  " Show the current mode
 set ignorecase                " Use case-insensitive search
@@ -47,12 +47,12 @@ set cursorline                " Highlight the line the cursor is on
 set incsearch                 " Search incremently (search while typing)
 set hlsearch                  " Highlight search
 set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
-syntax on                     " Enable syntax highlighting  
-colorscheme sublimemonokai    " 
+syntax on                     " Enable syntax highlighting
+colorscheme sublimemonokai    "
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
 let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
-let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100 
+let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
 autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
 
 " Setup shortcuts
@@ -61,14 +61,14 @@ autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
 map <leader>n :bn <CR>             " Go to the next buffer
 map <leader>m :bp <CR>             " Go to the previous buffer
 map <leader>b :bd <CR>             " Close the current buffer
-map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree 
+map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree
 map <leader>t :TagbarToggle<CR>    " Open/Close tag viewer
 
-" Markdown editing 
+" Markdown editing
 " -------------------------------------------------------------------------------------------------
 au! BufRead,BufNewFile *.md set filetype=markdown
 let g:vim_markdown_folding_level=3 " Open Markdown with headers folded to H3
-au FileType markdown set wrap 
+au FileType markdown set wrap
 
 " Lightline - Improved status and tab line
 " -------------------------------------------------------------------------------------------------
@@ -98,13 +98,13 @@ let NERDTreeQuitOnOpen=1            " Auto-close NERDTree after opening a file
 " FZF (fuzzy finder)
 " -------------------------------------------------------------------------------------------------
 " Use Ctrl-f to search file CONTENTS
-map <C-f> :Rg <CR>   
+map <C-f> :Rg <CR>
 " Use Ctrl-p to search file NAMES
-nnoremap <C-p> :Files<CR> 
+nnoremap <C-p> :Files<CR>
 " Use RipGrep (rg) command to search file CONTENTS only (not file names)
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings --ignore-case'.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings --ignore-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
