@@ -82,6 +82,9 @@ alias update-time="sudo date -s \"$(wget -qSO- --max-redirect=0 google.com 2>&1 
 # Download a webpage (provide one after this alias) and convert to Markdown
 alias html2md="pandoc -s -f html -t markdown_github-raw_html "
 
+# Recursively search for a string in all files ending in html and replace
+# find . -name '*.html' -print -exec sed -i.bak 's/foo/bar/g' {} \;
+
 
 # Download a offline and windows-safe version of a website
 zarchive(){
