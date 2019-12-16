@@ -1,0 +1,41 @@
+{
+	"added_words":
+	[
+		"Username",
+		"Refactored",
+		"username",
+		"mindmodeling",
+		"gohtml",
+		"localhost",
+		"struct",
+		"admin",
+		"requester's",
+		"plaintext",
+		"bcrypt",
+		"datastore",
+		"Backend"
+	],
+	"always_show_minimap_viewport": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+	"dictionary": "Packages/Language - English/en_US.dic",
+	"fade_fold_buttons": false,
+	"file_exclude_patterns":
+	[
+		"*.meta"
+	],
+	"font_size": 11,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"rulers":
+	[
+		80,
+		100,
+		120
+	],
+	"spell_check": true,
+	"tab_size": 4,
+	"trim_automatic_white_space": true
+}

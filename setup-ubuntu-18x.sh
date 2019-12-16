@@ -52,6 +52,12 @@ sudo apt upgrade -y
 # Clean up unused packages...
 sudo apt autoremove -y
 
+# Setup SublimeText3 configs
+mkdir -p ~/.config/sublime-text-3/Packages/User/
+ln -sf ~/Code/dotfiles/sublime/Go.sublime-settings  ~/.config/sublime-text-3/Packages/User/
+ln -sf ~/Code/dotfiles/sublime/Preferences.sublime-settings  ~/.config/sublime-text-3/Packages/User/
+
+
 # 1) Remember to update SSHD config: (/etc/ssh/sshd_config)
 #    PermitRootLogin no
 #    PasswordAuthentication no
