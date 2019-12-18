@@ -85,7 +85,6 @@ alias html2md="pandoc -s -f html -t markdown_github-raw_html "
 # Recursively search for a string in all files ending in html and replace
 # find . -name '*.html' -print -exec sed -i.bak 's/foo/bar/g' {} \;
 
-
 # Download a offline and windows-safe version of a website
 zarchive(){
     wget \
@@ -105,12 +104,10 @@ PATH=$PATH:~/Code/dotfiles/bin
 # Work-related Paths
 PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
-# Golang
+# Install Golang globally
 install-go(){
-    mkdir -p ~/go                # Create the GOPATH dir if it doesn't exist
-    rm -rf ~/go1.9 || true       # Remove the old Go 1.9 install if it exists
-    rm -rf ~/go1.10 || true      # Remove the old Go 1.10 install if it exists
-    echo "Installing Go 1.13 64-bit for Linux"
+    echo "Installing Go 2.13 64-bit for Linux"
+    mkdir -p ~/go
     wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
     sudo rm -rf /usr/local/go
     sudo tar -C /usr/local -xzf go1.13.3.linux-amd64.tar.gz
