@@ -17,3 +17,5 @@
     username = joshz
 [credential "https://github.com"]
     username = joshsziegler
+[url "git@github.com:"]
+	insteadOf = https://github.com/
