@@ -64,6 +64,9 @@ alias pydev="python setup.py develop"                   # Run setup.py in develo
 alias pyr="gitrc && pyv3 && pya && pydev"               # Rebuild from scratch
 alias pyf="autopep8 -riav --max-line-length 120"        # Auto fix most PEP8 violations
 
+# Matlab
+alias matlab-cli="matlab -nodisplay -nosplash -nodesktop"
+
 # Git
 alias gitf='git fetch --all --prune'
 alias gits='git status'
