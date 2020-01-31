@@ -60,8 +60,8 @@ autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
 " Setup shortcuts
 " -------------------------------------------------------------------------------------------------
 :let mapleader = ","               " Set the leader to the comma key
-map <leader>n :bn <CR>             " Go to the next buffer
-map <leader>m :bp <CR>             " Go to the previous buffer
+map <leader>m :bn <CR>             " Go to the next buffer
+map <leader>n :bp <CR>             " Go to the previous buffer
 map <leader>b :bd <CR>             " Close the current buffer
 map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree
 map <leader>t :TagbarToggle<CR>    " Open/Close tag viewer
