@@ -32,6 +32,8 @@ call plug#end()
 
 " Basic Settings
 " -------------------------------------------------------------------------------------------------
+set textwidth=79              " Hard-wrap lines at 79 characters (at word boundaries)
+set formatoptions+=croa       " Format comments properly (see manual)
 set nu                        " Show line numbers
 set tabstop=4                 " Show existing tabs as 4 spaces
 set expandtab                 " When pressing tab, insert 4 spaces
