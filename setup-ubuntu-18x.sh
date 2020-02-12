@@ -25,6 +25,7 @@ sudo apt install -y \
     linkchecker \
     lnav \
     vnstat
+#   krb5-user                   # Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
 #   linkchecker                 # Check for dead links in HTML/websites
 #   lnav                        # Fantastic CLI log viewer
 #   vnstat                      # Network Stats
