@@ -9,11 +9,11 @@
     default = simple
 [pull]
 #    rebase = true  # Not sure this is a good policy
+[fetch]
+	prune = true
 [credential]
     helper = cache
 [credential "https://git.mindmodeling.org"]
-    username = joshz
-[credential "https://gogs.mindmodeling.org"]
     username = joshz
 [credential "https://github.com"]
     username = joshsziegler
