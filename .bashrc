@@ -51,7 +51,7 @@ alias ssh-pk="/usr/local/ossh/bin/ssh"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # Rsync
-alias backup-zlt="rsync -ah --info=progress2 --delete ~/{.ssh,.mylogin.cnf,Code,Documents,Downloads,Music,Pictures,Videos} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
+alias backup-zlt="rsync -ah --info=progress2 --delete ~/{.ssh,.mylogin.cnf,z,Code,Downloads,Music,Videos} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
 
 # Python
 alias pyv3="python3 -m venv venv"                       # Create Python 3 virtualenv
