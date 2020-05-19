@@ -34,7 +34,7 @@ call plug#end()
 " -------------------------------------------------------------------------------------------------
 set textwidth=79              " Hard-wrap lines at 79 characters (at word boundaries)
 set formatoptions+=cro        " Format comments properly (see manual)
-set nu                        " Show line numbers
+" set nu                        " Show line numbers
 set tabstop=4                 " Show existing tabs as 4 spaces
 set expandtab                 " When pressing tab, insert 4 spaces
 set softtabstop=4             " Make this the same as tabstop
@@ -53,7 +53,7 @@ syntax on                     " Enable syntax highlighting
 colorscheme sublimemonokai    "
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
-let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
+" let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
 autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
 

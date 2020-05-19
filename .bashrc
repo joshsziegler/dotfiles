@@ -17,19 +17,6 @@ color(){
     (set -o pipefail;"$@" 2>&1>&3|sed $'s,.*,\e[31m&\e[m,'>&2)3>&1
 }
 
-# Update my dotfiles
-dotfiles(){
-    git -C ~/Code/dotfiles/ pull
-    source ~/.bashrc
-    ln -sf ~/Code/dotfiles/.gitconfig ~/
-    mkdir -p ~/.ssh/
-    ln -sf ~/Code/dotfiles/.ssh/config ~/.ssh/
-    ln -sf ~/Code/dotfiles/.vimrc ~/
-    ln -sf ~/Code/dotfiles/.vim/ ~/
-    ln -sf ~/Code/dotfiles/.pypirc ~/
-    ln -sf ~/Code/dotfiles/.tmux.conf ~/
-}
-
 # Show Current Git Branch and Status in Prompt
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[1;36m\] \w\[\033[1;33m\]$(__git_ps1)\[\033[1;34m\] \$\[\033[00m\] '
@@ -51,7 +38,7 @@ alias ssh-pk="/usr/local/ossh/bin/ssh"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # Rsync
-alias backup-zlt="rsync -ah --info=progress2 --delete ~/{.ssh,.mylogin.cnf,z,Code,Downloads,Music,Videos} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
+alias backup-zlt="rsync -ah --delete ~/{.ssh,.mylogin.cnf,z,Code,Downloads,Music,Videos} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
 
 # Python
 alias pyv3="python3 -m venv venv"                       # Create Python 3 virtualenv
@@ -76,7 +63,6 @@ alias gitt='git log --since="4 week ago" --date=short --no-merges --pretty="%Cre
 
 # Misc
 alias ls-last-updated="ls -Alrt | tail -n10"
-alias exit-code="echo $?"  # I can never remember this...
 alias find-largest="du -Sh | sort -rh | head -5"
 alias find-largest-dirs="du -ah | sort -rh | head -n 5"
 alias find-largest-files="find -type f -exec du -Sh {} + | sort -rh | head -n 5"
@@ -101,11 +87,6 @@ zarchive(){
      --no-parent \
          $1
 }
-
-# Linux binaries
-PATH=$PATH:~/Code/dotfiles/bin
-# Work-related Paths
-PATH=$PATH:/usr/local/krb5/bin:/usr/local/ossh/bin
 
 # Install Golang globally
 install-go(){

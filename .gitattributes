@@ -1,3 +1,0 @@
-bin/fzf filter=lfs diff=lfs merge=lfs -text
-bin/minify filter=lfs diff=lfs merge=lfs -text
-bin/rg filter=lfs diff=lfs merge=lfs -text

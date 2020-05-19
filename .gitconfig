@@ -4,13 +4,11 @@
 [core]
     hooksPath = hooks/
     editor = vim
-	quotepath = false
+    quotepath = false
 [push]
     default = simple
-[pull]
-#    rebase = true  # Not sure this is a good policy
 [fetch]
-	prune = true
+    prune = true
 [credential]
     helper = cache
 [credential "https://git.mindmodeling.org"]
@@ -18,4 +16,4 @@
 [credential "https://github.com"]
     username = joshsziegler
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
