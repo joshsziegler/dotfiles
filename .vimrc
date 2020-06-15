@@ -53,9 +53,12 @@ syntax on                     " Enable syntax highlighting
 colorscheme sublimemonokai    "
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
-" let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
-autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
+set foldmethod=indent         " Fold based on indent
+set foldnestmax=10            " Deepest fold is 10 levels
+set nofoldenable              " Don't fold by default
+" let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
+"autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
 
 " Setup shortcuts
 " -------------------------------------------------------------------------------------------------
@@ -69,7 +72,6 @@ map <leader>t :TagbarToggle<CR>    " Open/Close tag viewer
 " Markdown editing
 " -------------------------------------------------------------------------------------------------
 au! BufRead,BufNewFile *.md set filetype=markdown
-let g:vim_markdown_folding_level=3 " Open Markdown with headers folded to H3
 au FileType markdown set wrap
 
 " Lightline - Improved status and tab line
