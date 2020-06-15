@@ -6,7 +6,8 @@
 " Enable package manager (use :PlugUpdate to install or update plugins)
 call plug#begin()
 " Sublime-flavored Monokai color scheme
-Plug 'ErichDonGubler/vim-sublime-monokai'
+"Plug 'ErichDonGubler/vim-sublime-monokai'
+Plug 'altercation/vim-colors-solarized'
 " Improved status and tab line
 Plug 'itchyny/lightline.vim'
 " Add buffer info to lightline
@@ -50,7 +51,9 @@ set incsearch                 " Search incremently (search while typing)
 set hlsearch                  " Highlight search
 set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
 syntax on                     " Enable syntax highlighting
-colorscheme sublimemonokai    "
+"colorscheme sublimemonokai    "
+set background=light          " Set this for the light-version of Solarized
+colorscheme solarized
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
