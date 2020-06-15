@@ -90,11 +90,13 @@ zarchive(){
 
 # Install Golang globally
 install-go(){
-    echo "Installing Go 2.13 64-bit for Linux"
+    GOVERSION=1.14.4
+    echo "Installing Go $GOVERSION 64-bit for Linux"
     mkdir -p ~/go
-    wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
+    wget https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
     sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf go1.13.3.linux-amd64.tar.gz
+    sudo tar -C /usr/local -xzf go$GOVERSION.linux-amd64.tar.gz
+    rm go$GOVERSION.linux-amd64.tar.gz
 }
 # Go-related Paths
 export GOPATH=~/go
