@@ -30,9 +30,6 @@ alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
 
 # SSH
 alias ssh-zglr="ssh josh@zglr.org -t 'tmux attach || tmux new'"
-alias ssh-zglr2="ssh josh@192.168.1.2 -t 'tmux attach || tmux new'"
-## SSH - Work
-alias ssh-pk="/usr/local/ossh/bin/ssh"
 
 # Tmux - Support better colors by using -2 option along with set -g default-terminal "screen-256color"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
