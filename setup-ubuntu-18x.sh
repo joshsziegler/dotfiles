@@ -65,7 +65,7 @@ chown -R $USER:$USER ~/*
 # Change home dir to 700 to prevent snoopers
 chmod 700 ~
 # Create my default directories
-mkdir -p ~/Documents/{backups,code,.ssh}
+mkdir -p ~/Documents/{backups,code,.ssh,z}
 # Create symbolic links to dotfile configs
 ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/
 ln -sf ~/code/dotfiles/.gitconfig ~/
@@ -77,25 +77,30 @@ ln -sf ~/code/dotfiles/.tmux.conf ~/
 mkdir -p ~/.config/sublime-text-3/Packages/User/
 ln -sf ~/code/dotfiles/sublime/Go.sublime-settings  ~/.config/sublime-text-3/Packages/User/
 ln -sf ~/code/dotfiles/sublime/Preferences.sublime-settings  ~/.config/sublime-text-3/Packages/User/
+# EditorConfig                                                                             
+# GoImports                                                                                
+# Golang Build                                                                             
+# GoRename
+# Mustache
+# Package Control
+# TypeScript  
 
 # Update repos
 sudo apt update
 # Install packages
-sudo apt install -y git vim tmux python3 python3-pip lnav vnstat
-#   krb5-user                   # Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
-#   lnav                        # Fantastic CLI log viewer
-#   vnstat                      # Network Stats
-#   fail2ban
-#   nmap
-#   acct                        # System resource usage by user
-#   darkstat                    # Network monitor with HTTP served graphs/stats
-#   logwatch                    # Summarizes log files and can send summary via email
-#   deja-dup                    # GUI backup tool
-#   gparted                     # GUI disk partitioning
-#   unetbootin                  # GUI for creating bootable USB sticks
-#   baobab                      # GUI disk usage graphing
-#   goacess                     # CLI Web server log viewer
-#   xrdp                        # allows Windows users to connect via Remote Desktop
+sudo apt install -y git vim tmux htop python3 python3-pip lnav vnstat zeal  
+# lnav       ~ CLI log viewer (e.g. terminal UI for Apache/Nginx logs)
+# vnstat     ~ network stats per interface per day/week/month
+# zeal       ~ simple, offline programming documenation viewer
+# krb5-user  ~ Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
+# fail2ban  
+# logwatch   ~ Summarizes log files and can send summary via email
+# deja-dup   ~ GUI backup tool
+# gparted    ~ GUI disk partitioning
+# unetbootin ~ GUI for creating bootable USB sticks
+# baobab     ~ GUI disk usage graphing
+# goacess    ~ CLI Web server log viewer
+# xrdp       ~ allows Windows users to connect via Remote Desktop
 
 # Upgrade all packages installed
 sudo apt upgrade -y
