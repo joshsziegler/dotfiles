@@ -65,13 +65,14 @@ chown -R $USER:$USER ~/*
 # Change home dir to 700 to prevent snoopers
 chmod 700 ~
 # Create my default directories
-mkdir -p ~/Documents/{backups,code,.ssh,z}
+mkdir -p ~/{backups,code,.ssh,z}
 # Create symbolic links to dotfile configs
 ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/
 ln -sf ~/code/dotfiles/.gitconfig ~/
 ln -sf ~/code/dotfiles/.vimrc ~/
 ln -sf ~/code/dotfiles/.vim/ ~/
 ln -sf ~/code/dotfiles/.tmux.conf ~/
+ln -sf ~/code/dotfiles/.condarc ~/
 
 # SublimeText3
 mkdir -p ~/.config/sublime-text-3/Packages/User/
