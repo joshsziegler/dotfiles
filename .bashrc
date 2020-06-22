@@ -35,7 +35,7 @@ alias ssh-zglr="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # Rsync
-alias backup-zlt="rsync -ah --delete ~/{.ssh,.mylogin.cnf,z,Code,Downloads,Music,Videos} /media/joshz/Backup_HDD_Josh_Ziegler/backups/joshz-lt/"
+alias backup-zlt="rsync -ah --delete ~/{.ssh,.mylogin.cnf,z,code,Downloads} /media/$USER/Backup_HDD_Josh_Ziegler/backups/$HOSTNAME/"
 
 # Python
 alias pyv3="python3 -m venv venv"                       # Create Python 3 virtualenv
