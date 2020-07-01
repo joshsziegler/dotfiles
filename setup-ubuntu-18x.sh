@@ -67,6 +67,7 @@ chmod 700 ~
 # Create my default directories
 mkdir -p ~/{backups,code,.ssh,z}
 # Create symbolic links to dotfile configs
+ln -sf ~/code/dotfiles/.bashrc ~/
 ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/
 ln -sf ~/code/dotfiles/.gitconfig ~/
 ln -sf ~/code/dotfiles/.vimrc ~/
@@ -79,10 +80,8 @@ mkdir -p ~/.config/sublime-text-3/Packages/User/
 ln -sf ~/code/dotfiles/sublime/Go.sublime-settings  ~/.config/sublime-text-3/Packages/User/
 ln -sf ~/code/dotfiles/sublime/Preferences.sublime-settings  ~/.config/sublime-text-3/Packages/User/
 # EditorConfig                                                                             
-# GoImports                                                                                
-# Golang Build                                                                             
+# GoFmt (with User preferences set to use `goimports`)                                                                             
 # GoRename
-# Mustache
 # Package Control
 # TypeScript  
 
