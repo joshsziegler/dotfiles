@@ -12,9 +12,9 @@ shopt -s checkwinsize
 
 # Color prompt
 export TERM=xterm-256color
-# Prompt Username@Hostname DIR
-# PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-PS1='\u@\[\033[01;34m\]\h\[\033[00m\]:\w \[\033[01;34m\]$\[\033[00m\] '
+# Show Current Git Branch and Status in Prompt
+export GIT_PS1_SHOWDIRTYSTATE=1
+export PS1='\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[1;36m\] \w\[\033[1;33m\]$(__git_ps1)\[\033[1;34m\] \$\[\033[00m\] '
 
 # Use vim
 export VISUAL=vim
