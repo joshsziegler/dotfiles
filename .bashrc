@@ -39,7 +39,7 @@ alias find-largest="du -Sh | sort -rh | head -5"
 alias find-largest-dirs="du -ah | sort -rh | head -n 5"
 alias find-largest-files="find -type f -exec du -Sh {} + | sort -rh | head -n 5"
 # Download a webpage (provide one after this alias) and convert to Markdown
-alias html2md="pandoc -s -f html -t markdown_github-raw_html "
+alias html2md="pandoc -s -reference-links --atx-headers -f html -t markdown-raw_html "
 
 # Ubuntu and Apt
 alias apt-update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo reboot"
@@ -52,7 +52,7 @@ alias ssh-zglr="ssh josh@zglr.org -t 'tmux attach || tmux new'"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # Rsync
-alias backup-zlt="rsync -ah --delete ~/{.ssh,.mylogin.cnf,z,code,Downloads} /media/$USER/Backup_HDD_Josh_Ziegler/backups/$HOSTNAME/"
+alias backup-zlt="rsync -avh --delete ~/{.ssh,.mylogin.cnf,z,code,Downloads} --exclude='*node_module*' --exclude='*venv/*' /media/josh/Backup_HDD_Josh_Ziegler/backups/desktop/"
 
 # Python
 alias pip="pip3"
@@ -73,14 +73,14 @@ alias gitf='git fetch --all --prune'
 alias gits='git status'
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
 alias gitl='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
-alias gitt='git log --since="4 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
+alias gitt='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
 
 # Recursively search for a string in all files ending in html and replace
 # find . -name '*.html' -print -exec sed -i.bak 's/foo/bar/g' {} \;
 
 # Install Golang globally
 install-go(){
-    GOVERSION=1.14.4
+    GOVERSION=1.15
     echo "Installing Go $GOVERSION 64-bit for Linux"
     mkdir -p ~/go
     wget https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
