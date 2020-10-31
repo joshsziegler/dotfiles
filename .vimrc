@@ -6,8 +6,9 @@
 " Enable package manager (use :PlugUpdate to install or update plugins)
 call plug#begin()
 " Sublime-flavored Monokai color scheme
-"Plug 'ErichDonGubler/vim-sublime-monokai'
-Plug 'altercation/vim-colors-solarized'
+Plug 'ErichDonGubler/vim-sublime-monokai'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'reedes/vim-colors-pencil'
 " Improved status and tab line
 Plug 'itchyny/lightline.vim'
 " Add buffer info to lightline
@@ -20,7 +21,8 @@ Plug 'airblade/vim-gitgutter'
 " File tree explorer for vim
 Plug 'scrooloose/nerdtree'
 " Golang development
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'govim/govim'
 " Better JSON highlighting
 Plug 'elzr/vim-json'
 " Browse tags within code using ctags-exuberant
@@ -33,7 +35,7 @@ call plug#end()
 
 " Basic Settings
 " -------------------------------------------------------------------------------------------------
-set textwidth=79              " Hard-wrap lines at 79 characters (at word boundaries)
+set textwidth=99              " Hard-wrap lines at 99 characters (at word boundaries)
 set formatoptions+=cro        " Format comments properly (see manual)
 " set nu                        " Show line numbers
 set tabstop=4                 " Show existing tabs as 4 spaces
@@ -52,8 +54,10 @@ set hlsearch                  " Highlight search
 set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
 syntax on                     " Enable syntax highlighting
 "colorscheme sublimemonokai    "
-set background=light          " Set this for the light-version of Solarized
-colorscheme solarized
+"colorscheme solarized
+" colorscheme pencil 
+colorscheme Tango-Custom
+set background=light          " Set this for the light-version of colorscheme 
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
@@ -119,5 +123,29 @@ command! -bang -nargs=* Rg
 " vim-go (Golang development)
 " -------------------------------------------------------------------------------------------------
 " Use goimports on save instead of gofmt (may be slow for larger code bases)
-let g:go_fmt_command = "goimports"
+"let g:go_fmt_command = "goimports"
 
+" govim (Golang development)
+" -------------------------------------------------------------------------------------------------
+"call govim#config#Set("HighlightReferences", 0)
+" By default, govim populates the quickfix window with diagnostics reported by 
+" gopls after a period of inactivity, the time period being defined by 
+" updatetime (help updatetime). Here we suggest a short updatetime time in 
+" order that govim/Vim are more responsive/IDE-like
+set updatetime=500
+" To make govim/Vim more responsive/IDE-like, we suggest a short balloondelay
+set balloondelay=250
+" Show info for completion candidates in a popup menu
+if has("patch-8.1.1904")
+  set completeopt+=popup
+  set completepopup=align:menu,border:off,highlight:Pmenu
+endif
+
+set mouse=a
+" To get hover working in the terminal we need to set ttymouse.
+"
+" For the appropriate setting for your terminal. Note that despite the
+" automated tests using xterm as the terminal, a setting of ttymouse=xterm
+" does not work correctly beyond a certain column number (citation needed)
+" hence we use ttymouse=sgr
+set ttymouse=sgr
