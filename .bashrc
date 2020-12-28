@@ -94,3 +94,8 @@ export GOPATH=~/go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# My custom scripts and binaries
+export PATH=$PATH:~/code/dotfiles/bin
+
+# Setup path for notes.sh in dotfiles bin
+export NOTE_DIR=$HOME/z/notes
