@@ -40,6 +40,9 @@ sudo timedatectl set-timezone America/New_York
 if [[ -f "/etc/ssh/sshd_config" ]]; then
     sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
     sudo sed -i 's/X11Forwarding yes/X11Forwarding no/g' /etc/ssh/sshd_config
+    # Turn off Message of the Day News (i.e advertisements) when logging in via SSH
+    # Personally, I find that they obscure the important info and are annoying.
+    sudo sed -i 's/ENABLED=1/ENABLED=0/g' /etc/default/motd-news
 fi
 
 # Setup Auto-Update for Security Upgrades
@@ -56,9 +59,6 @@ sudo sed -i 's/\/\/Unattended-Upgrade::Remove-Unused-Dependencies "false";/Unatt
 sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot "false";/Unattended-Upgrade::Automatic-Reboot "true";/g' /etc/apt/apt.conf.d/50unattended-upgrades
 sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot-Time "02:00";/Unattended-Upgrade::Automatic-Reboot-Time "5:00";/g' /etc/apt/apt.conf.d/50unattended-upgrades
 
-# Turn off Message of the Day News (i.e advertisements) when logging in via SSH
-# Personally, I find that they obscure the important info and are annoying.
-sudo sed -i 's/ENABLED=1/ENABLED=0/g' /etc/default/motd-news
 
 # Changing everything to be owned by me
 chown -R $USER:$USER ~/*

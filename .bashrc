@@ -80,7 +80,7 @@ alias gitt='git log --since="1 week ago" --date=short --no-merges --pretty="%Cre
 
 # Install Golang globally
 install-go(){
-    GOVERSION=1.15
+    GOVERSION=1.16.5
     echo "Installing Go $GOVERSION 64-bit for Linux"
     mkdir -p ~/go
     wget https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
@@ -99,3 +99,5 @@ export PATH=$PATH:~/code/dotfiles/bin
 
 # Setup path for notes.sh in dotfiles bin
 export NOTE_DIR=$HOME/z/notes
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
