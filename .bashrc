@@ -13,8 +13,7 @@ shopt -s checkwinsize
 # Color prompt
 export TERM=xterm-256color
 # Show Current Git Branch and Status in Prompt
-export GIT_PS1_SHOWDIRTYSTATE=1
-export PS1='\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[1;36m\] \w\[\033[1;33m\]$(__git_ps1)\[\033[1;34m\] \$\[\033[00m\] '
+export PS1='\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[1;36m\] \w\[\033[1;33m\]\[\033[1;34m\] \$\[\033[00m\] '
 
 # Use vim
 export VISUAL=vim
