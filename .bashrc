@@ -77,17 +77,6 @@ alias gitt='git log --since="1 week ago" --date=short --no-merges --pretty="%Cre
 # Recursively search for a string in all files ending in html and replace
 # find . -name '*.html' -print -exec sed -i.bak 's/foo/bar/g' {} \;
 
-# Install Golang globally
-install-go(){
-    GOVERSION=1.16.5
-    echo "Installing Go $GOVERSION 64-bit for Linux"
-    mkdir -p ~/go
-    wget https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
-    sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf go$GOVERSION.linux-amd64.tar.gz
-    rm go$GOVERSION.linux-amd64.tar.gz
-}
-
 # Go
 export GOPATH=~/go
 export GOROOT=/usr/local/go

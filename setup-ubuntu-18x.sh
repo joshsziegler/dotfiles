@@ -107,3 +107,21 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 
+# Install Golang globally
+install-go(){
+    GOVERSION=1.17.3
+    echo "Installing Go $GOVERSION 64-bit for Linux"
+    mkdir -p ~/go
+    wget https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
+    sudo rm -rf /usr/local/go
+    sudo tar -C /usr/local -xzf go$GOVERSION.linux-amd64.tar.gz
+    rm go$GOVERSION.linux-amd64.tar.gz
+}
+install-go
+# Temporarily export GO paths so the installs work
+export GOPATH=~/go
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# Install other Go tools
+go install -v golang.org/x/tools/cmd/godoc@latest
+go install -v golang.org/x/tools/cmd/goimports@latest
