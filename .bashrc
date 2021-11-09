@@ -1,3 +1,6 @@
+# Make sure auto-complete is enabled (i.e. sudo apt install bash-autocompletion)
+source /etc/profile.d/bash_completion.sh
+
 # History control
 # don't use duplicate lines or lines starting with space
 HISTCONTROL=ignoreboth
