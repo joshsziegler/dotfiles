@@ -11,8 +11,7 @@ cat << EOF >> /home/vscode/.ssh/config
 # Dev or Remote .ssh/config
 Host office.infinitetactics.com
     User joshz
-Host gitlab.infinitetactics.com
-    HostName gitlab    
+Host gitlab.infinitetactics.com gitlab.office.analyticsgateway.com
     ProxyJump office.infinitetactics.com
     User git
 EOF
