@@ -2,8 +2,8 @@
 source /etc/profile.d/bash_completion.sh
 
 # History control
-# don't use duplicate lines or lines starting with space
-HISTCONTROL=ignoreboth
+# don't use duplicate lines or lines starting with space; remove prior duplicates
+HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=1000
 HISTFILESIZE=2000
 # append to the history file instead of overwrite
