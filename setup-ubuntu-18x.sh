@@ -26,6 +26,9 @@
 #
 #     echo 'FOO' | sudo tee FilePath
 #
+# For apps installed through `apt` I let it figure out what to install. For most
+# others, I generally use `command -v APP` since `which` has several issues: 
+# https://stackoverflow.com/a/677212 
 
 
 set -e # Stop execution if a command errors
@@ -87,41 +90,45 @@ ln -sf ~/code/dotfiles/sublime/Preferences.sublime-settings  ~/.config/sublime-t
 
 # Update repos
 sudo apt update
-# Install packages
+# Install packages 
 sudo apt install -y git vim tmux htop python3 python3-pip lnav vnstat zeal  
-# lnav       ~ CLI log viewer (e.g. terminal UI for Apache/Nginx logs)
-# vnstat     ~ network stats per interface per day/week/month
-# zeal       ~ simple, offline programming documenation viewer
-# krb5-user  ~ Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
-# fail2ban  
-# logwatch   ~ Summarizes log files and can send summary via email
-# deja-dup   ~ GUI backup tool
-# gparted    ~ GUI disk partitioning
-# unetbootin ~ GUI for creating bootable USB sticks
 # baobab     ~ GUI disk usage graphing
+# deja-dup   ~ GUI backup tool
+# fail2ban  
 # goacess    ~ CLI Web server log viewer
+# gparted    ~ GUI disk partitioning
+# krb5-user  ~ Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
+# lnav       ~ CLI log viewer (e.g. terminal UI for Apache/Nginx logs)
+# logwatch   ~ Summarizes log files and can send summary via email
+# unetbootin ~ GUI for creating bootable USB sticks
+# vnstat     ~ network stats per interface per day/week/month
 # xrdp       ~ allows Windows users to connect via Remote Desktop
+# zeal       ~ simple, offline programming documenation viewer
 
 # Upgrade all packages installed
 sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 
-# Install Golang globally
+# Install Golang globally IFF not correct version
 install-go(){
-    GOVERSION=1.17.3
-    echo "Installing Go $GOVERSION 64-bit for Linux"
-    mkdir -p ~/go
-    wget https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
-    sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf go$GOVERSION.linux-amd64.tar.gz
-    rm go$GOVERSION.linux-amd64.tar.gz
+    GOVERSION=1.17.4
+    if go env | grep "${GOVERSION}"; then
+        echo "Go ${GOVERSION} already installed"
+    else
+        echo "Installing Go ${GOVERSION} 64-bit for Linux"
+        mkdir -p ~/go
+        wget https://dl.google.com/go/go${GOVERSION}.linux-amd64.tar.gz
+        sudo rm -rf /usr/local/go
+        sudo tar -C /usr/local -xzf go${GOVERSION}.linux-amd64.tar.gz
+        rm go${GOVERSION}.linux-amd64.tar.gz
+    fi 
 }
 install-go
-# Temporarily export GO paths so the installs work
+# Temporarily export GO paths so the installs below work
 export GOPATH=~/go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-# Install other Go tools
-go install -v golang.org/x/tools/cmd/godoc@latest
-go install -v golang.org/x/tools/cmd/goimports@latest
+# Install other Go tools IFF not found 
+command -v godoc &>/dev/null || go install -v golang.org/x/tools/cmd/godoc@latest
+command -v goimports &>/dev/null || go install -v golang.org/x/tools/cmd/goimports@latest
