@@ -1,4 +1,5 @@
 #!/bin/bash
+# wget https://raw.githubusercontent.com/joshsziegler/dotfiles/master/setup-ag-dev-container.sh && chmod +x setup-ag-dev-container.sh && ./setup-ag-dev-container.sh
 set -e # Stop execution if a command errors
 set -x # Echo commands and expand any variables
 
