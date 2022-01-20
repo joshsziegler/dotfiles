@@ -77,6 +77,9 @@ alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all 
 alias gitl='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 alias gitt='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
 
+# Docker
+alias docker-clean='docker container prune -f && docker volume prune -f'
+
 # Recursively search for a string in all files ending in html and replace
 # find . -name '*.html' -print -exec sed -i.bak 's/foo/bar/g' {} \;
 
