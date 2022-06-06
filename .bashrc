@@ -55,6 +55,7 @@ alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 
 # Rsync
 alias backup-zlt="rsync -avh --delete ~/{.ssh,.mylogin.cnf,z,code,Downloads} --exclude='*node_module*' --exclude='*venv/*' /media/josh/Backup_HDD_Josh_Ziegler/backups/desktop/"
+alias backup-staging="rsync -aP staging.analyticsgateway.com:/p/staging/patches/* /p/staging/patches/"
 
 # Python
 alias pip="pip3"
