@@ -48,10 +48,10 @@ alias apt-update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove 
 alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
 
 # SSH
-function ssh () {
+function ssht () {
     /usr/bin/ssh -t "$@" "tmux attach || tmux new";
 }
-alias ssh-work="ssh-add -s /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so && ssh-agent -l"
+alias ssh-work="ssh-add -s /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so && ssh-add -l"
 
 # Tmux - Support better colors by using -2 option along with set -g default-terminal "screen-256color"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
