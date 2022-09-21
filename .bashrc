@@ -80,6 +80,15 @@ alias gits='git status'
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
 alias gitl='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 alias gitt='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
+function git-squash-then-rebase-on () {
+    # Squash merge, then rebase onto the desired branch (typically develop or master).
+    local BRANCH=$1
+    # Find the last common commit from the current HEAD and BRANCH.
+    # Then soft reset to that point (to keep all changes staged).
+    # Commit all changes as one atomic commit (i.e. squash merge).
+    # Then rebase the updated HEAD onto BRANCH.
+    git reset --soft $(git merge-base HEAD $BRANCH) && git commit && git rebase $BRANCH 
+}
 
 # Docker
 alias docker-clean='docker container prune -f && docker volume prune -f'
