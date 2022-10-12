@@ -6,8 +6,8 @@
 " Enable package manager (use :PlugUpdate to install or update plugins)
 call plug#begin()
 " Sublime-flavored Monokai color scheme
-Plug 'ErichDonGubler/vim-sublime-monokai'
-"Plug 'altercation/vim-colors-solarized'
+"Plug 'ErichDonGubler/vim-sublime-monokai'
+Plug 'altercation/vim-colors-solarized'
 "Plug 'reedes/vim-colors-pencil'
 " Improved status and tab line
 Plug 'itchyny/lightline.vim'
@@ -21,8 +21,7 @@ Plug 'airblade/vim-gitgutter'
 " File tree explorer for vim
 Plug 'scrooloose/nerdtree'
 " Golang development
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'govim/govim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Better JSON highlighting
 Plug 'elzr/vim-json'
 " Browse tags within code using ctags-exuberant
@@ -54,9 +53,9 @@ set hlsearch                  " Highlight search
 set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
 syntax on                     " Enable syntax highlighting
 "colorscheme sublimemonokai    "
-"colorscheme solarized
+colorscheme solarized
 " colorscheme pencil 
-colorscheme Tango-Custom
+"colorscheme Tango-Custom
 set background=light          " Set this for the light-version of colorscheme 
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
