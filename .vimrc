@@ -30,6 +30,8 @@ Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 " Markdown editing enhancements (folding, links, etc)
 Plug 'plasticboy/vim-markdown'
+" Remember last location with rules for exceptions (git commits, etc)
+Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
 " Basic Settings

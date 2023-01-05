@@ -16,7 +16,6 @@ shopt -s checkwinsize
 # Color prompt
 export TERM=xterm-256color
 # Show Current Git Branch and Status in Prompt
-# export PS1='\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[1;36m\] \w\[\033[1;33m\]\[\033[1;34m\] \$\[\033[00m\] '
 export PS1="\[$(tput bold)\]\[\033[38;5;39m\]\u\[$(tput sgr0)\]\[\033[38;5;241m\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;35m\]\h\[$(tput sgr0)\]\[\033[38;5;241m\]:\[$(tput sgr0)\]\[\033[38;5;234m\]\w\[$(tput sgr0)\] \$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') \[$(tput sgr0)\]\[\033[38;5;234m\]\\$\[$(tput sgr0)\]"
 
 # Use vim
@@ -52,7 +51,15 @@ alias apt-history="cat /var/log/apt/history.log | grep -C 1 Commandline"
 function ssht () {
     /usr/bin/ssh -t "$@" "tmux attach || tmux new";
 }
-alias ssh-work="ssh-add -s /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so && ssh-add -l"
+ssh-work() {
+    local WORK_YUBIKEY_HASH="SHA256:TG92bMtGBbmFXY8yWS3o5VBH3oEEQwTlsJJKLZIWdgY"
+    (ssh-add -l | grep "${WORK_YUBIKEY_HASH}" &>/dev/null) || {
+        echo "Yubikey not loaded in SSH-Agent. Please make sure the key is inserted."
+        ssh-add -s /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so 
+    }
+    echo "SSH-Agent Keys:"
+    ssh-add -l
+}
 
 # Tmux - Support better colors by using -2 option along with set -g default-terminal "screen-256color"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
@@ -78,6 +85,10 @@ alias matlab-cli="matlab -nodisplay -nosplash -nodesktop"
 # Git
 alias gitf='git fetch --all --prune'
 alias gits='git status'
+alias gitc='git checkout '
+alias gitbc='git checkout -b ' # Git Branch Create
+alias gitbd='git branch -D '   # Git Branch Delete
+alias gitbp='git push --set-upstream origin $(git branch --show-current)' # Git Branch Push (New)
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
 alias gitl='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
 alias gitt='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
@@ -109,3 +120,24 @@ export PATH=$PATH:~/code/dotfiles/bin
 export NOTE_DIR=$HOME/z/notes
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Work-Related
+function deploy-ag() {
+    set +x
+    if [ -z "$1" ]
+    then
+        echo "Target host is required."
+        echo "Usage: deploy-ag HOST [AG_VERSION]"
+        exit 1
+    fi
+    local HOST=$1
+    local AG_ARCH="amd64"
+    ssh-work
+    if [ -z "$2" ]
+    then
+        local AG_VERSION="$2-${AG_ARCH}"
+        ssh staging.analyticsgateway.com "cd ~/code/ag/ && git checkout develop && git pull && git checkout ${AG_VERSION} && cd deploy && ansible-playbook playbooks/deployment.yml -e target_host=${HOST}.analyticsgateway.com -e hub_version=${HUB_VERSION}-amd64"
+    else 
+        ssh staging.analyticsgateway.com "cd ~/code/ag/ && git checkout develop && git pull && cd deploy && ansible-playbook playbooks/deployment.yml -e target_host=${HOST}.analyticsgateway.com"
+    fi
+}
