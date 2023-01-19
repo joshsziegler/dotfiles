@@ -56,8 +56,6 @@ set hidden                    " Allow for hidden buffers, which allows for unsav
 syntax on                     " Enable syntax highlighting
 "colorscheme sublimemonokai    "
 colorscheme solarized
-" colorscheme pencil 
-"colorscheme Tango-Custom
 set background=light          " Set this for the light-version of colorscheme 
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
@@ -66,7 +64,7 @@ set foldmethod=indent         " Fold based on indent
 set foldnestmax=10            " Deepest fold is 10 levels
 set nofoldenable              " Don't fold by default
 " let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
-"autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
+autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
 
 " Setup shortcuts
 " -------------------------------------------------------------------------------------------------
