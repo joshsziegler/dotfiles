@@ -33,7 +33,7 @@
 
 
 set -e # Stop execution if a command errors
-set -x # Echo commands and expand any variables
+#set -x # Echo commands and expand any variables
 
 # Set timezone
 sudo timedatectl set-timezone America/New_York
@@ -134,3 +134,26 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Install other Go tools IFF not found
 command -v godoc &>/dev/null || go install -v golang.org/x/tools/cmd/godoc@latest
 command -v goimports &>/dev/null || go install -v golang.org/x/tools/cmd/goimports@latest
+
+## Optional ###################################################################
+
+# VS Code
+read -p "Install VS Code (Y or N)? " -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    curl -Lo vscode.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    sudo dpkg -i vscode.deb
+    rm vscode.deb
+fi
+
+# Slack
+read -p "Install Slack (Y or N)? " -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    SLACK_V="4.29.149"
+    curl -Lo slack.deb "https://downloads.slack-edge.com/releases/linux/${SLACK_V}/prod/x64/slack-desktop-${SLACK_V}-amd64.deb"
+    sudo dpkg -i slack.deb
+    rm slack.deb
+fi
+
+echo "Setup Complete."
