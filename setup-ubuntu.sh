@@ -31,38 +31,11 @@
 # others, I generally use `command -v APP` since `which` has several issues:
 # https://stackoverflow.com/a/677212
 
-
 set -e # Stop execution if a command errors
 #set -x # Echo commands and expand any variables
 
 # Set timezone
 sudo timedatectl set-timezone America/New_York
-
-# If SSH server is installed:
-#  - Disable root login (use sudoers instead)
-#  - Disable X11 forwarding to reduce attack surface
-if [[ -f "/etc/ssh/sshd_config" ]]; then
-    sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
-    sudo sed -i 's/X11Forwarding yes/X11Forwarding no/g' /etc/ssh/sshd_config
-    # Turn off Message of the Day News (i.e advertisements) when logging in via SSH
-    # Personally, I find that they obscure the important info and are annoying.
-    sudo sed -i 's/ENABLED=1/ENABLED=0/g' /etc/default/motd-news
-fi
-
-# Setup Auto-Update for Security Upgrades
-#  - This is taken from two pieces of documentation and applies to Ubuntu 18.04
-#    - https://help.ubuntu.com/community/AutomaticSecurityUpdates
-#    - https://help.ubuntu.com/lts/serverguide/automatic-updates.html#Automatic
-#  - The notifier package is required for automatic reboots!
-#  - This config only applies security updates, but will auto-remove unused dependencies
-sudo apt-get install unattended-upgrades
-sudo dpkg-reconfigure --priority=low unattended-upgrades
-echo 'APT::Periodic::Update-Package-Lists "1";' | sudo tee /etc/apt/apt.conf.d/20auto-upgrades    # Overwrite existing file
-echo 'APT::Periodic::Unattended-Upgrade "1";'   | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades # Append to the newly created file
-sudo sed -i 's/\/\/"${distro_id} ${distro_codename}-security";/"${distro_id} ${distro_codename}-security";/g' /etc/apt/apt.conf.d/50unattended-upgrades
-sudo sed -i 's/\/\/Unattended-Upgrade::Remove-Unused-Dependencies "false";/Unattended-Upgrade::Remove-Unused-Dependencies "true";/g' /etc/apt/apt.conf.d/50unattended-upgrades
-sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot "false";/Unattended-Upgrade::Automatic-Reboot "true";/g' /etc/apt/apt.conf.d/50unattended-upgrades
-sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot-Time "02:00";/Unattended-Upgrade::Automatic-Reboot-Time "5:00";/g' /etc/apt/apt.conf.d/50unattended-upgrades
 
 
 # Change home dir to 700 to prevent snoopers
@@ -154,6 +127,43 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     curl -Lo slack.deb "https://downloads.slack-edge.com/releases/linux/${SLACK_V}/prod/x64/slack-desktop-${SLACK_V}-amd64.deb"
     sudo dpkg -i slack.deb
     rm slack.deb
+fi
+
+# YubiKey / PIV
+read -p "Install OpenSC for YubiKey (Y or N)?" -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    sudo apt install -y opensc
+fi
+
+# Setup Auto-Update for Security Updates
+read -p "Auto-install security updates (recommended for servers only) (Y or N)?" -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    #  - This is taken from two pieces of documentation and applies to Ubuntu 18.04
+    #    - https://help.ubuntu.com/community/AutomaticSecurityUpdates
+    #    - https://help.ubuntu.com/lts/serverguide/automatic-updates.html#Automatic
+    #  - The notifier package is required for automatic reboots!
+    #  - This config only applies security updates, but will auto-remove unused dependencies
+    sudo apt-get install unattended-upgrades
+    sudo dpkg-reconfigure --priority=low unattended-upgrades
+    echo 'APT::Periodic::Update-Package-Lists "1";' | sudo tee /etc/apt/apt.conf.d/20auto-upgrades    # Overwrite existing file
+    echo 'APT::Periodic::Unattended-Upgrade "1";'   | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades # Append to the newly created file
+    sudo sed -i 's/\/\/"${distro_id} ${distro_codename}-security";/"${distro_id} ${distro_codename}-security";/g' /etc/apt/apt.conf.d/50unattended-upgrades
+    sudo sed -i 's/\/\/Unattended-Upgrade::Remove-Unused-Dependencies "false";/Unattended-Upgrade::Remove-Unused-Dependencies "true";/g' /etc/apt/apt.conf.d/50unattended-upgrades
+    sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot "false";/Unattended-Upgrade::Automatic-Reboot "true";/g' /etc/apt/apt.conf.d/50unattended-upgrades
+    sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot-Time "02:00";/Unattended-Upgrade::Automatic-Reboot-Time "5:00";/g' /etc/apt/apt.conf.d/50unattended-upgrades
+fi
+
+# If SSH server is installed:
+#  - Disable root login (use sudoers instead)
+#  - Disable X11 forwarding to reduce attack surface
+if [[ -f "/etc/ssh/sshd_config" ]]; then
+    sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
+    sudo sed -i 's/X11Forwarding yes/X11Forwarding no/g' /etc/ssh/sshd_config
+    # Turn off Message of the Day News (i.e advertisements) when logging in via SSH
+    # Personally, I find that they obscure the important info and are annoying.
+    sudo sed -i 's/ENABLED=1/ENABLED=0/g' /etc/default/motd-news
 fi
 
 echo "Setup Complete."
