@@ -134,6 +134,7 @@ read -p "Install OpenSC for YubiKey (Y or N)?" -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo apt install -y opensc
+    sudo systemctl enable pcscd # If not running, PIV will not work
 fi
 
 # Setup Auto-Update for Security Updates
