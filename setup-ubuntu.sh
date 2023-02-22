@@ -70,10 +70,11 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 # Install packages
-sudo apt install -y git vim tmux atop htop lnav vnstat zeal
+sudo apt install -y atop direnv git htop lnav tmux vim vnstat zeal
 # atop       ~ System resource monitoring
 # baobab     ~ GUI disk usage graphing
 # deja-dup   ~ GUI backup tool
+# direnv     ~ load and unload environment variables depending on the current directory
 # fail2ban
 # goacess    ~ CLI Web server log viewer
 # gparted    ~ GUI disk partitioning
