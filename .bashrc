@@ -20,6 +20,8 @@ if [ ! -z "$PS1" ]; then
     [ -f /etc/profile.d/bash_completion.sh ] && source /etc/profile.d/bash_completion.sh
     # Setup FZF
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    # Start SSH-Agent IFF not running
+    [ -z "$SSH_AUTH_SOCK" ] && eval `ssh-agent -s`
 fi
 
 # Editor ##########################################################################################
