@@ -32,6 +32,7 @@ alias vi="vim"
 # Go ##############################################################################################
 export GOPATH=~/go
 export GOROOT=/usr/local/go
+#export GOROOT=/usr/local/boring-go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Personal ########################################################################################
