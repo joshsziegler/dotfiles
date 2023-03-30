@@ -70,7 +70,7 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 # Install packages
-sudo apt install -y atop direnv git htop lnav tmux vim vnstat zeal
+sudo apt install -y atop curl direnv git htop lnav tmux vim vnstat zeal
 # atop       ~ System resource monitoring
 # baobab     ~ GUI disk usage graphing
 # deja-dup   ~ GUI backup tool
@@ -88,7 +88,7 @@ sudo apt install -y atop direnv git htop lnav tmux vim vnstat zeal
 
 # Install Golang globally IFF not correct version
 install-go(){
-    GOVERSION=1.19.5
+    GOVERSION=1.20.2
     if go env | grep "${GOVERSION}"; then
         echo "Go ${GOVERSION} already installed"
     else
