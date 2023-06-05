@@ -2,7 +2,7 @@
 #
 # Author:  Josh Ziegler
 # Date:    2020-05-19
-# Updated: 2023-01-19
+# Updated: 2023-05-05
 # License: MIT
 #
 # This script configures Ubuntu 22.04 to my baseline by installing packages and
@@ -49,7 +49,7 @@ ln -sf ~/code/dotfiles/.bashrc ~/
 ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/
 ln -sf ~/code/dotfiles/.gitconfig ~/
 ln -sf ~/code/dotfiles/.vimrc ~/
-ln -sf ~/code/dotfiles/.vim/ ~/
+#ln -sf ~/code/dotfiles/.vim/ ~/
 ln -sf ~/code/dotfiles/.tmux.conf ~/
 ln -sf ~/code/dotfiles/.condarc ~/
 
@@ -146,6 +146,16 @@ echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo apt install -y opensc
     sudo systemctl enable pcscd # If not running, PIV will not work
+fi
+
+# WireGuard
+read -p "Install WireGuard (Y or N)?" -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    sudo apt install wireguard
+    # If the VPN config has DNS entry, it will try to use resolvconf which doesn't exist on Ubuntu
+    # (use SystemD instead). See https://superuser.com/a/1544697
+    sudo ln -sf /usr/bin/resolvectl /usr/local/bin/resolvconf
 fi
 
 # Setup Auto-Update for Security Updates
