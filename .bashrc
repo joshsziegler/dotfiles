@@ -16,6 +16,8 @@ if [ ! -z "$PS1" ]; then
     shopt -s checkwinsize
     # Show the current git branch and status in the prompt
     export PS1="\[$(tput bold)\]\[\033[38;5;39m\]\u\[$(tput sgr0)\]\[\033[38;5;241m\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;35m\]\h\[$(tput sgr0)\]\[\033[38;5;241m\]:\[$(tput sgr0)\]\[\033[38;5;234m\]\w\[$(tput sgr0)\] \$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') \[$(tput sgr0)\]\[\033[38;5;234m\]\\$\[$(tput sgr0)\]"
+    # Show current user and hostname in Terminal emulator's tab/window
+    export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}\007"'
     # Make sure auto-complete is enabled (i.e. sudo apt install bash-autocompletion)
     [ -f /etc/profile.d/bash_completion.sh ] && source /etc/profile.d/bash_completion.sh
     # Setup FZF
@@ -100,6 +102,7 @@ ssh-work() {
     echo "SSH-Agent Keys:"
     ssh-add -l
 }
+alias ag-copy-db='ssh dev.analyticsgateway.com "cp /var/ag/ag-db ag-temp.db" && rsync dev.analyticsgateway.com:ag-temp.db ag-dev-`date -uI`.db && ssh dev.analyticsgateway.com "rm ag-temp.db"'
 function deploy-ag() {
     set +x
     if [ -z "$1" ]
