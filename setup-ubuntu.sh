@@ -37,15 +37,15 @@ set -e # Stop execution if a command errors
 # Set timezone
 sudo timedatectl set-timezone America/New_York
 
-
 # Change home dir to 700 to prevent snoopers
 chmod 700 ~
 # Remove default directories -- I store everything in ~/code and ~/z
 rm -rf {Documents,Downloads,Music,Pictures,Public,Templates,Videos}
 # Create my default directories
 mkdir -p ~/{backups,code,.ssh,z}
+# Source my bashrc if it isn't already
+grep -Fxq "source ~/code/dotfiles/.bashrc" ~/.bashrc || echo "source ~/code/dotfiles/.bashrc" >> ~/.bashrc
 # Create symbolic links to dotfile configs
-ln -sf ~/code/dotfiles/.bashrc ~/
 ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/
 ln -sf ~/code/dotfiles/.gitconfig ~/
 ln -sf ~/code/dotfiles/.vimrc ~/
@@ -70,7 +70,7 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 # Install packages
-sudo apt install -y atop curl direnv git htop lnav tmux vim vnstat zeal
+sudo apt install -y atop curl direnv git htop lnav tmux vim vnstat
 # atop       ~ System resource monitoring
 # baobab     ~ GUI disk usage graphing
 # deja-dup   ~ GUI backup tool
@@ -177,15 +177,19 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot-Time "02:00";/Unattended-Upgrade::Automatic-Reboot-Time "5:00";/g' /etc/apt/apt.conf.d/50unattended-upgrades
 fi
 
-# If SSH server is installed:
-#  - Disable root login (use sudoers instead)
-#  - Disable X11 forwarding to reduce attack surface
+# If SSH server is installed AND the user says so, configure it.
 if [[ -f "/etc/ssh/sshd_config" ]]; then
-    sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
-    sudo sed -i 's/X11Forwarding yes/X11Forwarding no/g' /etc/ssh/sshd_config
-    # Turn off Message of the Day News (i.e advertisements) when logging in via SSH
-    # Personally, I find that they obscure the important info and are annoying.
-    sudo sed -i 's/ENABLED=1/ENABLED=0/g' /etc/default/motd-news
+    read -p "Configure SSH server (disable root login, x11 forwarding, and MotD news) (Y or N)?" -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        #  - Disable root login (use sudoers instead)
+        sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
+        #  - Disable X11 forwarding to reduce attack surface
+        sudo sed -i 's/X11Forwarding yes/X11Forwarding no/g' /etc/ssh/sshd_config
+        # Turn off Message of the Day News (i.e advertisements) when logging in via SSH
+        # Personally, I find that they obscure the important info and are annoying.
+        sudo sed -i 's/ENABLED=1/ENABLED=0/g' /etc/default/motd-news
+    fi
 fi
 
 echo "Setup Complete."
