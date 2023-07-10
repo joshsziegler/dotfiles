@@ -5,9 +5,6 @@ HISTFILESIZE=2000
 # Append to the history file instead of overwrite
 shopt -s histappend
 
-# Environment Variables ###########################################################################
-eval "$(direnv hook bash)"
-
 # If Interactive Shell ############################################################################
 if [ ! -z "$PS1" ]; then
     # Enable color prompt
@@ -122,3 +119,7 @@ function deploy-ag() {
         ssh staging.analyticsgateway.com "cd ~/code/ag/ && git checkout develop && git pull && cd deploy && ansible-playbook playbooks/deployment.yml -e target_host=${HOST}.analyticsgateway.com"
     fi
 }
+
+# Environment Variables ###########################################################################
+# From to their docs, this must be done after other shell extenstions that manipulate the prompts!
+eval "$(direnv hook bash)"
