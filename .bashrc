@@ -73,6 +73,7 @@ alias py-fix="autopep8 -riav --max-line-length 120" # Auto fix most PEP8 violati
 alias gitf='git fetch --all --prune'
 alias gits='git status'        # Git Status
 alias gitc='git checkout '     # Git Checkout BRANCH
+alias gitb='git ls-remote --heads origin "*jz*"' # Git branch with my initials
 alias gitbc='git checkout -b ' # Git Branch Create BRANCH
 alias gitbd='git branch -D '   # Git Branch Delete BRANCH
 alias gitbp='git push --set-upstream origin $(git branch --show-current)' # Git Branch Push (New)
