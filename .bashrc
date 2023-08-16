@@ -23,6 +23,16 @@ if [ ! -z "$PS1" ]; then
     [ -z "$SSH_AUTH_SOCK" ] && eval `ssh-agent -s`
 fi
 
+
+# Ubuntu / APT ####################################################################################
+function apt-up {
+    if [ -z $1 ] ; then
+        sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    else
+        ssh -t $1 -- sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    fi
+}
+
 # Editor ##########################################################################################
 export VISUAL=vim
 export EDITOR=vim
@@ -53,7 +63,7 @@ alias mv='mv -v'
 ## Tmux - Support better colors by using -2 option along with set -g default-terminal "screen-256color"
 alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 # APT
-alias aptu="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y" # Apt Upgrade
+alias aptu="apt-up"
 alias apth="cat /var/log/apt/history.log | grep -C 1 Commandline"             # Apt History
 ## HTML to Markdown: Download a webpage (provide one after this alias) and convert to Markdown
 alias html2md="pandoc -s -reference-links --atx-headers -f html -t markdown-raw_html "
