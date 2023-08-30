@@ -88,7 +88,8 @@ alias gitbc='git checkout -b ' # Git Branch Create BRANCH
 alias gitbd='git branch -D '   # Git Branch Delete BRANCH
 alias gitbp='git push --set-upstream origin $(git branch --show-current)' # Git Branch Push (New)
 alias gitrc="git reset --hard && git clean -xfd" # Reset to HEAD and remove all files that aren't checked in
-alias gitl='git log --all --graph --abbrev-commit --pretty=oneline --decorate'
+alias gitl='git log --abbrev-commit --pretty=oneline --decorate' # Show abbreviated log for this branch only
+alias gitla='git log --all --graph --abbrev-commit --pretty=oneline --decorate' # Show abbreviated log for all branches with graphing
 alias gitt='git log --since="1 week ago" --date=short --no-merges --pretty="%Cred %h %Cblue (%ar) %Creset -- %s -- %Cgreen %an"'
 function gitsr () { # Git Squash then Rebase on BRANCH
     # Squash merge, then rebase onto the desired branch (typically develop or master).
