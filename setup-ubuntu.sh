@@ -81,8 +81,10 @@ sudo apt install -y atop curl direnv git htop lnav tmux vim vnstat
 # krb5-user  ~ Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
 # lnav       ~ CLI log viewer (e.g. terminal UI for Apache/Nginx logs)
 # logwatch   ~ Summarizes log files and can send summary via email
+# ncdu       ~ TUI disk usage analyzer which allows deleting (similar to baobab)
 # unetbootin ~ GUI for creating bootable USB sticks
 # vnstat     ~ network stats per interface per day/week/month
+# yt-dl      ~ Download (YouTube) videos from CLI.
 # xrdp       ~ allows Windows users to connect via Remote Desktop
 # zeal       ~ simple, offline programming documenation viewer
 
