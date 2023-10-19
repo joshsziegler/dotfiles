@@ -70,7 +70,7 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 # Install packages
-sudo apt install -y atop curl direnv git htop lnav tmux vim vnstat
+sudo apt install -y atop curl direnv git htop lnav ncdu tmux vim vnstat
 # atop       ~ System resource monitoring
 # baobab     ~ GUI disk usage graphing
 # deja-dup   ~ GUI backup tool
