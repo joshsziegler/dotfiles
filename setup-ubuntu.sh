@@ -186,6 +186,7 @@ if [[ -f "/etc/ssh/sshd_config" ]]; then
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         #  - Disable root login (use sudoers instead)
         sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
+        sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
         #  - Disable X11 forwarding to reduce attack surface
         sudo sed -i 's/X11Forwarding yes/X11Forwarding no/g' /etc/ssh/sshd_config
         # Turn off Message of the Day News (i.e advertisements) when logging in via SSH
