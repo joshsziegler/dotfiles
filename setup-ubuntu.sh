@@ -160,20 +160,16 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo ln -sf /usr/bin/resolvectl /usr/local/bin/resolvconf
 fi
 
-# Setup Auto-Update for Security Updates
+# Enable Auto Updates for Ubuntu 20.04
+# This config applies security updates, removes unused dependencies, and reboots at 5AM UTC if needed.
+# Adapted from https://www.digitalocean.com/community/tutorials/how-to-keep-ubuntu-20-04-servers-updated
 read -p "Auto-install security updates (recommended for servers only) (Y or N)?" -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    #  - This is taken from two pieces of documentation and applies to Ubuntu 18.04
-    #    - https://help.ubuntu.com/community/AutomaticSecurityUpdates
-    #    - https://help.ubuntu.com/lts/serverguide/automatic-updates.html#Automatic
-    #  - The notifier package is required for automatic reboots!
-    #  - This config only applies security updates, but will auto-remove unused dependencies
     sudo apt-get install unattended-upgrades
-    sudo dpkg-reconfigure --priority=low unattended-upgrades
-    echo 'APT::Periodic::Update-Package-Lists "1";' | sudo tee /etc/apt/apt.conf.d/20auto-upgrades    # Overwrite existing file
-    echo 'APT::Periodic::Unattended-Upgrade "1";'   | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades # Append to the newly created file
-    sudo sed -i 's/\/\/"${distro_id} ${distro_codename}-security";/"${distro_id} ${distro_codename}-security";/g' /etc/apt/apt.conf.d/50unattended-upgrades
+    sudo systemctl status unattended-upgrades.service
+    sudo cat /etc/apt/apt.conf.d/50unattended-upgrades
+    sudo sed -i 's/\/\/"${distro_id}:${distro_codename}-security";/"${distro_id}:${distro_codename}-security";/g' /etc/apt/apt.conf.d/50unattended-upgrades
     sudo sed -i 's/\/\/Unattended-Upgrade::Remove-Unused-Dependencies "false";/Unattended-Upgrade::Remove-Unused-Dependencies "true";/g' /etc/apt/apt.conf.d/50unattended-upgrades
     sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot "false";/Unattended-Upgrade::Automatic-Reboot "true";/g' /etc/apt/apt.conf.d/50unattended-upgrades
     sudo sed -i 's/\/\/Unattended-Upgrade::Automatic-Reboot-Time "02:00";/Unattended-Upgrade::Automatic-Reboot-Time "5:00";/g' /etc/apt/apt.conf.d/50unattended-upgrades
