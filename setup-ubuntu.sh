@@ -52,6 +52,9 @@ ln -sf ~/code/dotfiles/.vimrc ~/
 #ln -sf ~/code/dotfiles/.vim/ ~/
 ln -sf ~/code/dotfiles/.tmux.conf ~/
 ln -sf ~/code/dotfiles/.condarc ~/
+# Setup direnv config
+mkdir -p ~/.config/dotenv
+ln -sf ~/code/dotfiles/direnv.toml ~/.config/direnv/
 
 # SublimeText3
 mkdir -p ~/.config/sublime-text-3/Packages/User/
