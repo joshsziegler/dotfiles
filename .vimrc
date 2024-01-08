@@ -149,11 +149,11 @@ set balloondelay=250
 "  set completepopup=align:menu,border:off,highlight:Pmenu
 "endif
 
-set mouse=a
+"set mouse=a
 " To get hover working in the terminal we need to set ttymouse.
 "
 " For the appropriate setting for your terminal. Note that despite the
 " automated tests using xterm as the terminal, a setting of ttymouse=xterm
 " does not work correctly beyond a certain column number (citation needed)
 " hence we use ttymouse=sgr
-set ttymouse=sgr
+"set ttymouse=sgr
