@@ -132,18 +132,22 @@ command! -bang -nargs=* Rg
 " govim (Golang development)
 " -------------------------------------------------------------------------------------------------
 "call govim#config#Set("HighlightReferences", 0)
-" By default, govim populates the quickfix window with diagnostics reported by 
-" gopls after a period of inactivity, the time period being defined by 
-" updatetime (help updatetime). Here we suggest a short updatetime time in 
+"Use gofumpt to format Go
+let g:go_fmt_command="gopls"
+let g:go_gopls_gofumpt=1
+let g:go_code_completion_enabled = 1
+" By default, govim populates the quickfix window with diagnostics reported by
+" gopls after a period of inactivity, the time period being defined by
+" updatetime (help updatetime). Here we suggest a short updatetime time in
 " order that govim/Vim are more responsive/IDE-like
 set updatetime=500
 " To make govim/Vim more responsive/IDE-like, we suggest a short balloondelay
 set balloondelay=250
 " Show info for completion candidates in a popup menu
-if has("patch-8.1.1904")
-  set completeopt+=popup
-  set completepopup=align:menu,border:off,highlight:Pmenu
-endif
+"if has("patch-8.1.1904")
+"  set completeopt+=popup
+"  set completepopup=align:menu,border:off,highlight:Pmenu
+"endif
 
 set mouse=a
 " To get hover working in the terminal we need to set ttymouse.
