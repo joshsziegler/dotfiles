@@ -56,9 +56,10 @@ set hidden                    " Allow for hidden buffers, which allows for unsav
 syntax on                     " Enable syntax highlighting
 "colorscheme sublimemonokai    "
 colorscheme solarized
-set background=light          " Set this for the light-version of colorscheme 
+set background=light          " Set this for the light-version of colorscheme
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
+set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
 set foldmethod=indent         " Fold based on indent
 set foldnestmax=10            " Deepest fold is 10 levels
@@ -74,6 +75,10 @@ map <leader>n :bp <CR>             " Go to the previous buffer
 map <leader>b :bd <CR>             " Close the current buffer
 map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree
 map <leader>t :TagbarToggle<CR>    " Open/Close tag viewer
+nnoremap <C-J> <C-W><C-J>          " Remap split navigation from Ctrl-w then j to Ctrl-j
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Markdown editing
 " -------------------------------------------------------------------------------------------------
