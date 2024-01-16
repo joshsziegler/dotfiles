@@ -67,6 +67,8 @@ alias aptu="apt-up"
 alias apth="cat /var/log/apt/history.log | grep -C 1 Commandline"             # Apt History
 ## HTML to Markdown: Download a webpage (provide one after this alias) and convert to Markdown
 alias html2md="pandoc -s -reference-links --atx-headers -f html -t markdown-raw_html "
+## Docker
+alias docker-prune="docker system prune --volumes" # Prune verything, including volumes
 ## ZGLR Specific
 alias zglr-backup="rsync -avh --delete ~/{.ssh,.mylogin.cnf,z,code,Downloads} --exclude='*node_module*' --exclude='*venv/*' /media/josh/Backup_HDD_Josh_Ziegler/backups/desktop/"
 ## Python
