@@ -41,7 +41,7 @@ alias vi="vim"
 # Go ##############################################################################################
 export GOPATH=~/go
 export GOROOT=/usr/local/go
-#export GOROOT=/usr/local/boring-go
+export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Personal ########################################################################################
@@ -105,7 +105,7 @@ function gitsr () { # Git Squash then Rebase on BRANCH
 
 # Work ############################################################################################
 ssh-work() {
-    local WORK_YUBIKEY_HASH="SHA256:TG92bMtGBbmFXY8yWS3o5VBH3oEEQwTlsJJKLZIWdgY"
+    local WORK_YUBIKEY_HASH="SHA256:6WAaKFoUFRDnpw1T0+1R0iMOyK+LnUwAD9TkRVDpeVA"
     (ssh-add -l | grep "${WORK_YUBIKEY_HASH}" &>/dev/null) || {
         echo "Yubikey not loaded in SSH-Agent. Please make sure the key is inserted."
         ssh-add -s /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so
