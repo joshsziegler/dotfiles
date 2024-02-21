@@ -30,7 +30,7 @@
 	],
 	"always_show_minimap_viewport": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/User/Tango.tmTheme",
+	"color_scheme": "Solarized (light).sublime-color-scheme",
 	"dictionary": "Packages/Language - English/en_US.dic",
 	"fade_fold_buttons": false,
 	"file_exclude_patterns":
@@ -40,7 +40,7 @@
 	"font_size": 12,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
 	],
 	"rulers":
 	[
@@ -50,5 +50,7 @@
 	],
 	"spell_check": true,
 	"tab_size": 4,
-	"trim_automatic_white_space": true
+	"trim_automatic_white_space": true,
+	"theme": "Default.sublime-theme",
+	"index_files": true,
 }

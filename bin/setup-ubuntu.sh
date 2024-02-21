@@ -2,12 +2,17 @@
 #
 # Author:  Josh Ziegler
 # Date:    2020-05-19
-# Updated: 2023-05-05
+# Updated: 2024-02-20
 # License: MIT
 #
 # This script configures Ubuntu 22.04 to my baseline by installing packages and
-# changing several default configs.
+# changing several default configs. I use a bare Git repository to manage my
+# dotfiles which can be checked out as so:
 #
+#     cd ~
+#     git clone --bare <git-repo-url> $HOME/.cfg
+#     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+#     config checkout
 #
 # Notes:
 #
@@ -43,28 +48,6 @@ chmod 700 ~
 rm -rf {Documents,Downloads,Music,Pictures,Public,Templates,Videos}
 # Create my default directories
 mkdir -p ~/{backups,code,.ssh,z}
-# Source my bashrc if it isn't already
-grep -Fxq "source ~/code/dotfiles/.bashrc" ~/.bashrc || echo "source ~/code/dotfiles/.bashrc" >> ~/.bashrc
-# Create symbolic links to dotfile configs
-ln -sf ~/code/dotfiles/.ssh/config ~/.ssh/
-ln -sf ~/code/dotfiles/.gitconfig ~/
-ln -sf ~/code/dotfiles/.vimrc ~/
-#ln -sf ~/code/dotfiles/.vim/ ~/
-ln -sf ~/code/dotfiles/.tmux.conf ~/
-ln -sf ~/code/dotfiles/.condarc ~/
-# Setup direnv config
-mkdir -p ~/.config/dotenv
-ln -sf ~/code/dotfiles/direnv.toml ~/.config/direnv/
-
-# SublimeText3
-mkdir -p ~/.config/sublime-text-3/Packages/User/
-ln -sf ~/code/dotfiles/sublime/Go.sublime-settings  ~/.config/sublime-text-3/Packages/User/
-ln -sf ~/code/dotfiles/sublime/Preferences.sublime-settings  ~/.config/sublime-text-3/Packages/User/
-# EditorConfig
-# GoFmt (with User preferences set to use `goimports`)
-# GoRename
-# Package Control
-# TypeScript
 
 # Update repos
 sudo apt update
@@ -113,7 +96,7 @@ export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Install other Go tools IFF not found
 command -v godoc &>/dev/null || go install -v golang.org/x/tools/cmd/godoc@latest
-command -v goimports &>/dev/null || go install -v golang.org/x/tools/cmd/goimports@latest
+command -v gofumpt &>/dev/null || go install -v mvdan.cc/gofumpt@latest
 
 ## Optional ###################################################################
 
