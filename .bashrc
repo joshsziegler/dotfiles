@@ -49,6 +49,8 @@ export PATH=$PATH:~/code/dotfiles/bin # My custom scripts and binaries
 export NOTE_DIR=$HOME/z/notes # Setup path for notes.sh in dotfiles bin
 
 # Aliases #########################################################################################
+# git for this dotfiles repo
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # ls
 alias ls="ls -F --color=auto"
 alias ll="ls -lhF --color=auto"

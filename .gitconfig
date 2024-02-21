@@ -15,3 +15,5 @@
     username = joshz
 [credential "https://github.com"]
     username = joshsziegler
+[init]
+	defaultBranch = main
