@@ -55,7 +55,8 @@ set hlsearch                  " Highlight search
 set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
 syntax on                     " Enable syntax highlighting
 "colorscheme sublimemonokai    "
-colorscheme solarized
+"colorscheme solarized
+colorscheme pencil
 set background=light          " Set this for the light-version of colorscheme
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
