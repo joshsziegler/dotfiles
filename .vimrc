@@ -8,7 +8,6 @@ call plug#begin()
 " Sublime-flavored Monokai color scheme
 "Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'altercation/vim-colors-solarized'
-"Plug 'reedes/vim-colors-pencil'
 " Improved status and tab line
 Plug 'itchyny/lightline.vim'
 " Add buffer info to lightline
@@ -32,6 +31,16 @@ Plug 'tomtom/tcomment_vim'
 Plug 'plasticboy/vim-markdown'
 " Remember last location with rules for exceptions (git commits, etc)
 Plug 'farmergreg/vim-lastplace'
+Plug 'preservim/vim-pencil'             " Prose-focussed enhancements
+Plug 'preservim/vim-colors-pencil'      " iA Writer inspired colorscheme to go with vim-pencil
+Plug 'kana/vim-textobj-user'            " Required by preservim/vim-textobj-sentence
+Plug 'preservim/vim-textobj-quote'      " Replace quotes (when writing prose)
+Plug 'preservim/vim-textobj-sentence'   " Improves Vim’s native sentence motion command
+Plug 'preservim/vim-wheel'              " Adds movement with Ctrl-J and Ctrl-K
+Plug 'preservim/vim-lexical'            " Building on Vim’s spell-check and thesaurus/dictionary completion
+Plug 'preservim/vim-litecorrect'        " Lightweight auto-correction for Vim
+Plug 'preservim/vim-wordy'              " Highlight jargon, business speak, weasel words, etc.
+Plug 'junegunn/goyo.vim'              " Distraction-free edit mode (like iA Writer)
 call plug#end()
 
 " Basic Settings
@@ -84,7 +93,45 @@ nnoremap <C-H> <C-W><C-H>
 " Markdown editing
 " -------------------------------------------------------------------------------------------------
 au! BufRead,BufNewFile *.md set filetype=markdown
-au FileType markdown set wrap
+" au FileType markdown set wrap
+
+" Prose
+" -------------------------------------------------------------------------------------------------
+function! Prose()
+  call pencil#init({'wrap': 'soft'})
+  call lexical#init()
+  call litecorrect#init()
+  call textobj#quote#init()
+  call textobj#sentence#init()
+  Goyo
+
+  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+  let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command (def)
+
+  " replace common punctuation
+  iabbrev <buffer> -- –
+  iabbrev <buffer> --- —
+  iabbrev <buffer> << «
+  iabbrev <buffer> >> »
+
+  " open most folds
+  setlocal foldlevel=6
+
+  " replace typographical quotes (reedes/vim-textobj-quote)
+  map <silent> <buffer> <leader>qc <Plug>ReplaceWithCurly
+  map <silent> <buffer> <leader>qs <Plug>ReplaceWithStraight
+
+  " highlight words (reedes/vim-wordy)
+  noremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
+  xnoremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
+  inoremap <silent> <buffer> <F8> <C-o>:NextWordy<cr>
+endfunction
+
+" automatically initialize buffer by file type
+autocmd FileType markdown,mkd,text call Prose()
+" invoke manually by command for other file types
+command! -nargs=0 Prose call Prose()
 
 " Lightline - Improved status and tab line
 " -------------------------------------------------------------------------------------------------
