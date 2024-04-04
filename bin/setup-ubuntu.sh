@@ -77,7 +77,7 @@ sudo apt install -y atop curl direnv exuberant-ctags git htop lnav ncdu tmux vim
 
 # Install Golang globally IFF not correct version
 install-go(){
-    GOVERSION=1.21.5
+    GOVERSION=1.21.8
     if go env | grep "${GOVERSION}"; then
         echo "Go ${GOVERSION} already installed"
     else
