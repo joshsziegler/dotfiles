@@ -147,6 +147,17 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo ln -sf /usr/bin/resolvectl /usr/local/bin/resolvconf
 fi
 
+# HashiCorp Packer
+read -p "Install HashiCorp Packer (Y or N)?" -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # This method was take from hashicorp.com on 2024.04.04
+    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+    sudo apt-get update && sudo apt-get install packer
+fi
+
+
 # Enable Auto Updates for Ubuntu 20.04
 # This config applies security updates, removes unused dependencies, and reboots at 5AM UTC if needed.
 # Adapted from https://www.digitalocean.com/community/tutorials/how-to-keep-ubuntu-20-04-servers-updated
