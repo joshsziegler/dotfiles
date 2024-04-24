@@ -31,7 +31,18 @@ Plug 'airblade/vim-gitgutter'
 " File tree explorer for vim
 Plug 'scrooloose/nerdtree'
 " Golang development
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+if has('nvim')
+    "Plug 'neovim/nvim-lsp'
+    Plug 'neovim/nvim-lspconfig'
+
+    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+    Plug 'ray-x/navigator.lua'
+
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-context'
+
+    Plug 'ray-x/go.nvim'
+endif
 " Better JSON highlighting
 Plug 'elzr/vim-json'
 " Browse tags within code using ctags-exuberant
@@ -42,6 +53,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'plasticboy/vim-markdown'
 " Remember last location with rules for exceptions (git commits, etc)
 Plug 'farmergreg/vim-lastplace'
+Plug 'yorickpeterse/vim-paper', {'branch': 'main'} " Paper-inspired colorscheme with fewer colors
 Plug 'preservim/vim-pencil'             " Prose-focussed enhancements
 Plug 'preservim/vim-colors-pencil'      " iA Writer inspired colorscheme to go with vim-pencil
 Plug 'kana/vim-textobj-user'            " Required by preservim/vim-textobj-sentence
@@ -51,7 +63,7 @@ Plug 'preservim/vim-wheel'              " Adds movement with Ctrl-J and Ctrl-K
 Plug 'preservim/vim-lexical'            " Building on Vim’s spell-check and thesaurus/dictionary completion
 Plug 'preservim/vim-litecorrect'        " Lightweight auto-correction for Vim
 Plug 'preservim/vim-wordy'              " Highlight jargon, business speak, weasel words, etc.
-Plug 'junegunn/goyo.vim'              " Distraction-free edit mode (like iA Writer)
+Plug 'junegunn/goyo.vim'                " Distraction-free edit mode (like iA Writer)
 call plug#end()
 
 " Basic Settings
@@ -74,19 +86,25 @@ set incsearch                 " Search incremently (search while typing)
 set hlsearch                  " Highlight search
 set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
 syntax on                     " Enable syntax highlighting
-"colorscheme sublimemonokai    "
-"colorscheme solarized
-colorscheme pencil
+"colorscheme pencil
+colorscheme paper
 set background=light          " Set this for the light-version of colorscheme
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
 set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
-set foldmethod=indent         " Fold based on indent
+"if has('nvim')
+"    set foldmethod=expr
+"    set foldexpr=nvim_treesitter#foldexpr()
+"else
+    set foldmethod=indent         " Fold based on indent
+"endif
 set foldnestmax=10            " Deepest fold is 10 levels
 set nofoldenable              " Don't fold by default
-" let g:go_version_warning = 0  " Stop Vim-Go from complaining about Vim's version
 autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
+if has('nvim')
+    set inccommand=split      " Preview :substitute before hitting enter
+endif
 
 " Setup shortcuts
 " -------------------------------------------------------------------------------------------------
@@ -183,36 +201,57 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
 
-" vim-go (Golang development)
-" -------------------------------------------------------------------------------------------------
-" Use goimports on save instead of gofmt (may be slow for larger code bases)
-"let g:go_fmt_command = "goimports"
+if has('nvim')
+lua <<EOF
+-- ray-x/navigator https://github.com/ray-x/navigator.lua
+--------------------------------------------------------------------------------------------------
+require'navigator'.setup()
 
-" govim (Golang development)
-" -------------------------------------------------------------------------------------------------
-"call govim#config#Set("HighlightReferences", 0)
-"Use gofumpt to format Go
-let g:go_fmt_command="gopls"
-let g:go_gopls_gofumpt=1
-let g:go_code_completion_enabled = 1
-" By default, govim populates the quickfix window with diagnostics reported by
-" gopls after a period of inactivity, the time period being defined by
-" updatetime (help updatetime). Here we suggest a short updatetime time in
-" order that govim/Vim are more responsive/IDE-like
-set updatetime=500
-" To make govim/Vim more responsive/IDE-like, we suggest a short balloondelay
-set balloondelay=250
-" Show info for completion candidates in a popup menu
-"if has("patch-8.1.1904")
-"  set completeopt+=popup
-"  set completepopup=align:menu,border:off,highlight:Pmenu
-"endif
+-- nvim-treesitter https://github.com/nvim-treesitter/nvim-treesitter
+--------------------------------------------------------------------------------------------------
+require 'nvim-treesitter.configs'.setup({
+    ensure_installed = {
+        "bash",
+        "c",
+        "css",
+        "comment",
+        "dockerfile",
+        "go",
+        "gomod",
+        "gosum",
+        "gotmpl",
+        "hcl",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "make",
+        "scss",
+        "sql",
+        "ssh_config",
+        "tmux",
+        "vim",
+        "vimdoc",
+    },
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+})
 
-"set mouse=a
-" To get hover working in the terminal we need to set ttymouse.
-"
-" For the appropriate setting for your terminal. Note that despite the
-" automated tests using xterm as the terminal, a setting of ttymouse=xterm
-" does not work correctly beyond a certain column number (citation needed)
-" hence we use ttymouse=sgr
-"set ttymouse=sgr
+-- go.nvim
+--------------------------------------------------------------------------------------------------
+require 'go'.setup({
+  goimports = 'gopls', -- if set to 'gopls' will use golsp format
+  gofmt = 'gopls', -- if set to gopls will use golsp format
+  tag_transform = false,
+  test_dir = '',
+  comment_placeholder = '   ',
+  lsp_cfg = true, -- false: use your own lspconfig
+  lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
+  lsp_on_attach = true, -- use on_attach from go.nvim
+  dap_debug = true,
+})
+local protocol = require'vim.lsp.protocol'
+EOF
+endif
