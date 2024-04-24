@@ -16,9 +16,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Enable package manager (use :PlugUpdate to install or update plugins)
 call plug#begin()
-" Sublime-flavored Monokai color scheme
-"Plug 'ErichDonGubler/vim-sublime-monokai'
-Plug 'altercation/vim-colors-solarized'
 " Improved status and tab line
 Plug 'itchyny/lightline.vim'
 " Add buffer info to lightline
@@ -53,6 +50,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'plasticboy/vim-markdown'
 " Remember last location with rules for exceptions (git commits, etc)
 Plug 'farmergreg/vim-lastplace'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'yorickpeterse/vim-paper', {'branch': 'main'} " Paper-inspired colorscheme with fewer colors
 Plug 'preservim/vim-pencil'             " Prose-focussed enhancements
 Plug 'preservim/vim-colors-pencil'      " iA Writer inspired colorscheme to go with vim-pencil
