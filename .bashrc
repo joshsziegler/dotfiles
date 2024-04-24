@@ -34,9 +34,17 @@ function apt-up {
 }
 
 # Editor ##########################################################################################
-export VISUAL=vim
-export EDITOR=vim
-alias vi="vim"
+if command -v nvim &> /dev/null
+then # Use neovim if available
+    export EDITOR=nvim
+    export VISUAL=$EDITOR
+    alias vim="$EDITOR"
+elif command -v vim &> /dev/null
+then # Use vim as a backup if available
+    export EDITOR=vim
+    export VISUAL=$EDITOR
+    alias vi="$EDITOR"
+fi # I give up
 
 # Go ##############################################################################################
 export GOPATH=~/go
