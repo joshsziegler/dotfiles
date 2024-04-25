@@ -75,6 +75,9 @@ alias tmux="tmux -2 attach -t joshz || tmux -2 new -s joshz"
 # APT
 alias aptu="apt-up"
 alias apth="cat /var/log/apt/history.log | grep -C 1 Commandline"             # Apt History
+## Gnome
+alias save-gnome-term-prefs="dconf dump /org/gnome/terminal/ > ~/gterminal.preferences"
+alias load-gnome-term-prefs="cat ~/gterminal.preferences | dconf load /org/gnome/terminal/legacy/profiles:/"
 ## HTML to Markdown: Download a webpage (provide one after this alias) and convert to Markdown
 alias html2md="pandoc -s -reference-links --atx-headers -f html -t markdown-raw_html "
 ## Docker
