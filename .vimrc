@@ -24,7 +24,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Show git diff in the gutter and stages/undoes hunks
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', {'branch': 'main'}
 " File tree explorer for vim
 Plug 'scrooloose/nerdtree'
 " Golang development
@@ -62,13 +62,13 @@ Plug 'preservim/vim-lexical'            " Building on Vim’s spell-check and th
 Plug 'preservim/vim-litecorrect'        " Lightweight auto-correction for Vim
 Plug 'preservim/vim-wordy'              " Highlight jargon, business speak, weasel words, etc.
 Plug 'junegunn/goyo.vim'                " Distraction-free edit mode (like iA Writer)
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 " Basic Settings
 " -------------------------------------------------------------------------------------------------
 set textwidth=99              " Hard-wrap lines at 99 characters (at word boundaries)
 set formatoptions+=cro        " Format comments properly (see manual)
-" set nu                        " Show line numbers
 set tabstop=4                 " Show existing tabs as 4 spaces
 set expandtab                 " When pressing tab, insert 4 spaces
 set softtabstop=4             " Make this the same as tabstop
@@ -84,22 +84,29 @@ set incsearch                 " Search incremently (search while typing)
 set hlsearch                  " Highlight search
 set hidden                    " Allow for hidden buffers, which allows for unsaved buffers
 syntax on                     " Enable syntax highlighting
-"colorscheme pencil
-colorscheme paper
-set background=light          " Set this for the light-version of colorscheme
+set termguicolors             " Enable true color support
 filetype on                   " Enables filetype detection
 filetype plugin on            " Enables filetype specific plugins
 set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
-"if has('nvim')
-"    set foldmethod=expr
-"    set foldexpr=nvim_treesitter#foldexpr()
-"else
-    set foldmethod=indent         " Fold based on indent
-"endif
-set foldnestmax=10            " Deepest fold is 10 levels
-set nofoldenable              " Don't fold by default
-autocmd BufWritePre * :%s/\s\+$//e " Remove all trailing whitespace on file save
+set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
+
+" Color Scheme
+" -------------------------------------------------------------------------------------------------
+set background=light          " Set this for the light-version of colorscheme
+colorscheme paper             " paper, pencil, solarized, Tango-Custom
+
+" Misc
+" -------------------------------------------------------------------------------------------------
+autocmd BufWritePre * :%s/\s\+$//e   " Remove all trailing whitespace on file save
+if has('nvim')
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+else
+    set foldmethod=indent            " Fold based on indent
+endif
+set foldnestmax=10                   " Deepest fold is 10 levels
+set nofoldenable                     " Don't fold by default
 if has('nvim')
     set inccommand=split      " Preview :substitute before hitting enter
 endif
@@ -244,7 +251,7 @@ require 'go'.setup({
   gofmt = 'gopls', -- if set to gopls will use golsp format
   tag_transform = false,
   test_dir = '',
-  comment_placeholder = '   ',
+  comment_placeholder = ' // ...  ',
   lsp_cfg = true, -- false: use your own lspconfig
   lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_on_attach = true, -- use on_attach from go.nvim
