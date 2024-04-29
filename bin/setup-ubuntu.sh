@@ -45,7 +45,7 @@ sudo timedatectl set-timezone America/New_York
 # Change home dir to 700 to prevent snoopers
 chmod 700 ~
 # Remove default directories -- I store everything in ~/code and ~/z
-rm -rf {Documents,Downloads,Music,Pictures,Public,Templates,Videos}
+rm -rf ~/{Documents,Music,Pictures,Public,Templates,Videos}
 # Create my default directories
 mkdir -p ~/{backups,code,.ssh,z}
 
@@ -56,9 +56,10 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 # Install packages
-sudo apt install -y atop curl direnv exuberant-ctags fswatch git htop lnav ncdu tmux vim vnstat
+sudo apt install -y atop ca-certificates curl direnv exuberant-ctags fswatch git htop lnav ncdu tmux vim vnstat
 # atop            ~ System resource monitoring
 # baobab          ~ GUI disk usage graphing
+# ca-certificates ~ Required for 3rd party APT PPAs
 # deja-dup        ~ GUI backup tool
 # direnv          ~ load and unload environment variables depending on the current directory
 # exuberant-ctags ~ Required for Vim's tag bar
@@ -156,6 +157,21 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
     sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
     sudo apt-get update && sudo apt-get install packer
+fi
+
+# Docker
+read -p "Install Docker (Y or N)?" -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # This method was take from docker.com on 2024.04.29
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 fi
 
 
