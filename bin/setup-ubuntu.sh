@@ -56,13 +56,14 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 # Install packages
-sudo apt install -y atop curl direnv exuberant-ctags git htop lnav ncdu tmux vim vnstat
+sudo apt install -y atop curl direnv exuberant-ctags fswatch git htop lnav ncdu tmux vim vnstat
 # atop            ~ System resource monitoring
 # baobab          ~ GUI disk usage graphing
 # deja-dup        ~ GUI backup tool
 # direnv          ~ load and unload environment variables depending on the current directory
 # exuberant-ctags ~ Required for Vim's tag bar
 # fail2ban
+# fswatch         ~ Used by vim and others for inotify supported file watching
 # goacess         ~ CLI Web server log viewer
 # gparted         ~ GUI disk partitioning
 # krb5-user       ~ Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
