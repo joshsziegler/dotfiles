@@ -1,28 +1,35 @@
 #!/bin/bash
-set -e
-set -x
+set -e # Stop execution if a command errors
+#set -x # Echo commands and expand any variables
+###############################################################################
+# Runs SCRIPT_PATH on each host in HOSTS.
+# Rsyncs the script to the host's home directory, runs it, and then deletes it.
+###############################################################################
 
-SCRIPT="enable-ubuntu-auto-updates.sh"
-#AGS=("aaco" "ascend" "demo" "design-pickle" "dev" "dsass" "hpc-access-point" "hpcmp-aws" "hpcmp-azure" "nexus" "ppo" "sdpe")
-AGS=("aaco" "ascend" "demo" "design-pickle" "dev" "hpcmp-aws" "hpcmp-azure" "ppo" "sdpe")
+#SCRIPT_PATH="bin/enable-ubuntu-auto-updates.sh"
+SCRIPT_PATH="tools/set-user-ids.sh"
+SCRIPT=`basename $SCRIPT_PATH`
+HOSTS=("aaco" "demo" "design-pickle" "dev" "dsass" "hpcmp-aws" "hpcmp-azure" "nexus" "ppo" "public" "sdpe")
 
+# SSH without checking the host identity or saving it
 SSH="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
-for SYSTEM in ${AGS[@]}
+for HOST in ${HOSTS[@]}
 do
-    TARGET=${SYSTEM}.analyticsgateway.com
+    TARGET=${HOST}.analyticsgateway.com
+    echo ""
     echo "${TARGET}"
 
     ### Do Work Here for HEAD
-    rsync -v ${SCRIPT} ${TARGET}:~/
-    ${SSH} ${TARGET} "./${SCRIPT}"
-    ${SSH} ${TARGET} "rm ${SCRIPT}"
+    rsync -q ${SCRIPT_PATH} ${TARGET}:~/
+    # SSH to the TARGET and run SCRIPT, hiding the SSH warning about the hostfile
+    ${SSH} ${TARGET} "./${SCRIPT}"  2> >(grep -v "Permanently added" 1>&2)
+    ${SSH} ${TARGET} "rm ${SCRIPT}" 2> >(grep -v "Permanently added" 1>&2)
 
     ### Do Work Here for SIDECAR
-    rsync -v -e "${SSH} -J ${TARGET}" ${SCRIPT} agadmin@sidecar:~/
-    ${SSH} -J ${TARGET} agadmin@sidecar "./${SCRIPT}"
-    ${SSH} -J ${TARGET} agadmin@sidecar "rm ${SCRIPT}"
-
+    #rsync -q -e "${SSH_PATH} -J ${TARGET}" ${SCRIPT} agadmin@sidecar:~/
+    #${SSH} -J ${TARGET} agadmin@sidecar "./${SCRIPT}"
+    #${SSH} -J ${TARGET} agadmin@sidecar "rm ${SCRIPT}"
 done
 
 
