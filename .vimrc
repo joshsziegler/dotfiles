@@ -16,53 +16,39 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Enable package manager (use :PlugUpdate to install or update plugins)
 call plug#begin()
-" Improved status and tab line
-Plug 'itchyny/lightline.vim'
-" Add buffer info to lightline
-Plug 'mengelbrecht/lightline-bufferline'
-" Wrapper around the fuzzy finder (fzf)
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-" Show git diff in the gutter and stages/undoes hunks
-Plug 'airblade/vim-gitgutter', {'branch': 'main'}
-" File tree explorer for vim
-Plug 'scrooloose/nerdtree'
-" Golang development
-if has('nvim')
-    "Plug 'neovim/nvim-lsp'
-    Plug 'neovim/nvim-lspconfig'
-
-    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-    Plug 'ray-x/navigator.lua'
-
+  Plug 'itchyny/lightline.vim'             " Improved status and tab line
+  Plug 'mengelbrecht/lightline-bufferline' " Add buffer info to lightline
+  " Wrapper around the fuzzy finder (fzf)
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'airblade/vim-gitgutter', {'branch': 'main'} " Show git diff in the gutter and (un)stages hunks
+  Plug 'scrooloose/nerdtree'              " File tree explorer for vim
+  "Plug 'elzr/vim-json'                   " Better JSON highlighting
+  Plug 'majutsushi/tagbar'                " Browse tags within code using ctags-exuberant
+  Plug 'tomtom/tcomment_vim'              " File-type file commenting and uncommenting
+  Plug 'plasticboy/vim-markdown'          " Markdown editing enhancements (folding, links, etc)
+  Plug 'farmergreg/vim-lastplace'         " Remember last location with rules for exceptions (git commits, etc)
+  Plug 'altercation/vim-colors-solarized' " Solarized colorscheme (light and dark)
+  Plug 'yorickpeterse/vim-paper', {'branch': 'main'} " Paper-inspired colorscheme with fewer colors
+  Plug 'preservim/vim-pencil'             " Prose-focussed enhancements
+  Plug 'preservim/vim-colors-pencil'      " iA Writer inspired colorscheme to go with vim-pencil
+  Plug 'kana/vim-textobj-user'            " Required by preservim/vim-textobj-sentence
+  Plug 'preservim/vim-textobj-quote'      " Replace quotes (when writing prose)
+  Plug 'preservim/vim-textobj-sentence'   " Improves Vim’s native sentence motion command
+  Plug 'preservim/vim-wheel'              " Adds movement with Ctrl-J and Ctrl-K
+  Plug 'preservim/vim-lexical'            " Building on Vim’s spell-check and thesaurus/dictionary completion
+  Plug 'preservim/vim-litecorrect'        " Lightweight auto-correction for Vim
+  Plug 'preservim/vim-wordy'              " Highlight jargon, business speak, weasel words, etc.
+  Plug 'junegunn/goyo.vim'                " Distraction-free edit mode (like iA Writer)
+  if has('nvim')
+    Plug 'neovim/nvim-lspconfig'          " Language Server Config Helper
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
-
-    Plug 'ray-x/go.nvim'
-endif
-" Better JSON highlighting
-Plug 'elzr/vim-json'
-" Browse tags within code using ctags-exuberant
-Plug 'majutsushi/tagbar'
-" File-type file commenting and uncommenting
-Plug 'tomtom/tcomment_vim'
-" Markdown editing enhancements (folding, links, etc)
-Plug 'plasticboy/vim-markdown'
-" Remember last location with rules for exceptions (git commits, etc)
-Plug 'farmergreg/vim-lastplace'
-"Plug 'altercation/vim-colors-solarized'
-Plug 'yorickpeterse/vim-paper', {'branch': 'main'} " Paper-inspired colorscheme with fewer colors
-Plug 'preservim/vim-pencil'             " Prose-focussed enhancements
-Plug 'preservim/vim-colors-pencil'      " iA Writer inspired colorscheme to go with vim-pencil
-Plug 'kana/vim-textobj-user'            " Required by preservim/vim-textobj-sentence
-Plug 'preservim/vim-textobj-quote'      " Replace quotes (when writing prose)
-Plug 'preservim/vim-textobj-sentence'   " Improves Vim’s native sentence motion command
-Plug 'preservim/vim-wheel'              " Adds movement with Ctrl-J and Ctrl-K
-Plug 'preservim/vim-lexical'            " Building on Vim’s spell-check and thesaurus/dictionary completion
-Plug 'preservim/vim-litecorrect'        " Lightweight auto-correction for Vim
-Plug 'preservim/vim-wordy'              " Highlight jargon, business speak, weasel words, etc.
-Plug 'junegunn/goyo.vim'                " Distraction-free edit mode (like iA Writer)
-Plug 'altercation/vim-colors-solarized'
+    " Floating windows and codelens support
+    "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+    Plug 'ray-x/go.nvim'                  " Go support via LSP and TreeSitter
+    Plug 'ray-x/navigator.lua'
+  endif
 call plug#end()
 
 " Basic Settings
@@ -123,49 +109,7 @@ nnoremap <C-J> <C-W><C-J>          " Remap split navigation from Ctrl-w then j t
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-" Markdown editing
-" -------------------------------------------------------------------------------------------------
-au! BufRead,BufNewFile *.md set filetype=markdown
-" au FileType markdown set wrap
-
-" Prose
-" -------------------------------------------------------------------------------------------------
-function! Prose()
-  call pencil#init({'wrap': 'soft'})
-  call lexical#init()
-  call litecorrect#init()
-  call textobj#quote#init()
-  call textobj#sentence#init()
-  Goyo
-
-  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
-  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
-  let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command (def)
-
-  " replace common punctuation
-  iabbrev <buffer> -- –
-  iabbrev <buffer> --- —
-  iabbrev <buffer> << «
-  iabbrev <buffer> >> »
-
-  " open most folds
-  setlocal foldlevel=6
-
-  " replace typographical quotes (reedes/vim-textobj-quote)
-  map <silent> <buffer> <leader>qc <Plug>ReplaceWithCurly
-  map <silent> <buffer> <leader>qs <Plug>ReplaceWithStraight
-
-  " highlight words (reedes/vim-wordy)
-  noremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
-  xnoremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
-  inoremap <silent> <buffer> <F8> <C-o>:NextWordy<cr>
-endfunction
-
-" automatically initialize buffer by file type
-autocmd FileType markdown,mkd,text call Prose()
-" invoke manually by command for other file types
-command! -nargs=0 Prose call Prose()
+nnoremap <Leader>p :Prose<CR>       " Open in 'prose' mode
 
 " Lightline - Improved status and tab line
 " -------------------------------------------------------------------------------------------------
@@ -210,7 +154,7 @@ if has('nvim')
 lua <<EOF
 -- ray-x/navigator https://github.com/ray-x/navigator.lua
 --------------------------------------------------------------------------------------------------
-require'navigator'.setup()
+-- require'navigator'.setup()
 
 -- nvim-treesitter https://github.com/nvim-treesitter/nvim-treesitter
 --------------------------------------------------------------------------------------------------
@@ -255,8 +199,85 @@ require 'go'.setup({
   lsp_cfg = true, -- false: use your own lspconfig
   lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_on_attach = true, -- use on_attach from go.nvim
+  lsp_inlay_hints = {
+    enable = true,
+    -- hint style, set to 'eol' for end-of-line hints, 'inlay' for inline hints
+    -- inlay only avalible for 0.10.x
+    style = 'eol',
+    -- Note: following setup only works for style = 'eol', you do not need to set it for 'inlay'
+    -- Only show inlay hints for the current line
+    only_current_line = true,
+    parameter_hints_prefix = " ~ ",
+  },
   dap_debug = true,
 })
 local protocol = require'vim.lsp.protocol'
 EOF
 endif
+
+" Markdown editing
+" -------------------------------------------------------------------------------------------------
+au! BufRead,BufNewFile *.md set filetype=markdown
+" au FileType markdown set wrap
+
+" Goyo
+" -------------------------------------------------------------------------------------------------
+"  Ensure :q to quit even when Goyo is active
+function! s:goyo_enter()
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+endfunction
+
+function! s:goyo_leave()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+endfunction
+
+autocmd! User GoyoEnter call <SID>goyo_enter()
+autocmd! User GoyoLeave call <SID>goyo_leave()
+
+" Prose
+" -------------------------------------------------------------------------------------------------
+function! Prose()
+  call pencil#init({'wrap': 'soft'})
+  call lexical#init()
+  call litecorrect#init()
+  call textobj#quote#init()
+  call textobj#sentence#init()
+  Goyo
+
+  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+  let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command (def)
+
+  " replace common punctuation
+  iabbrev <buffer> -- –
+  iabbrev <buffer> --- —
+  iabbrev <buffer> << «
+  iabbrev <buffer> >> »
+
+  " open most folds
+  setlocal foldlevel=6
+
+  " replace typographical quotes (reedes/vim-textobj-quote)
+  map <silent> <buffer> <leader>qc <Plug>ReplaceWithCurly
+  map <silent> <buffer> <leader>qs <Plug>ReplaceWithStraight
+
+  " highlight words (reedes/vim-wordy)
+  noremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
+  xnoremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
+  inoremap <silent> <buffer> <F8> <C-o>:NextWordy<cr>
+endfunction
+
+" automatically initialize buffer by file type
+autocmd FileType markdown,mkd,text call Prose()
+" invoke manually by command for other file types
+command! -nargs=0 Prose call Prose()
