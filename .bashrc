@@ -20,7 +20,12 @@ if [ ! -z "$PS1" ]; then
     # Setup FZF
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
     # Start SSH-Agent IFF not running
-    [ -z "$SSH_AUTH_SOCK" ] && eval `ssh-agent -s`
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+        echo "starting ssh-agent"
+        eval `ssh-agent -s`
+    else
+        echo "ssh-agent already running"
+    fi
 fi
 
 
