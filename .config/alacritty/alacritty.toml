@@ -1,8 +1,15 @@
+[shell]
+program = "/bin/bash"
+args = ["-c", "tmux"]
+
 [window]
 startup_mode = 'Maximized'
 
 [terminal]
 osc52 = "CopyPaste"
+
+[mouse]
+hide_when_typing = true
 
 # Default colors (Paper Theme)
 [colors.primary]
