@@ -89,6 +89,12 @@ alias html2md="pandoc -s -reference-links --atx-headers -f html -t markdown-raw_
 alias docker-prune="docker system prune --volumes" # Prune verything, including volumes
 ## ZGLR Specific
 alias zglr-backup="rsync -avh --delete ~/{.ssh,.mylogin.cnf,z,code,Downloads} --exclude='*node_module*' --exclude='*venv/*' /media/josh/Backup_HDD_Josh_Ziegler/backups/desktop/"
+## Hashicorp Packer
+alias pkri="packer init ."
+alias pkrf="packer fmt ."
+alias pkrv="packer validate ."
+alias pkrb="packer build ."
+alias pkr="packer init . && packer fmt . && packer validate . && packer build ."
 ## Python
 alias pip="pip3"
 alias pyv="python3 -m venv venv"                    # Create Python 3 virtualenv
