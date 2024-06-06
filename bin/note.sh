@@ -21,7 +21,7 @@ function usage() {
 mkdir -p "$NOTE_DIR"
 
 if [ $# -eq 0 ]; then
-    $EDITOR "$NOTE_DIR/$(date +'%Y-week-%V').md"
+    $EDITOR "$NOTE_DIR/$(date +'%Y').md"
 else
   case $1 in
     grep)
