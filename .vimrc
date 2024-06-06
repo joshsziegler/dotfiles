@@ -53,6 +53,7 @@ call plug#end()
 
 " Basic Settings
 " -------------------------------------------------------------------------------------------------
+set mouse=                    " Disable mouse in nvim
 set textwidth=99              " Hard-wrap lines at 99 characters (at word boundaries)
 set formatoptions+=cro        " Format comments properly (see manual)
 set tabstop=4                 " Show existing tabs as 4 spaces
