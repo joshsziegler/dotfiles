@@ -1,6 +1,9 @@
 [shell]
 program = "/bin/bash"
-args = ["-c", "tmux"]
+args = ["-c", "tmux attach || tmux"]
+
+[env]
+TERM = "xterm-256color"
 
 [window]
 startup_mode = 'Maximized'

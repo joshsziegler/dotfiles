@@ -7,6 +7,7 @@ shopt -s histappend
 
 # If Interactive Shell ############################################################################
 if [ ! -z "$PS1" ]; then
+    echo "Interactive shell..."
     # Enable color prompt
     export TERM=xterm-256color # Enable color prompt
     # Check the window size after each command and, if necessary, update values for LINES and COLUMNS.
