@@ -193,7 +193,7 @@ require 'nvim-treesitter.configs'.setup({
 --------------------------------------------------------------------------------------------------
 require 'go'.setup({
   goimports = 'gopls', -- if set to 'gopls' will use golsp format
-  gofmt = 'gopls', -- if set to gopls will use golsp format
+  gofmt = 'gofumpt',
   tag_transform = false,
   test_dir = '',
   comment_placeholder = ' // ...  ',
