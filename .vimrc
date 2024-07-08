@@ -41,6 +41,7 @@ call plug#begin()
   Plug 'preservim/vim-wordy'              " Highlight jargon, business speak, weasel words, etc.
   Plug 'junegunn/goyo.vim'                " Distraction-free edit mode (like iA Writer)
   if has('nvim')
+    Plug 'folke/which-key.nvim', {'branch': 'main'} " Show possible key bindings for the command you started
     Plug 'neovim/nvim-lspconfig'          " Language Server Config Helper
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
@@ -153,6 +154,17 @@ command! -bang -nargs=* Rg
 
 if has('nvim')
 lua <<EOF
+
+-- folke/which-key.nvim https://github.com/folke/which-key.nvim
+--------------------------------------------------------------------------------------------------
+local wk = require("which-key").setup({})
+-- wk.register({
+--     <C> = {
+--         name = "Ctrl", -- optional group name
+--         p = { "<c>", "Search file NAMES with ripgrep"},
+--     }
+-- })
+
 -- ray-x/navigator https://github.com/ray-x/navigator.lua
 --------------------------------------------------------------------------------------------------
 -- require'navigator'.setup()
