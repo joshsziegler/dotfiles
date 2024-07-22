@@ -49,6 +49,7 @@ call plug#begin()
     "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
     Plug 'ray-x/go.nvim'                  " Go support via LSP and TreeSitter
     Plug 'ray-x/navigator.lua'
+    Plug 'jghauser/follow-md-links.nvim', {'branch': 'main'} " Follow Markdown local links (Enter) and go back (Backspace)
   endif
 call plug#end()
 
@@ -188,6 +189,8 @@ require 'nvim-treesitter.configs'.setup({
         "json",
         "lua",
         "make",
+        "markdown",
+        "markdown_inline",
         "scss",
         "sql",
         "ssh_config",
@@ -225,6 +228,11 @@ require 'go'.setup({
   dap_debug = true,
 })
 local protocol = require'vim.lsp.protocol'
+
+-- jghauser/follow-md-links.nvim
+-- <cr> follows Markdown links in normal mode.
+-- Map backspace <bs> to go back to previous file
+vim.keymap.set('n', '<bs>', ':edit #<cr>', { silent = true })
 EOF
 endif
 
