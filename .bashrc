@@ -88,6 +88,7 @@ alias load-gnome-term-prefs="cat ~/gterminal.preferences | dconf load /org/gnome
 alias html2md="pandoc -s -reference-links --atx-headers -f html -t markdown-raw_html "
 ## Docker
 alias docker-prune="docker system prune --volumes" # Prune verything, including volumes
+alias docker-bash="docker run -it --entrypoint /bin/bash " # Run docker container but drop into BASH
 ## ZGLR Specific
 alias zglr-backup="rsync -avh --delete ~/{.ssh,.mylogin.cnf,z,code,Downloads} --exclude='*node_module*' --exclude='*venv/*' /media/josh/Backup_HDD_Josh_Ziegler/backups/desktop/"
 ## Hashicorp Packer
