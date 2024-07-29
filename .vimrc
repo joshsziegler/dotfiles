@@ -114,6 +114,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <Leader>p :Prose<CR>       " Open in 'prose' mode
 
+
 " Lightline - Improved status and tab line
 " -------------------------------------------------------------------------------------------------
 set noshowmode    " Hide vim's default insert line
@@ -129,6 +130,8 @@ let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
+" Show full path for current buffer
+let g:lightline.active = { 'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ] }
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " vim-gitgutter - Show git diff in the gutter (added/modified/removed)
