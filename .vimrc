@@ -156,6 +156,12 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
 
+" Insert Mode Abbreviation (aka "we have snippets at home")
+" Type the code to replace it with the right hand side.
+" -------------------------------------------------------------------------------------------------
+" idate ~ YYYY.MM.D
+iab idate <c-r>=strftime("%Y.%m.%d")<cr>
+
 if has('nvim')
 lua <<EOF
 
