@@ -7,7 +7,7 @@ shopt -s histappend
 
 # If Interactive Shell ############################################################################
 if [ ! -z "$PS1" ]; then
-    echo "Interactive shell..."
+    # echo "Interactive shell..."
     # Enable color prompt
     export TERM=xterm-256color # Enable color prompt
     # Check the window size after each command and, if necessary, update values for LINES and COLUMNS.
@@ -22,7 +22,7 @@ if [ ! -z "$PS1" ]; then
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
     # Start SSH-Agent IFF not running
     if [ -z "$SSH_AUTH_SOCK" ]; then
-        echo "starting ssh-agent"
+        echo "Starting ssh-agent..."
         eval `ssh-agent -s`
     else
         echo "ssh-agent already running"
