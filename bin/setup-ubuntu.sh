@@ -77,8 +77,12 @@ sudo apt install -y atop ca-certificates curl direnv exuberant-ctags fswatch git
 # xrdp            ~ allows Windows users to connect via Remote Desktop
 # zeal            ~ simple, offline programming documenation viewer
 
-# Install Golang globally IFF not correct version
-install-go(){
+## Optional ###################################################################
+
+# Golang (globally and IFF not correct version)
+read -p "Install Go (Y or N)? " -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     GOVERSION=1.21.8
     if go env | grep "${GOVERSION}"; then
         echo "Go ${GOVERSION} already installed"
@@ -90,17 +94,14 @@ install-go(){
         sudo tar -C /usr/local -xzf go${GOVERSION}.linux-amd64.tar.gz
         rm go${GOVERSION}.linux-amd64.tar.gz
     fi
-}
-install-go
-# Temporarily export GO paths so the installs below work
-export GOPATH=~/go
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-# Install other Go tools IFF not found
-command -v godoc &>/dev/null || go install -v golang.org/x/tools/cmd/godoc@latest
-command -v gofumpt &>/dev/null || go install -v mvdan.cc/gofumpt@latest
-
-## Optional ###################################################################
+    # Temporarily export GO paths so the installs below work
+    export GOPATH=~/go
+    export GOROOT=/usr/local/go
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    # Install other Go tools IFF not found
+    command -v godoc &>/dev/null || go install -v golang.org/x/tools/cmd/godoc@latest
+    command -v gofumpt &>/dev/null || go install -v mvdan.cc/gofumpt@latest
+fi
 
 # VS Code
 read -p "Install VS Code (Y or N)? " -n 1 -r
