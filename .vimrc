@@ -58,10 +58,6 @@ call plug#end()
 set mouse=                    " Disable mouse in nvim
 set textwidth=99              " Hard-wrap lines at 99 characters (at word boundaries)
 set formatoptions+=cro        " Format comments properly (see manual)
-set tabstop=4                 " Show existing tabs as 4 spaces
-set expandtab                 " When pressing tab, insert 4 spaces
-set softtabstop=4             " Make this the same as tabstop
-set shiftwidth=4              " When indenting, use 4 spaces
 set scrolloff=5               " Number of context lines shown above and below the cursor
 set autoindent                " Copy the indentation from the previous line when starting a new line
 set showmode                  " Show the current mode
@@ -79,6 +75,23 @@ filetype plugin on            " Enables filetype specific plugins
 set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
 set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
+set list                      " Show whitespace when under the cursor (disable with :set nolist)
+set lcs+=space:·              " Show spaces as a middle dot character when under the cursor
+
+
+" Set default tab and indent behavior
+set tabstop=4                 " Show existing tabs as 4 spaces
+set expandtab                 " When pressing tab, insert 4 spaces
+set softtabstop=4             " Make this the same as tabstop
+set shiftwidth=4              " When indenting, use 4 spaces
+augroup custom_indent
+    autocmd!
+
+    " BASH
+    autocmd Filetype sh setlocal noexpandtab shiftwidth=4 softtabstop=0
+    " Makefile
+    autocmd Filetype make setlocal noexpandtab
+augroup END
 
 " Color Scheme
 " -------------------------------------------------------------------------------------------------
