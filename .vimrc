@@ -289,6 +289,9 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 
 " Prose
 " -------------------------------------------------------------------------------------------------
+"  Do not hide ANY markdown markup by default UNLESS in Prose() mode
+let g:pencil#conceallevel = 0     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+
 function! Prose()
   call pencil#init({'wrap': 'soft'})
   call lexical#init()
@@ -297,8 +300,7 @@ function! Prose()
   call textobj#sentence#init()
   Goyo
 
-  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
-  let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
+  let g:pencil#conceallevel = 2     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
   let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command (def)
 
   " replace common punctuation
