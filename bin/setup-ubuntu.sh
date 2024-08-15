@@ -56,26 +56,34 @@ sudo apt upgrade -y
 # Remove unused packages
 sudo apt autoremove -y
 # Install packages
-sudo apt install -y atop ca-certificates curl direnv exuberant-ctags fswatch git htop lnav ncdu tmux vim vnstat
-# atop            ~ System resource monitoring
-# baobab          ~ GUI disk usage graphing
-# ca-certificates ~ Required for 3rd party APT PPAs
-# deja-dup        ~ GUI backup tool
-# direnv          ~ load and unload environment variables depending on the current directory
-# exuberant-ctags ~ Required for Vim's tag bar
-# fail2ban
-# fswatch         ~ Used by vim and others for inotify supported file watching
-# goacess         ~ CLI Web server log viewer
-# gparted         ~ GUI disk partitioning
-# krb5-user       ~ Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
-# lnav            ~ CLI log viewer (e.g. terminal UI for Apache/Nginx logs)
-# logwatch        ~ Summarizes log files and can send summary via email
-# ncdu            ~ TUI disk usage analyzer which allows deleting (similar to baobab)
-# unetbootin      ~ GUI for creating bootable USB sticks
-# vnstat          ~ network stats per interface per day/week/month
-# yt-dl           ~ Download (YouTube) videos from CLI.
-# xrdp            ~ allows Windows users to connect via Remote Desktop
-# zeal            ~ simple, offline programming documenation viewer
+PACKAGES=(
+	"atop"            # System resource monitoring
+	#"baobab"         # GUI disk usage graphing
+	"ca-certificates" # Required for 3rd party APT PPAs
+	"curl"
+	#"deja-dup"       # GUI backup tool
+	"direnv"          # load and unload environment variables depending on the current directory
+	"exuberant-ctags" # Required for Vim's tag bar
+	#"fail2ban"
+	"fswatch"         # Used by vim and others for inotify supported file watching
+	"git"
+	#"goacess"        # CLI Web server log viewer
+	#"gparted"        # GUI disk partitioning
+	"htop"
+	"krb5-user"       # Kerberos for HPC YubiKey support (HPCMP.HPC.MIL)
+	"lnav"            # CLI log viewer (e.g. terminal UI for Apache/Nginx logs)
+	#"logwatch"       # Summarizes log files and can send summary via email
+	"ncdu"            # TUI disk usage analyzer which allows deleting (similar to baobab)
+	"tmux"
+	#"unetbootin"     # GUI for creating bootable USB sticks
+	"vnstat"          # network stats per interface per day/week/month
+	#"xrdp"           # allows Windows users to connect via Remote Desktop
+	"yt-dlp"          # Download (YouTube) videos from CLI.
+	"zeal"            # simple, offline programming documenation viewer
+)
+sudo apt install -y ${PACKAGES[@]}
+# Install AWS CLI via Snap because it's the only way it will auto-update
+sudo snap install aws-cli --classic
 
 ## Optional ###################################################################
 
@@ -83,7 +91,7 @@ sudo apt install -y atop ca-certificates curl direnv exuberant-ctags fswatch git
 read -p "Install Go (Y or N)? " -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    GOVERSION=1.21.8
+    GOVERSION=1.23.0
     if go env | grep "${GOVERSION}"; then
         echo "Go ${GOVERSION} already installed"
     else
