@@ -29,6 +29,11 @@ if [ ! -z "$PS1" ]; then
     fi
 fi
 
+# Print string in red to stderr
+error() {
+ echo -e "\e[01;31m$1\e[0m" >&2;
+}
+
 
 # Ubuntu / APT ####################################################################################
 function apt-up {
@@ -135,6 +140,9 @@ ssh-work() {
     (ssh-add -l | grep "${WORK_YUBIKEY_HASH}" &>/dev/null) || {
         echo "Yubikey not loaded in SSH-Agent. Please make sure the key is inserted."
         ssh-add -s /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so
+		if [ $? -ne 0 ]; then
+			error "Error adding key"
+		fi
     }
     echo "SSH-Agent Keys:"
     ssh-add -l
