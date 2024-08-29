@@ -45,9 +45,9 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'          " Language Server Config Helper
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
-    " Floating windows and codelens support
-    "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
     Plug 'ray-x/go.nvim'                  " Go support via LSP and TreeSitter
+    " Floating windows and codelens support
+    Plug 'ray-x/guihua.lua'
     Plug 'ray-x/navigator.lua'
     Plug 'jghauser/follow-md-links.nvim', {'branch': 'main'} " Follow Markdown local links (Enter) and go back (Backspace)
   endif
@@ -230,7 +230,8 @@ require 'nvim-treesitter.configs'.setup({
 --------------------------------------------------------------------------------------------------
 require 'go'.setup({
   goimports = 'gopls', -- if set to 'gopls' will use golsp format
-  gofmt = 'gofumpt',
+  gofmt = 'gopls',
+
   tag_transform = false,
   test_dir = '',
   comment_placeholder = ' // ...  ',
@@ -249,6 +250,17 @@ require 'go'.setup({
   },
   dap_debug = true,
 })
+
+-- Run gofmt on save
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').gofmt()
+  end,
+  group = format_sync_grp,
+})
+
 local protocol = require'vim.lsp.protocol'
 
 -- jghauser/follow-md-links.nvim
