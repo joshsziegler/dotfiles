@@ -45,11 +45,16 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'          " Language Server Config Helper
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
+    Plug 'mfussenegger/nvim-dap'          " Debug Adapter Protocol (DAP) Support
+    Plug 'rcarriga/nvim-dap-ui'           " UI for nvim-dap
+    Plug 'nvim-neotest/nvim-nio'          " Required for nvim-dap-ui
+    Plug 'theHamsta/nvim-dap-virtual-text'" Recommended for nvim-dap virtual text support
     Plug 'ray-x/go.nvim'                  " Go support via LSP and TreeSitter
     " Floating windows and codelens support
     Plug 'ray-x/guihua.lua'
     Plug 'ray-x/navigator.lua'
     Plug 'jghauser/follow-md-links.nvim', {'branch': 'main'} " Follow Markdown local links (Enter) and go back (Backspace)
+    Plug 'f-person/git-blame.nvim'        " git blame integration
   endif
 call plug#end()
 
