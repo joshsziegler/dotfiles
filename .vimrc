@@ -233,11 +233,21 @@ require 'nvim-treesitter.configs'.setup({
     },
 })
 
+-- f-person/git-blame.nvim
+--------------------------------------------------------------------------------------------------
+require('gitblame').setup {
+    enabled = true,
+    schedule_event = CursorHold,
+}
+
+
+
 -- go.nvim
 --------------------------------------------------------------------------------------------------
 require 'go'.setup({
   goimports = 'gopls', -- if set to 'gopls' will use golsp format
-  gofmt = 'gopls',
+  gofmt = 'gofumpt', -- gofmt through gopls: alternative is gofumpt, goimports, golines, gofmt, etc
+  lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
 
   tag_transform = false,
   test_dir = '',
@@ -258,12 +268,12 @@ require 'go'.setup({
   dap_debug = true,
 })
 
--- Run gofmt on save
-local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+-- Run gofmt + goimports on save
+local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
-   require('go.format').gofmt()
+   require('go.format').goimports()
   end,
   group = format_sync_grp,
 })
