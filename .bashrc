@@ -1,3 +1,44 @@
+# Prompt #########################################################################################
+PROMPT_COMMAND=__prompt_command    # Function to generate PS1 after CMDs
+__prompt_command() {
+	if [ -z "$PS1" ]; then
+		# Use a simple colorless prompt if this is not an interactive prompt
+		PS1="\u@\h:\w\$"
+		return
+	fi
+	local EXIT="$?"                # This needs to be first
+
+	local Red='\[\e[0;31m\]'
+	local Gre='\[\e[0;32m\]'
+	local BYel='\[\e[1;33m\]'
+	local BBlu='\[\e[1;34m\]'
+	local Pur='\[\e[0;35m\]'
+
+	local RESET='\[$(tput sgr0)\]' # Clear effects of previous SGR in data stream
+	local BOLD='\[$(tput bold)\]'
+	local LBLUE='\[\033[38;5;39m\]'  # Light Blue
+	local LGREY='\[\033[38;5;241m\]' # Light Grey
+	local BLACK='\[\033[38;5;234m\]' # Black?
+	local GREEN='\[\033[38;5;35m\]'  # Green?
+
+	# Username
+	PS1="${BOLD}${LBLUE}\u${RESET}"
+	# @
+	PS1+="@${RESET}"
+	# Hostname
+	PS1+="${BOLD}${GREEN}\h${RESET}"
+	# Working Directory
+	PS1+="${LGRE}:${RESET}${BLACK}\w${RESET}"
+	# Git Branch and status
+	PS1+="\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') ${RESET}"
+	# $
+	if [ $EXIT != 0 ]; then
+		PS1+="${BOLD}${Red}\$${RESET}" # Make red if the last command errored (returned non-zero)
+	else
+		PS1+="\$${RESET}"
+	fi
+}
+
 # History #########################################################################################
 HISTCONTROL=ignoreboth:erasedups # Don't store lines starting with a space, or duplicates.
 HISTSIZE=1000
@@ -12,10 +53,6 @@ if [ ! -z "$PS1" ]; then
     export TERM=xterm-256color # Enable color prompt
     # Check the window size after each command and, if necessary, update values for LINES and COLUMNS.
     shopt -s checkwinsize
-    # Show the current git branch and status in the prompt
-    export PS1="\[$(tput bold)\]\[\033[38;5;39m\]\u\[$(tput sgr0)\]\[\033[38;5;241m\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;35m\]\h\[$(tput sgr0)\]\[\033[38;5;241m\]:\[$(tput sgr0)\]\[\033[38;5;234m\]\w\[$(tput sgr0)\] \$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') \[$(tput sgr0)\]\[\033[38;5;234m\]\\$\[$(tput sgr0)\]"
-    # Show current user and hostname in Terminal emulator's tab/window
-    export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}\007"'
     # Make sure auto-complete is enabled (i.e. sudo apt install bash-autocompletion)
     [ -f /etc/profile.d/bash_completion.sh ] && source /etc/profile.d/bash_completion.sh
     # Setup FZF
