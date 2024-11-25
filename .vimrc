@@ -51,7 +51,7 @@ call plug#begin()
     Plug 'theHamsta/nvim-dap-virtual-text'" Recommended for nvim-dap virtual text support
     Plug 'ray-x/go.nvim'                  " Go support via LSP and TreeSitter
     " Floating windows and codelens support
-    Plug 'ray-x/guihua.lua'
+    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make'}
     Plug 'ray-x/navigator.lua'
     Plug 'jghauser/follow-md-links.nvim', {'branch': 'main'} " Follow Markdown local links (Enter) and go back (Backspace)
     Plug 'f-person/git-blame.nvim'        " git blame integration
@@ -120,19 +120,6 @@ if has('nvim')
     set inccommand=split      " Preview :substitute before hitting enter
 endif
 
-" Setup shortcuts
-" -------------------------------------------------------------------------------------------------
-:let mapleader = ","               " Set the leader to the comma key
-map <leader>m :bn <CR>             " Go to the next buffer
-map <leader>n :bp <CR>             " Go to the previous buffer
-map <leader>b :bd <CR>             " Close the current buffer
-map <leader>k :NERDTreeToggle<CR>  " Open/Close NERDTree
-map <leader>t :TagbarToggle<CR>    " Open/Close tag viewer
-nnoremap <C-J> <C-W><C-J>          " Remap split navigation from Ctrl-w then j to Ctrl-j
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-nnoremap <Leader>p :Prose<CR>       " Open in 'prose' mode
 
 
 " Lightline - Improved status and tab line
@@ -197,7 +184,7 @@ local wk = require("which-key").setup({})
 
 -- ray-x/navigator https://github.com/ray-x/navigator.lua
 --------------------------------------------------------------------------------------------------
--- require'navigator'.setup()
+require'navigator'.setup()
 
 -- nvim-treesitter https://github.com/nvim-treesitter/nvim-treesitter
 --------------------------------------------------------------------------------------------------
@@ -252,7 +239,7 @@ require 'go'.setup({
   tag_transform = false,
   test_dir = '',
   comment_placeholder = ' // ...  ',
-  lsp_cfg = true, -- false: use your own lspconfig
+ lsp_cfg = true, -- false: use your own lspconfig
   lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_on_attach = true, -- use on_attach from go.nvim
   lsp_inlay_hints = {
@@ -355,3 +342,20 @@ endfunction
 autocmd FileType markdown,mkd,text call Prose()
 " invoke manually by command for other file types
 command! -nargs=0 Prose call Prose()
+
+" Setup shortcuts
+" -------------------------------------------------------------------------------------------------
+:let mapleader = ","               " Set the leader to the comma key
+map <leader>m :bn <CR>             " Go to the next buffer
+map <leader>n :bp <CR>             " Go to the previous buffer
+map <leader>b :bd <CR>             " Close the current buffer
+map <leader>co :copen <CR>         " Open quick fix window
+map <leader>cc :ccl <CR>           " Close quick fix window
+map <leader>t :TagbarToggle<CR>    " Open/Close tag viewer
+nnoremap <C-J> <C-W><C-J>          " Remap split navigation from Ctrl-w then j to Ctrl-j
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <leader>w :Prose<CR>           " Open in 'prose' mode
+nnoremap <leader>a :NERDTreeToggle<CR>  " Open/Close NERDTree
+nnoremap gz :!zeal "<cword>"&<CR><CR>   " Open Zeal to search documentation
