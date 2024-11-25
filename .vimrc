@@ -80,7 +80,7 @@ filetype plugin on            " Enables filetype specific plugins
 set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
 let &colorcolumn="80,100"     " Show a visual line on columns 80, and 100
 set omnifunc=syntaxcomplete#Complete " Enable auto-completion via Omni
-set list                      " Show whitespace when under the cursor (disable with :set nolist)
+"set list                      " Show whitespace when under the cursor (disable with :set nolist)
 set lcs+=space:·              " Show spaces as a middle dot character when under the cursor
 
 
