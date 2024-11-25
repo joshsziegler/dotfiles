@@ -57,6 +57,8 @@ if [ ! -z "$PS1" ]; then
     [ -f /etc/profile.d/bash_completion.sh ] && source /etc/profile.d/bash_completion.sh
     # Setup FZF
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    # Alacritty completions
+    [ -f ~/code/alacritty/extra/completions/alacritty.bash ] && source ~/code/alacritty/extra/completions/alacritty.bash
     # Start SSH-Agent IFF not running
     if [ -z "$SSH_AUTH_SOCK" ]; then
         echo "Starting ssh-agent..."
